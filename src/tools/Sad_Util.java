@@ -4,9 +4,13 @@
  */
 package tools;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
 import javax.swing.text.JTextComponent;
 
 /**
@@ -37,5 +41,49 @@ public class Sad_Util {
             }
 
         }
+    }
+
+    public static void sad_mensagem(String cad) {
+        JOptionPane.showMessageDialog(null, cad);
+    }
+
+    public static int sad_perguntar(String cad) {
+        return JOptionPane.showConfirmDialog(null, cad, cad, JOptionPane.YES_NO_OPTION);
+    }
+
+    public static String sad_intToStr(int num) {
+        return String.valueOf(num);
+    }
+
+    public static double sad_strToDouble(String cad) {
+        try {
+            return Double.parseDouble(cad.replace(",", "."));
+        } catch (NumberFormatException e) {
+            sad_mensagem("Erro");
+            return 0.0;
+        }
+    }
+
+    public static String sad_doubleToStr(double num) {
+        return String.valueOf(num);
+    }
+
+    public static Date sad_strToDate(String cad) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            sdf.setLenient(false);
+            return sdf.parse(cad);
+        } catch (ParseException e) {
+            sad_mensagem("Erro");
+            return null;
+        }
+    }
+
+    public static String sad_dateToStr(Date data) {
+        if (data == null) {
+            return "";
+        }
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(data);
     }
 };
