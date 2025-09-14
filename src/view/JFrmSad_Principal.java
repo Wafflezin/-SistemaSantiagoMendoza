@@ -158,8 +158,8 @@ public class JFrmSad_Principal extends javax.swing.JFrame {
 
     private void jMnuVendedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuVendedorActionPerformed
         // TODO add your handling code here:
-        //JDlgSad_Vendedor jDlgVendedor = new JDlgSad_Vendedor(this, true);
-        //jDlgVendedor.setVisible(true);
+        JDlgSad_Vendedor jDlgVendedor = new JDlgSad_Vendedor(this, true);
+        jDlgVendedor.setVisible(true);
     }//GEN-LAST:event_jMnuVendedorActionPerformed
 
     private void jMnuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuSairActionPerformed
