@@ -388,7 +388,8 @@ public class JDlgSad_Clientes extends javax.swing.JDialog {
 
     private void jBtnSad_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {                                                  
         // TODO add your handling code here:
-        Sad_Util.sad_mensagem("Você pesquisou");
+        JDlgSad_ClientesPesquisar jDlgClientesPesquisar = new JDlgSad_ClientesPesquisar(null, true);
+        jDlgClientesPesquisar.setVisible(true);
         Sad_Util.sad_habilitar(true, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false,jBtnSad_Incluir, jBtnSad_Pesquisar);
         
