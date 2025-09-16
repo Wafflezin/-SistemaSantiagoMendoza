@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package view;
+
 import tools.Sad_Util;
+
 /**
  *
  * @author SANTIAGO
@@ -18,7 +20,7 @@ public class JDlgSad_Vendedor extends javax.swing.JDialog {
         initComponents();
         setTitle("Cadastro de Vendeodr");
         setLocationRelativeTo(null);
-        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Confirmar, jBtnSad_Cancelar );
+        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Confirmar, jBtnSad_Cancelar);
     }
 
     /**
@@ -244,7 +246,7 @@ public class JDlgSad_Vendedor extends javax.swing.JDialog {
 
     private void jBtnSad_IncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_IncluirActionPerformed
         // TODO add your handling code here:
-        Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha, jBtnSad_Confirmar, jBtnSad_Cancelar );
+        Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
         Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha);
 
@@ -252,36 +254,39 @@ public class JDlgSad_Vendedor extends javax.swing.JDialog {
 
     private void jBtnSad_AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_AlterarActionPerformed
         // TODO add your handling code here:
-        Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha, jBtnSad_Confirmar, jBtnSad_Cancelar );
-        Sad_Util.sad_habilitar(false,jBtnSad_Excluir, jBtnSad_Incluir, jBtnSad_Alterar);
+        Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha, jBtnSad_Confirmar, jBtnSad_Cancelar);
+        Sad_Util.sad_habilitar(false, jBtnSad_Excluir, jBtnSad_Incluir, jBtnSad_Alterar);
 
     }//GEN-LAST:event_jBtnSad_AlterarActionPerformed
 
     private void jBtnSad_ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ExcluirActionPerformed
         // TODO add your handling code here:
-        Sad_Util.sad_habilitar(false, jBtnSad_Alterar, jBtnSad_Cancelar, jBtnSad_Excluir);
-        Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
-        Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha);
+        if (Sad_Util.sad_perguntar("Excluir?")) {
+            Sad_Util.sad_habilitar(false, jBtnSad_Alterar, jBtnSad_Cancelar, jBtnSad_Excluir);
+            Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
+            Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha);
+        }
     }//GEN-LAST:event_jBtnSad_ExcluirActionPerformed
 
     private void jBtnSad_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ConfirmarActionPerformed
         // TODO add your handling code here:
-        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha, jBtnSad_Confirmar, jBtnSad_Cancelar );
+        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
         Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha);
     }//GEN-LAST:event_jBtnSad_ConfirmarActionPerformed
 
     private void jBtnSad_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_CancelarActionPerformed
         // TODO add your handling code here:
-        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha, jBtnSad_Confirmar, jBtnSad_Cancelar, jBtnSad_Alterar, jBtnSad_Excluir );
+        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha, jBtnSad_Confirmar, jBtnSad_Cancelar, jBtnSad_Alterar, jBtnSad_Excluir);
         Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
         Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha);
     }//GEN-LAST:event_jBtnSad_CancelarActionPerformed
 
     private void jBtnSad_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_PesquisarActionPerformed
         // TODO add your handling code here:
+        Sad_Util.sad_mensagem("Você pesquisou");
         Sad_Util.sad_habilitar(true, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Cancelar);
-        Sad_Util.sad_habilitar(false,jBtnSad_Incluir, jBtnSad_Pesquisar);
+        Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
 
     }//GEN-LAST:event_jBtnSad_PesquisarActionPerformed
 
