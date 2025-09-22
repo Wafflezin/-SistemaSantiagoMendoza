@@ -51,43 +51,28 @@ public class Sad_Util {
         return JOptionPane.showConfirmDialog(null, cad, "Pergunta", JOptionPane.YES_NO_OPTION) == 0;
     }
     
-    public static int sad_strToInt(String str){
+    public static int strToInt(String str){
         return Integer.valueOf(str);
     }
-
-    public static String sad_intToStr(int num) {
+    
+    public static String intToStr(int num) {
         return String.valueOf(num);
     }
 
-    public static double sad_strToDouble(String cad) {
-        try {
-            return Double.parseDouble(cad.replace(",", "."));
-        } catch (NumberFormatException e) {
-            sad_mensagem("Erro");
-            return 0.0;
-        }
+    public static double strToDouble(String cad) {
+        return Double.valueOf(cad);
     }
 
-    public static String sad_doubleToStr(double num) {
-        return String.valueOf(num);
+    
+    public static Date strToDate(String str) {
+        return new Date(str);
     }
 
-    public static Date sad_strToDate(String cad) {
-        try {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-            sdf.setLenient(false);
-            return sdf.parse(cad);
-        } catch (ParseException e) {
-            sad_mensagem("Erro");
-            return null;
-        }
-    }
-
-    public static String sad_dateToStr(Date data) {
-        if (data == null) {
-            return "";
-        }
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    public static String dateToStr(Date data) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         return sdf.format(data);
+    }
+    public static String doubleToStr(double num) {
+        return String.valueOf(num);
     }
 };
