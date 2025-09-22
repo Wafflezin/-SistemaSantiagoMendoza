@@ -61,7 +61,7 @@ public class SadVendedorDAO extends AbstractDAO{
         return lista;
     }
     public static void main(String[] args){
-        SadVendedorDAO usuariosDAO = new SadVendedorDAO();
-        usuariosDAO.listAll();
+        SadVendedorDAO sadVendedorDAO = new SadVendedorDAO();
+        sadVendedorDAO.listAll();
     }
 }

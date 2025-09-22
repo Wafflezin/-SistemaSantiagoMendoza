@@ -28,7 +28,6 @@ public class SadVendas implements java.io.Serializable {
     private SadVendedor sadVendedor;
     private Date sadDataVendas;
     private double sadTotal;
-    private Set sadVendaProdutoses = new HashSet(0);
 
     public SadVendas() {
     }
@@ -39,13 +38,13 @@ public class SadVendas implements java.io.Serializable {
         this.sadTotal = sadTotal;
     }
 
-    public SadVendas(int sadIdVendas, SadClientes sadClientes, SadVendedor sadVendedor, Date sadDataVendas, double sadTotal, Set sadVendaProdutoses) {
+    public SadVendas(int sadIdVendas, SadClientes sadClientes, SadVendedor sadVendedor, Date sadDataVendas, double sadTotal) {
         this.sadIdVendas = sadIdVendas;
         this.sadClientes = sadClientes;
         this.sadVendedor = sadVendedor;
         this.sadDataVendas = sadDataVendas;
         this.sadTotal = sadTotal;
-        this.sadVendaProdutoses = sadVendaProdutoses;
+
     }
 
     @Id
@@ -97,14 +96,4 @@ public class SadVendas implements java.io.Serializable {
     public void setSadTotal(double sadTotal) {
         this.sadTotal = sadTotal;
     }
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "sadVendas")
-    public Set getSadVendaProdutoses() {
-        return this.sadVendaProdutoses;
-    }
-
-    public void setSadVendaProdutoses(Set sadVendaProdutoses) {
-        this.sadVendaProdutoses = sadVendaProdutoses;
-    }
-
 }

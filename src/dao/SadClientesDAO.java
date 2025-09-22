@@ -61,7 +61,8 @@ public class SadClientesDAO extends AbstractDAO{
         return lista;
     }
     public static void main(String[] args){
-        SadClientesDAO usuariosDAO = new SadClientesDAO();
-        usuariosDAO.listAll();
+        SadClientesDAO sadClientesDAO = new SadClientesDAO();
+        sadClientesDAO.listAll();
+        System.out.println("deu certo");
     }
 }
