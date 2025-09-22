@@ -50,6 +50,10 @@ public class Sad_Util {
     public static boolean sad_perguntar(String cad) {
         return JOptionPane.showConfirmDialog(null, cad, "Pergunta", JOptionPane.YES_NO_OPTION) == 0;
     }
+    
+    public static int sad_strToInt(String str){
+        return Integer.valueOf(str);
+    }
 
     public static String sad_intToStr(int num) {
         return String.valueOf(num);
