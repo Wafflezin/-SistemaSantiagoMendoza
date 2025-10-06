@@ -6,6 +6,8 @@ package view;
 
 import java.util.List;
 import javax.swing.JOptionPane;
+import bean.SadClientes;
+import dao.SadClientesDAO;
 
 /**
  *
@@ -14,14 +16,24 @@ import javax.swing.JOptionPane;
 public class JDlgSad_ClientesPesquisar extends javax.swing.JDialog {
 
     /**
-     * Creates new form JDlgUsuariosPesquisar
+     * Creates new form JDlgSad_ClientesPesquisar
      */
+    
+    private JDlgSad_Clientes jDlgSad_Clientes;
+    Sad_ControllerClientes Sad_sad_ControllerClientes;
     public JDlgSad_ClientesPesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Pesquisar Clientes");
-        
+        Sad_sad_ControllerClientes = new Sad_ControllerClientes();
+        SadClientesDAO sad_ClientesDAO = new SadClientesDAO();
+        List lista = (List) sad_ClientesDAO.listAll();
+        Sad_sad_ControllerClientes.setList(lista);
+        jTblSad_Tabela.setModel(Sad_sad_ControllerClientes);
+    }
+    public void setTelaPai( JDlgSad_Clientes jDlgSad_Clientes) {;
+        this.jDlgSad_Clientes = jDlgSad_Clientes;
     }
     
 
