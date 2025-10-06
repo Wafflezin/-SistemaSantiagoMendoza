@@ -261,7 +261,7 @@ public class JDlgSad_Vendedor extends javax.swing.JDialog {
 
     private void jBtnSad_ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ExcluirActionPerformed
         // TODO add your handling code here:
-        if (Sad_Util.sad_perguntar("Excluir?")) {
+        if (Sad_Util.sad_perguntar("Excluir?") == true) {
             Sad_Util.sad_habilitar(false, jBtnSad_Alterar, jBtnSad_Cancelar, jBtnSad_Excluir);
             Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
             Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha);

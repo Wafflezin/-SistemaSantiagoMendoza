@@ -47,8 +47,10 @@ public class Sad_Util {
         JOptionPane.showMessageDialog(null, cad);
     }
 
-    public static boolean sad_perguntar(String cad) {
-        return JOptionPane.showConfirmDialog(null, cad, "Pergunta", JOptionPane.YES_NO_OPTION) == 0;
+    public static boolean sad_perguntar(String mes) {
+        int resp = JOptionPane.showConfirmDialog(null,mes,
+                "Perguntar", JOptionPane.YES_NO_OPTION);
+        return resp == JOptionPane.YES_NO_OPTION;
     }
     
     public static int strToInt(String str){

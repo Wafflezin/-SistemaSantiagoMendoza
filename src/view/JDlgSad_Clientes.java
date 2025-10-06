@@ -412,7 +412,7 @@ public class JDlgSad_Clientes extends javax.swing.JDialog {
 
     private void jBtnSad_ExcluirActionPerformed(java.awt.event.ActionEvent evt) {                                                
         // TODO add your handling code here:
-        if(Sad_Util.sad_perguntar("Excluir?")){
+        if(Sad_Util.sad_perguntar("Excluir?") == true){
             Sad_Util.sad_habilitar(false, jBtnSad_Alterar, jBtnSad_Cancelar, jBtnSad_Excluir);
             Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
             Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Email, jFmtSad_Rg, jCboSad_Sexo, jFmtSad_Pronomes, jTxtSad_Endereco, jFmtSad_Cpf, jFmtSad_DataNascimento, jTxtSad_Bairro, jTxtSad_Cidade, jFmtSad_Cep, jFmtSad_Residencial, jFmtSad_Celular, jPwdSad_Senha);
