@@ -4,37 +4,39 @@
  */
 package view;
 
-
 import java.util.List;
 import javax.swing.JOptionPane;
-import bean.SadUsuarios;
-import dao.SadUsuariosDAO;
+import bean.SadVendas;
+import dao.SadVendasDAO;
 
 /**
  *
  * @author u70874542189
  */
-public class JDlgSad_UsuariosPesquisar extends javax.swing.JDialog {
-    
+public class JDlgSad_VendasPesquisar extends javax.swing.JDialog {
+
     /**
-     * Creates new form JDlgUsuariosPesquisar
+     * Creates new form JDlgSad_VendasPesquisar
      */
-    private JDlgSad_Usuarios jDlgSad_Usuarios;
-    Sad_ControllerUsuarios Sad_ControllerUsuarios;
-    public JDlgSad_UsuariosPesquisar(java.awt.Frame parent, boolean modal) {
+    
+    private JDlgSad_Vendas jDlgSad_Vendas;
+    Sad_ControllerVendas Sad_ControllerVendas;
+    
+    public JDlgSad_VendasPesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Pesquisar Usuarios");
-        Sad_ControllerUsuarios = new Sad_ControllerUsuarios();
-        SadUsuariosDAO sad_UsuariosDAO = new SadUsuariosDAO();
-        List lista = (List) sad_UsuariosDAO.listAll();
-        Sad_ControllerUsuarios.setList(lista);
-        jTblSad_Tabela.setModel(Sad_ControllerUsuarios);
+        setTitle("Pesquisar Vendas");
+        Sad_ControllerVendas = new Sad_ControllerVendas();
+        SadVendasDAO sad_VendasDAO = new SadVendasDAO();
+        List lista = (List) sad_VendasDAO.listAll();
+        Sad_ControllerVendas.setList(lista);
+        jTblSad_Tabela.setModel(Sad_ControllerVendas);
     }
-    public void setTelaPai( JDlgSad_Usuarios jDlgSad_Usuarios) {;
-        this.jDlgSad_Usuarios = jDlgSad_Usuarios;
+    public void setTelaPai( JDlgSad_Vendas jDlgSad_Vendas) {;
+        this.jDlgSad_Vendas = jDlgSad_Vendas;
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -96,10 +98,8 @@ public class JDlgSad_UsuariosPesquisar extends javax.swing.JDialog {
 
     private void jBtnSad_OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_OKActionPerformed
         // TODO add your handling code here:
-       
+        
         setVisible(false);
-
-    
     }//GEN-LAST:event_jBtnSad_OKActionPerformed
 
     /**
@@ -119,14 +119,38 @@ public class JDlgSad_UsuariosPesquisar extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDlgSad_UsuariosPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgSad_VendasPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDlgSad_UsuariosPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgSad_VendasPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDlgSad_UsuariosPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgSad_VendasPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDlgSad_UsuariosPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgSad_VendasPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -139,7 +163,7 @@ public class JDlgSad_UsuariosPesquisar extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDlgSad_UsuariosPesquisar dialog = new JDlgSad_UsuariosPesquisar(new javax.swing.JFrame(), true);
+                JDlgSad_VendasPesquisar dialog = new JDlgSad_VendasPesquisar(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

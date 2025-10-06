@@ -20,17 +20,18 @@ public class JDlgSad_ClientesPesquisar extends javax.swing.JDialog {
      */
     
     private JDlgSad_Clientes jDlgSad_Clientes;
-    Sad_ControllerClientes Sad_sad_ControllerClientes;
+    Sad_ControllerClientes Sad_ControllerClientes;
+    
     public JDlgSad_ClientesPesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Pesquisar Clientes");
-        Sad_sad_ControllerClientes = new Sad_ControllerClientes();
+        Sad_ControllerClientes = new Sad_ControllerClientes();
         SadClientesDAO sad_ClientesDAO = new SadClientesDAO();
         List lista = (List) sad_ClientesDAO.listAll();
-        Sad_sad_ControllerClientes.setList(lista);
-        jTblSad_Tabela.setModel(Sad_sad_ControllerClientes);
+        Sad_ControllerClientes.setList(lista);
+        jTblSad_Tabela.setModel(Sad_ControllerClientes);
     }
     public void setTelaPai( JDlgSad_Clientes jDlgSad_Clientes) {;
         this.jDlgSad_Clientes = jDlgSad_Clientes;

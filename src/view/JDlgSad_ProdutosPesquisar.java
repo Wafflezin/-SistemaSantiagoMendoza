@@ -5,6 +5,8 @@
 package view;
 
 
+import dao.SadProdutosDAO;
+import bean.SadProdutos;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -16,11 +18,22 @@ public class JDlgSad_ProdutosPesquisar extends javax.swing.JDialog {
     /**
      * Creates new form JDlgUsuariosPesquisar
      */
+    private JDlgSad_Produtos jDlgSad_Produtos;
+    Sad_ControllerProdutos Sad_ControllerProdutos;
+    
     public JDlgSad_ProdutosPesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Pesquisar Produtos");
+        Sad_ControllerProdutos = new Sad_ControllerProdutos();
+        SadProdutosDAO sad_ProdutosDAO = new SadProdutosDAO();
+        List lista = (List) sad_ProdutosDAO.listAll();
+        Sad_ControllerProdutos.setList(lista);
+        jTblSad_Tabela.setModel(Sad_ControllerProdutos);
+    }
+    public void setTelaPai( JDlgSad_Produtos jDlgSad_Produtos) {;
+        this.jDlgSad_Produtos = jDlgSad_Produtos;
     }
 
     /**

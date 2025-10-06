@@ -7,6 +7,8 @@ package view;
 
 import java.util.List;
 import javax.swing.JOptionPane;
+import bean.SadVendedor;
+import dao.SadVendedorDAO;
 
 /**
  *
@@ -17,12 +19,21 @@ public class JDlgSad_VendedorPesquisar extends javax.swing.JDialog {
     /**
      * Creates new form JDlgUsuariosPesquisar
      */
+    private JDlgSad_Vendedor jDlgSad_Vendedor;
+    Sad_ControllerVendedor Sad_ControllerVendedor;
     public JDlgSad_VendedorPesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Pesquisar Vendedores");
-
+        Sad_ControllerVendedor = new Sad_ControllerVendedor();
+        SadVendedorDAO sad_VendedorDAO = new SadVendedorDAO();
+        List lista = (List) sad_VendedorDAO.listAll();
+        Sad_ControllerVendedor.setList(lista);
+        jTblSad_Tabela.setModel(Sad_ControllerVendedor);
+    }
+    public void setTelaPai( JDlgSad_Vendedor jDlgSad_Vendedor) {;
+        this.jDlgSad_Vendedor = jDlgSad_Vendedor;
     }
 
     /**
