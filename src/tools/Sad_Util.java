@@ -7,6 +7,8 @@ package tools;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -67,7 +69,13 @@ public class Sad_Util {
 
     
     public static Date strToDate(String str) {
-        return new Date(str);
+        SimpleDateFormat dateNascFormat = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            return dateNascFormat.parse(str);
+        } catch (ParseException ex) {
+            Logger.getLogger(Sad_Util.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public static String dateToStr(Date data) {

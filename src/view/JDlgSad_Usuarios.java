@@ -5,6 +5,8 @@
  */
 package view;
 
+import bean.SadUsuarios;
+import dao.SadUsuariosDAO;
 import tools.Sad_Util;
 
 /**
@@ -12,6 +14,8 @@ import tools.Sad_Util;
  * @author u10916731103
  */
 public class JDlgSad_Usuarios extends javax.swing.JDialog {
+    
+    private boolean incluir;
 
     public JDlgSad_Usuarios(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -20,6 +24,32 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jPwfSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Confirmar, jBtnSad_Cancelar);
     }
+    
+    public SadUsuarios viewBean() {
+        SadUsuarios sadusuarios = new SadUsuarios();
+        int codigo = Sad_Util.strToInt(jTxtSad_Codigo.getText());
+        sadusuarios.setSadIdUsuarios(codigo);
+        sadusuarios.setSadNome(jTxtSad_Nome.getText());
+        sadusuarios.setSadApelido(jTxtSad_Apelido.getText());
+        sadusuarios.setSadCpf(jFmtSad_Cpf.getText());
+        sadusuarios.setSadSenha(jPwfSad_Senha.getText());
+        sadusuarios.setSadNivel(jCboSad_Nivel.getSelectedIndex());
+        sadusuarios.setSadAtivo(jChbSad_Ativo.isSelected() ? "S" : "N");
+        sadusuarios.setSadDataNascimento(Sad_Util.strToDate(jFmtSad_DataNascimento.getText()));
+        return sadusuarios;
+    }
+    
+    public void beanView(SadUsuarios sadusuarios) {
+        jTxtSad_Codigo.setText(Sad_Util.intToStr(sadusuarios.getSadIdUsuarios()));
+        jTxtSad_Nome.setText(sadusuarios.getSadNome());
+        jTxtSad_Apelido.setText(sadusuarios.getSadApelido());
+        jFmtSad_Cpf.setText(sadusuarios.getSadCpf());
+        jPwfSad_Senha.setText(sadusuarios.getSadSenha());
+        jCboSad_Nivel.setSelectedIndex(sadusuarios.getSadNivel());
+        jChbSad_Ativo.setSelected(sadusuarios.getSadAtivo() == "S");
+        jFmtSad_DataNascimento.setText(Sad_Util.dateToStr(sadusuarios.getSadDataNascimento()));
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -246,18 +276,20 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
 
     private void jBtnSad_IncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_IncluirActionPerformed
         // TODO add your handling code here:
+        incluir = true;
         Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_Nome, jPwfSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
         Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jPwfSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento);
-
+        jTxtSad_Codigo.grabFocus();
 
     }//GEN-LAST:event_jBtnSad_IncluirActionPerformed
 
     private void jBtnSad_AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_AlterarActionPerformed
         // TODO add your handling code here:
+        incluir = false;
         Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_Nome, jPwfSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Excluir, jBtnSad_Incluir, jBtnSad_Alterar);
-
+        jTxtSad_Nome.grabFocus();
 
     }//GEN-LAST:event_jBtnSad_AlterarActionPerformed
 
@@ -273,6 +305,12 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
 
     private void jBtnSad_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ConfirmarActionPerformed
         // TODO add your handling code here:
+        SadUsuariosDAO sadUsuariosDAO = new SadUsuariosDAO();
+        if(incluir) {
+            sadUsuariosDAO.insert(viewBean());
+        } else {
+            sadUsuariosDAO.update(viewBean());
+        }
         Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jPwfSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
         Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jPwfSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento);
