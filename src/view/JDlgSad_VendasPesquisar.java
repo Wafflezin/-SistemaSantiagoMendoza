@@ -110,8 +110,9 @@ public class JDlgSad_VendasPesquisar extends javax.swing.JDialog {
 
     private void jBtnSad_OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_OKActionPerformed
         // TODO add your handling code here:
-        
-        setVisible(false);
+        SadVendas sadVendas =  Sad_ControllerVendas.getBean( jTblSad_Tabela.getSelectedRow() );
+        jDlgSad_Vendas.beanView(sadVendas);
+        this.setVisible(false);
     }//GEN-LAST:event_jBtnSad_OKActionPerformed
 
     private void jBtnSad_OK1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_OK1ActionPerformed

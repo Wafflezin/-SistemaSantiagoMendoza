@@ -5,11 +5,16 @@
 package view;
 
 import tools.Sad_Util;
+import bean.SadProdutos;
+import dao.SadProdutosDAO;
+
 /**
  *
  * @author SANTIAGO
  */
 public class JDlgSad_Produtos extends javax.swing.JDialog {
+
+    private boolean incluir;
 
     /**
      * Creates new form JDlgSad_Produtos
@@ -19,7 +24,30 @@ public class JDlgSad_Produtos extends javax.swing.JDialog {
         initComponents();
         setTitle("Cadastro de Produtos");
         setLocationRelativeTo(null);
-        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Confirmar, jBtnSad_Cancelar );
+        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Confirmar, jBtnSad_Cancelar);
+    }
+
+    public SadProdutos viewBean() {
+        SadProdutos sadProdutos = new SadProdutos();
+        int codigo = Sad_Util.strToInt(jTxtSad_Codigo.getText());
+        sadProdutos.setSadIdProdutos(codigo);
+        sadProdutos.setSadPeso(jTxtSad_Peso.getText());
+        sadProdutos.setSadQuantidade(jTxtSad_Quantidade.getText());
+        sadProdutos.setSadNome(jTxtSad_Nome.getText());
+        sadProdutos.setSadTestado(jChbSad_Testado.isSelected() ? "S" : "N");
+        sadProdutos.setSadNovo(jChbSad_Novo.isSelected() ? "S" : "N");
+        sadProdutos.setSadMarca(jTxtSad_Marca.getText());
+        return sadProdutos;
+    }
+
+    public void beanView(SadProdutos sadProdutos) {
+        jTxtSad_Codigo.setText(Sad_Util.intToStr(sadProdutos.getSadIdProdutos()));
+        jTxtSad_Peso.setText(sadProdutos.getSadPeso());
+        jTxtSad_Quantidade.setText(sadProdutos.getSadQuantidade());
+        jTxtSad_Nome.setText(sadProdutos.getSadNome());
+        jChbSad_Testado.setSelected("S".equals(sadProdutos.getSadTestado()));
+        jChbSad_Novo.setSelected("S".equals(sadProdutos.getSadNovo()));
+        jTxtSad_Marca.setText(sadProdutos.getSadMarca());
     }
 
     /**
@@ -230,49 +258,60 @@ public class JDlgSad_Produtos extends javax.swing.JDialog {
 
     private void jBtnSad_IncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_IncluirActionPerformed
         // TODO add your handling code here:
-        Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo, jBtnSad_Confirmar, jBtnSad_Cancelar );
+        incluir = true;
+        Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
         Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo);
-
+        jTxtSad_Codigo.grabFocus();
     }//GEN-LAST:event_jBtnSad_IncluirActionPerformed
 
     private void jBtnSad_AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_AlterarActionPerformed
         // TODO add your handling code here:
-        Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo, jBtnSad_Confirmar, jBtnSad_Cancelar );
-        Sad_Util.sad_habilitar(false,jBtnSad_Excluir, jBtnSad_Incluir, jBtnSad_Alterar);
-
+        incluir = false;
+        Sad_Util.sad_habilitar(true, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo, jBtnSad_Confirmar, jBtnSad_Cancelar);
+        Sad_Util.sad_habilitar(false, jBtnSad_Excluir, jBtnSad_Incluir, jBtnSad_Alterar);
+        jTxtSad_Nome.grabFocus();
     }//GEN-LAST:event_jBtnSad_AlterarActionPerformed
 
     private void jBtnSad_ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ExcluirActionPerformed
         // TODO add your handling code here:
-        if(Sad_Util.sad_perguntar("Excluir?") == true){
-        Sad_Util.sad_habilitar(false, jBtnSad_Alterar, jBtnSad_Cancelar, jBtnSad_Excluir);
-        Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
-        Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo);
+        if (Sad_Util.sad_perguntar("Excluir?") == true) {
+            SadProdutosDAO sadProdutosDAO = new SadProdutosDAO();
+            sadProdutosDAO.delete(viewBean());
+            Sad_Util.sad_habilitar(false, jBtnSad_Alterar, jBtnSad_Cancelar, jBtnSad_Excluir);
+            Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
+            Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo);
         }
     }//GEN-LAST:event_jBtnSad_ExcluirActionPerformed
 
     private void jBtnSad_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ConfirmarActionPerformed
         // TODO add your handling code here:
-        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo, jBtnSad_Confirmar, jBtnSad_Cancelar );
+        SadProdutosDAO sadProdutosDAO = new SadProdutosDAO();
+        if (incluir) {
+            sadProdutosDAO.insert(viewBean());
+        } else {
+            sadProdutosDAO.update(viewBean());
+        }
+        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
         Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo);
     }//GEN-LAST:event_jBtnSad_ConfirmarActionPerformed
 
     private void jBtnSad_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_CancelarActionPerformed
         // TODO add your handling code here:
-        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo, jBtnSad_Confirmar, jBtnSad_Cancelar, jBtnSad_Alterar, jBtnSad_Excluir );
+        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo, jBtnSad_Confirmar, jBtnSad_Cancelar, jBtnSad_Alterar, jBtnSad_Excluir);
         Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
         Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo);
     }//GEN-LAST:event_jBtnSad_CancelarActionPerformed
 
     private void jBtnSad_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_PesquisarActionPerformed
         // TODO add your handling code here:
-        JDlgSad_ProdutosPesquisar jDlgProdutosPesquisar = new JDlgSad_ProdutosPesquisar(null, true);
-        jDlgProdutosPesquisar.setVisible(true);
+        JDlgSad_ProdutosPesquisar jDlgSad_ProdutosPesquisar = new JDlgSad_ProdutosPesquisar(null, true);
+        jDlgSad_ProdutosPesquisar.setTelaPai(this);
+        jDlgSad_ProdutosPesquisar.setVisible(true);
         Sad_Util.sad_habilitar(true, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Cancelar);
-        Sad_Util.sad_habilitar(false,jBtnSad_Incluir, jBtnSad_Pesquisar);
-        
+        Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
+
     }//GEN-LAST:event_jBtnSad_PesquisarActionPerformed
 
     /**

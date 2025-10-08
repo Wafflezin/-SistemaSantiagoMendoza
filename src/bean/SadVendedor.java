@@ -116,4 +116,9 @@ public class SadVendedor implements java.io.Serializable {
         this.sadCelular = sadCelular;
     }
 
+    @Override
+    public String toString() {
+        return this.sadNome;
+    }
+
 }

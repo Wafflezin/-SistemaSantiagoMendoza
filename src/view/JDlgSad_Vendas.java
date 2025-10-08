@@ -5,6 +5,13 @@
  */
 package view;
 
+import bean.SadClientes;
+import dao.SadClientesDAO;
+import bean.SadVendas;
+import dao.SadVendasDAO;
+import bean.SadVendedor;
+import dao.SadVendedorDAO;
+import java.util.List;
 import tools.Sad_Util;
 
 /**
@@ -13,16 +20,27 @@ import tools.Sad_Util;
  */
 public class JDlgSad_Vendas extends javax.swing.JDialog {
 
+    private boolean incluir;
+
     /**
      * Creates new form JDlgSad_Vendas
      */
     public JDlgSad_Vendas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-         setTitle("Cadastro de Usuários");
+        setTitle("Cadastro de Usuários");
         setLocationRelativeTo(null);
         Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Confirmar, jBtnSad_Cancelar);
-    
+        SadClientesDAO clientesDAO = new SadClientesDAO();
+        SadVendedorDAO vendedoresDAO = new SadVendedorDAO();
+        List clientes = (List) clientesDAO.listAll();
+        for (int i = 0; i < clientes.size(); i++) {
+            jCboSad_Clientes.addItem((SadClientes) clientes.get(i));
+        }
+        List vendedores = (List) vendedoresDAO.listAll();
+        for (int i = 0; i < vendedores.size(); i++) {
+            jCboSad_Vendedor.addItem((SadVendedor) vendedores.get(i));
+        }
     }
 
     /**
@@ -39,9 +57,9 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         jScrollPanelSad_Painel = new javax.swing.JScrollPane();
         jTblSad_Tabela = new javax.swing.JTable();
-        jCboSad_Clientes = new javax.swing.JComboBox<>();
+        jCboSad_Clientes = new javax.swing.JComboBox<SadClientes>();
         jLabel1 = new javax.swing.JLabel();
-        jCboSad_Vendedor = new javax.swing.JComboBox<>();
+        jCboSad_Vendedor = new javax.swing.JComboBox<SadVendedor>();
         jTxtSad_Codigo = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jTxtSad_Total = new javax.swing.JTextField();
@@ -77,7 +95,6 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
         ));
         jScrollPanelSad_Painel.setViewportView(jTblSad_Tabela);
 
-        jCboSad_Clientes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
         jCboSad_Clientes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCboSad_ClientesActionPerformed(evt);
@@ -85,8 +102,6 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
         });
 
         jLabel1.setText("Codigo");
-
-        jCboSad_Vendedor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "" }));
 
         jTxtSad_Codigo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -295,7 +310,8 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
         // TODO add your handling code here:
         Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
-        Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas);
+        Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes
+                , jCboSad_Vendedor, jFmtSad_DataVendas);
     }//GEN-LAST:event_jBtnSad_ConfirmarActionPerformed
 
     private void jBtnSad_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_CancelarActionPerformed
@@ -307,8 +323,8 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
 
     private void jBtnSad_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_PesquisarActionPerformed
         // TODO add your handling code here:
-        JDlgSad_UsuariosPesquisar jDlgUsuariosPesquisar = new JDlgSad_UsuariosPesquisar(null, true);
-        jDlgUsuariosPesquisar.setVisible(true);
+        JDlgSad_VendasPesquisar jDlgVendasPesquisar = new JDlgSad_VendasPesquisar(null, true);
+        jDlgVendasPesquisar.setVisible(true);
         Sad_Util.sad_habilitar(true, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
 
@@ -402,8 +418,8 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
     private javax.swing.JButton jBtnSad_Incluir;
     private javax.swing.JButton jBtnSad_IncluirProd;
     private javax.swing.JButton jBtnSad_Pesquisar;
-    private javax.swing.JComboBox<String> jCboSad_Clientes;
-    private javax.swing.JComboBox<String> jCboSad_Vendedor;
+    private javax.swing.JComboBox<SadClientes> jCboSad_Clientes;
+    private javax.swing.JComboBox<SadVendedor> jCboSad_Vendedor;
     private javax.swing.JFormattedTextField jFmtSad_DataVendas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class JDlgSad_ProdutosPesquisar extends javax.swing.JDialog {
     /**
-     * Creates new form JDlgUsuariosPesquisar
+     * Creates new form JDlgProdutosPesquisar
      */
     private JDlgSad_Produtos jDlgSad_Produtos;
     Sad_ControllerProdutos Sad_ControllerProdutos;
@@ -112,8 +112,10 @@ public class JDlgSad_ProdutosPesquisar extends javax.swing.JDialog {
 
     private void jBtnSad_OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_OKActionPerformed
         // TODO add your handling code here:
+        SadProdutos sadProdutos =  Sad_ControllerProdutos.getBean( jTblSad_Tabela.getSelectedRow() );
+        jDlgSad_Produtos.beanView(sadProdutos);
+        this.setVisible(false);
         
-        setVisible(false);
 
     
     }//GEN-LAST:event_jBtnSad_OKActionPerformed

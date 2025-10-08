@@ -210,5 +210,11 @@ public class SadClientes implements java.io.Serializable {
     public void setSadPronomes(String sadPronomes) {
         this.sadPronomes = sadPronomes;
     }
+    
+     @Override
+    public String toString(){
+        return this.sadNome;
+    }
+
 
 }

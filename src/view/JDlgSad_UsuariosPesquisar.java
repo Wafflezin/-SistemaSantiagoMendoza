@@ -112,12 +112,9 @@ public class JDlgSad_UsuariosPesquisar extends javax.swing.JDialog {
 
     private void jBtnSad_OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_OKActionPerformed
         // TODO add your handling code here:
-        SadUsuarios sadusuarios =  Sad_ControllerUsuarios.getBean( jTblSad_Tabela.getSelectedRow() );
-        jDlgSad_Usuarios.beanView(sadusuarios);
+        SadUsuarios sadUsuarios =  Sad_ControllerUsuarios.getBean( jTblSad_Tabela.getSelectedRow() );
+        jDlgSad_Usuarios.beanView(sadUsuarios);
         this.setVisible(false);
-
-
-    
     }//GEN-LAST:event_jBtnSad_OKActionPerformed
 
     private void jBtnSad_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_CancelarActionPerformed

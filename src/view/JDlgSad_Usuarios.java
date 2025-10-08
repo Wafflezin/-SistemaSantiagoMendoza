@@ -46,7 +46,7 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
         jFmtSad_Cpf.setText(sadUsuarios.getSadCpf());
         jPwdSad_Senha.setText(sadUsuarios.getSadSenha());
         jCboSad_Nivel.setSelectedIndex(sadUsuarios.getSadNivel());
-        jChbSad_Ativo.setSelected(sadUsuarios.getSadAtivo() == "S");
+        jChbSad_Ativo.setSelected("S".equals(sadUsuarios.getSadAtivo()));
         jFmtSad_DataNascimento.setText(Sad_Util.dateToStr(sadUsuarios.getSadDataNascimento()));
     }
 
