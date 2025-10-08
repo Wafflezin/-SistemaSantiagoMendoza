@@ -79,7 +79,7 @@ public class Sad_Util {
     }
 
     public static String dateToStr(Date data) {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return sdf.format(data);
     }
     public static String doubleToStr(double num) {

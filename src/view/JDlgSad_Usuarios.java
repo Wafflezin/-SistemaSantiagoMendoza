@@ -287,7 +287,7 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
     private void jBtnSad_AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_AlterarActionPerformed
         // TODO add your handling code here:
         incluir = false;
-        Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_Nome, jPwfSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento, jBtnSad_Confirmar, jBtnSad_Cancelar);
+        Sad_Util.sad_habilitar(true, jTxtSad_Nome, jPwfSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Excluir, jBtnSad_Incluir, jBtnSad_Alterar);
         jTxtSad_Nome.grabFocus();
 
@@ -296,8 +296,10 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
     private void jBtnSad_ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ExcluirActionPerformed
         // TODO add your handling code here:
         if (Sad_Util.sad_perguntar("Excluir?") == true) {
+            SadUsuariosDAO sadUsuariosDAO = new SadUsuariosDAO();
+            sadUsuariosDAO.delete(viewBean());
             Sad_Util.sad_habilitar(false, jBtnSad_Alterar, jBtnSad_Cancelar, jBtnSad_Excluir);
-            Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
+            Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);           
             Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jPwfSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento);
         }
     }//GEN-LAST:event_jBtnSad_ExcluirActionPerformed
@@ -320,6 +322,7 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
     private void jBtnSad_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_PesquisarActionPerformed
         // TODO add your handling code here:
         JDlgSad_UsuariosPesquisar jDlgUsuariosPesquisar = new JDlgSad_UsuariosPesquisar(null, true);
+        jDlgUsuariosPesquisar.setTelaPai(this);
         jDlgUsuariosPesquisar.setVisible(true);
         Sad_Util.sad_habilitar(true, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
