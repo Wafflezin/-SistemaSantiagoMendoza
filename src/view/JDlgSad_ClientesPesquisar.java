@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import bean.SadClientes;
 import dao.SadClientesDAO;
+import tools.Sad_Util;
 
 /**
  *
@@ -111,9 +112,14 @@ public class JDlgSad_ClientesPesquisar extends javax.swing.JDialog {
 
     private void jBtnSad_OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_OKActionPerformed
         // TODO add your handling code here:
-        SadClientes sadClientes =  Sad_ControllerClientes.getBean( jTblSad_Tabela.getSelectedRow() );
+        int selectedRow = jTblSad_Tabela.getSelectedRow();
+        if(selectedRow >= 0) { 
+        SadClientes sadClientes = Sad_ControllerClientes.getBean(selectedRow);
         jDlgSad_Clientes.beanView(sadClientes);
         this.setVisible(false);
+    } else {
+        Sad_Util.sad_mensagem("Selecione um cliente!");
+    }
     }//GEN-LAST:event_jBtnSad_OKActionPerformed
 
     private void jBtnSad_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_CancelarActionPerformed

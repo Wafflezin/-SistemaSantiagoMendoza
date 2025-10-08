@@ -385,14 +385,21 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
 
     private void jBtnSad_IncluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_IncluirProdActionPerformed
         // TODO add your handling code here:
+        JDlgSad_VendaProdutos jDlgSad_VendaProdutos = new JDlgSad_VendaProdutos(null, true);
+        jDlgSad_VendaProdutos.setVisible(true);
     }//GEN-LAST:event_jBtnSad_IncluirProdActionPerformed
 
     private void jBtnSad_AlterarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_AlterarProdActionPerformed
         // TODO add your handling code here:
+        JDlgSad_VendaProdutos jDlgSad_VendaProdutos = new JDlgSad_VendaProdutos(null, true);
+        jDlgSad_VendaProdutos.setVisible(true);
     }//GEN-LAST:event_jBtnSad_AlterarProdActionPerformed
 
     private void jBtnSad_ExcluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ExcluirProdActionPerformed
         // TODO add your handling code here:
+        JDlgSad_VendaProdutos jDlgSad_VendaProdutos = new JDlgSad_VendaProdutos(null, true);
+        jDlgSad_VendaProdutos.setVisible(true);
+        if (Sad_Util.sad_perguntar("Deseja excluir o produto?") == true);
     }//GEN-LAST:event_jBtnSad_ExcluirProdActionPerformed
 
     /**
