@@ -172,6 +172,8 @@ public class JFrmSad_Principal extends javax.swing.JFrame {
 
     private void jMnuVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuVendasActionPerformed
         // TODO add your handling code here:
+        JDlgSad_Vendas jDlgVendas = new JDlgSad_Vendas(this, true);
+        jDlgVendas.setVisible(true);
     }//GEN-LAST:event_jMnuVendasActionPerformed
 
     /**

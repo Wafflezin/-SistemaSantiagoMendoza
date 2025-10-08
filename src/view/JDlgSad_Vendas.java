@@ -28,7 +28,7 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
     public JDlgSad_Vendas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setTitle("Cadastro de Usuários");
+        setTitle("Cadastro de Vendas");
         setLocationRelativeTo(null);
         Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Confirmar, jBtnSad_Cancelar);
         SadClientesDAO clientesDAO = new SadClientesDAO();
@@ -41,6 +41,25 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
         for (int i = 0; i < vendedores.size(); i++) {
             jCboSad_Vendedor.addItem((SadVendedor) vendedores.get(i));
         }
+    }
+
+    public SadVendas viewBean() {
+        SadVendas sadVendas = new SadVendas();
+        int codigo = Sad_Util.strToInt(jTxtSad_Codigo.getText());
+        sadVendas.setSadIdVendas(codigo);
+        sadVendas.setSadClientes((SadClientes) jCboSad_Clientes.getSelectedItem());
+        sadVendas.setSadVendedor((SadVendedor) jCboSad_Vendedor.getSelectedItem());
+        sadVendas.setSadDataVendas(Sad_Util.strToDate(jFmtSad_DataVendas.getText()));
+        sadVendas.setSadTotal(Sad_Util.strToDouble(jTxtSad_Total.getText()));
+        return sadVendas;
+    }
+
+    public void beanView(SadVendas sadVendas) {
+        jTxtSad_Codigo.setText(Sad_Util.intToStr(sadVendas.getSadIdVendas()));
+        jCboSad_Clientes.setSelectedItem(sadVendas.getSadClientes());
+        jCboSad_Vendedor.setSelectedItem(sadVendas.getSadVendedor());
+        jFmtSad_DataVendas.setText(Sad_Util.dateToStr(sadVendas.getSadDataVendas()));
+        jTxtSad_Total.setText(Sad_Util.doubleToStr(sadVendas.getSadTotal()));
     }
 
     /**
@@ -308,10 +327,15 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
 
     private void jBtnSad_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ConfirmarActionPerformed
         // TODO add your handling code here:
+        SadVendasDAO sadVendasDAO = new SadVendasDAO();
+        if (incluir) {
+            sadVendasDAO.insert(viewBean());
+        } else {
+            sadVendasDAO.update(viewBean());
+        }
         Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
-        Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes
-                , jCboSad_Vendedor, jFmtSad_DataVendas);
+        Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas);
     }//GEN-LAST:event_jBtnSad_ConfirmarActionPerformed
 
     private void jBtnSad_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_CancelarActionPerformed
@@ -323,8 +347,9 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
 
     private void jBtnSad_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_PesquisarActionPerformed
         // TODO add your handling code here:
-        JDlgSad_VendasPesquisar jDlgVendasPesquisar = new JDlgSad_VendasPesquisar(null, true);
-        jDlgVendasPesquisar.setVisible(true);
+        JDlgSad_VendasPesquisar jDlgSad_VendasPesquisar = new JDlgSad_VendasPesquisar(null, true);
+        jDlgSad_VendasPesquisar.setTelaPai(this);
+        jDlgSad_VendasPesquisar.setVisible(true);
         Sad_Util.sad_habilitar(true, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
 
@@ -332,22 +357,26 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
 
     private void jBtnSad_IncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_IncluirActionPerformed
         // TODO add your handling code here:
+        incluir = true;
         Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
         Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas);
-
+        jTxtSad_Codigo.grabFocus();
     }//GEN-LAST:event_jBtnSad_IncluirActionPerformed
 
     private void jBtnSad_AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_AlterarActionPerformed
         // TODO add your handling code here:
+        incluir = false;
         Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Excluir, jBtnSad_Incluir, jBtnSad_Alterar);
-
+        jTxtSad_Total.grabFocus();
     }//GEN-LAST:event_jBtnSad_AlterarActionPerformed
 
     private void jBtnSad_ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ExcluirActionPerformed
         // TODO add your handling code here:
         if (Sad_Util.sad_perguntar("Excluir?") == true) {
+            SadVendasDAO sadVendasDAO = new SadVendasDAO();
+            sadVendasDAO.delete(viewBean());
             Sad_Util.sad_habilitar(false, jBtnSad_Alterar, jBtnSad_Cancelar, jBtnSad_Excluir);
             Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
             Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas);
