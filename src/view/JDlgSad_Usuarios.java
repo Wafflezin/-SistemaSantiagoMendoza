@@ -26,28 +26,28 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
     }
     
     public SadUsuarios viewBean() {
-        SadUsuarios sadusuarios = new SadUsuarios();
+        SadUsuarios sadUsuarios = new SadUsuarios();
         int codigo = Sad_Util.strToInt(jTxtSad_Codigo.getText());
-        sadusuarios.setSadIdUsuarios(codigo);
-        sadusuarios.setSadNome(jTxtSad_Nome.getText());
-        sadusuarios.setSadApelido(jTxtSad_Apelido.getText());
-        sadusuarios.setSadCpf(jFmtSad_Cpf.getText());
-        sadusuarios.setSadSenha(jPwdSad_Senha.getText());
-        sadusuarios.setSadNivel(jCboSad_Nivel.getSelectedIndex());
-        sadusuarios.setSadAtivo(jChbSad_Ativo.isSelected() ? "S" : "N");
-        sadusuarios.setSadDataNascimento(Sad_Util.strToDate(jFmtSad_DataNascimento.getText()));
-        return sadusuarios;
+        sadUsuarios.setSadIdUsuarios(codigo);
+        sadUsuarios.setSadNome(jTxtSad_Nome.getText());
+        sadUsuarios.setSadApelido(jTxtSad_Apelido.getText());
+        sadUsuarios.setSadCpf(jFmtSad_Cpf.getText());
+        sadUsuarios.setSadSenha(jPwdSad_Senha.getText());
+        sadUsuarios.setSadNivel(jCboSad_Nivel.getSelectedIndex());
+        sadUsuarios.setSadAtivo(jChbSad_Ativo.isSelected() ? "S" : "N");
+        sadUsuarios.setSadDataNascimento(Sad_Util.strToDate(jFmtSad_DataNascimento.getText()));
+        return sadUsuarios;
     }
     
-    public void beanView(SadUsuarios sadusuarios) {
-        jTxtSad_Codigo.setText(Sad_Util.intToStr(sadusuarios.getSadIdUsuarios()));
-        jTxtSad_Nome.setText(sadusuarios.getSadNome());
-        jTxtSad_Apelido.setText(sadusuarios.getSadApelido());
-        jFmtSad_Cpf.setText(sadusuarios.getSadCpf());
-        jPwdSad_Senha.setText(sadusuarios.getSadSenha());
-        jCboSad_Nivel.setSelectedIndex(sadusuarios.getSadNivel());
-        jChbSad_Ativo.setSelected(sadusuarios.getSadAtivo() == "S");
-        jFmtSad_DataNascimento.setText(Sad_Util.dateToStr(sadusuarios.getSadDataNascimento()));
+    public void beanView(SadUsuarios sadUsuarios) {
+        jTxtSad_Codigo.setText(Sad_Util.intToStr(sadUsuarios.getSadIdUsuarios()));
+        jTxtSad_Nome.setText(sadUsuarios.getSadNome());
+        jTxtSad_Apelido.setText(sadUsuarios.getSadApelido());
+        jFmtSad_Cpf.setText(sadUsuarios.getSadCpf());
+        jPwdSad_Senha.setText(sadUsuarios.getSadSenha());
+        jCboSad_Nivel.setSelectedIndex(sadUsuarios.getSadNivel());
+        jChbSad_Ativo.setSelected(sadUsuarios.getSadAtivo() == "S");
+        jFmtSad_DataNascimento.setText(Sad_Util.dateToStr(sadUsuarios.getSadDataNascimento()));
     }
 
 
@@ -321,9 +321,9 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
 
     private void jBtnSad_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_PesquisarActionPerformed
         // TODO add your handling code here:
-        JDlgSad_UsuariosPesquisar jDlgUsuariosPesquisar = new JDlgSad_UsuariosPesquisar(null, true);
-        jDlgUsuariosPesquisar.setTelaPai(this);
-        jDlgUsuariosPesquisar.setVisible(true);
+        JDlgSad_UsuariosPesquisar jDlgSad_UsuariosPesquisar = new JDlgSad_UsuariosPesquisar(null, true);
+        jDlgSad_UsuariosPesquisar.setTelaPai(this);
+        jDlgSad_UsuariosPesquisar.setVisible(true);
         Sad_Util.sad_habilitar(true, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
 

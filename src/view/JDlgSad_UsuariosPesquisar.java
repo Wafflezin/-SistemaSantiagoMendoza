@@ -115,8 +115,7 @@ public class JDlgSad_UsuariosPesquisar extends javax.swing.JDialog {
         SadUsuarios sadusuarios =  Sad_ControllerUsuarios.getBean( jTblSad_Tabela.getSelectedRow() );
         jDlgSad_Usuarios.beanView(sadusuarios);
         this.setVisible(false);
-       
-        setVisible(false);
+
 
     
     }//GEN-LAST:event_jBtnSad_OKActionPerformed

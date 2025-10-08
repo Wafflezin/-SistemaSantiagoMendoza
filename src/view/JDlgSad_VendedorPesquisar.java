@@ -111,7 +111,7 @@ public class JDlgSad_VendedorPesquisar extends javax.swing.JDialog {
         // TODO add your handling code here:
         SadVendedor sadVendedor =  Sad_ControllerVendedor.getBean( jTblSad_Tabela.getSelectedRow() );
         jDlgSad_Vendedor.beanView(sadVendedor);
-        setVisible(false);
+        this.setVisible(false);
 
     
     }//GEN-LAST:event_jBtnSad_OKActionPerformed

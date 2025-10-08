@@ -15,8 +15,10 @@ import tools.Sad_Util;
  */
 public class JDlgSad_Clientes extends javax.swing.JDialog {
 
+    private boolean incluir;
+
     /**
-     * Creates new form JDlgSad_Clientes1
+     * Creates new form JDlgSad_Clientes
      */
     public JDlgSad_Clientes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -24,6 +26,46 @@ public class JDlgSad_Clientes extends javax.swing.JDialog {
         setTitle("Cadastro de Clientes");
         setLocationRelativeTo(null);
         Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Email, jFmtSad_Rg, jCboSad_Sexo, jTxtSad_Pronomes, jTxtSad_Endereco, jFmtSad_Cpf, jFmtSad_DataNascimento, jTxtSad_Bairro, jTxtSad_Cidade, jFmtSad_Cep, jFmtSad_Residencial, jFmtSad_Celular, jPwdSad_Senha, jBtnSad_Confirmar, jBtnSad_Cancelar, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Confirmar, jBtnSad_Cancelar);
+
+    }
+
+    public SadClientes viewBean() {
+        SadClientes sadClientes = new SadClientes();
+        int codigo = Sad_Util.strToInt(jTxtSad_Codigo.getText());
+        sadClientes.setSadIdClientes(codigo);
+        sadClientes.setSadNome(jTxtSad_Nome.getText());
+        sadClientes.setSadCpf(jFmtSad_Cpf.getText());
+        sadClientes.setSadRg(jFmtSad_Rg.getText());
+        sadClientes.setSadSexo(jCboSad_Sexo.getSelectedIndex());
+        sadClientes.setSadDataNascimento(Sad_Util.strToDate(jFmtSad_DataNascimento.getText()));
+        sadClientes.setSadEmail(jTxtSad_Email.getText());
+        sadClientes.setSadCep(jFmtSad_Cep.getText());
+        sadClientes.setSadEndereco(jTxtSad_Endereco.getText());
+        sadClientes.setSadBairro(jTxtSad_Bairro.getText());
+        sadClientes.setSadCidade(jTxtSad_Cidade.getText());
+        sadClientes.setSadTelefoneResidencial(jFmtSad_Residencial.getText());
+        sadClientes.setSadCelular(jFmtSad_Celular.getText());
+        sadClientes.setSadSenha(jPwdSad_Senha.getText());
+        sadClientes.setSadPronomes(jTxtSad_Pronomes.getText());
+        return sadClientes;
+    }
+
+    public void beanView(SadClientes sadClientes) {
+        jTxtSad_Codigo.setText(Sad_Util.intToStr(sadClientes.getSadIdClientes()));
+        jTxtSad_Nome.setText(sadClientes.getSadNome());
+        jFmtSad_Cpf.setText(sadClientes.getSadCpf());
+        jFmtSad_Rg.setText(sadClientes.getSadRg());
+        jCboSad_Sexo.setSelectedIndex(sadClientes.getSadSexo());
+        jFmtSad_DataNascimento.setText(Sad_Util.dateToStr(sadClientes.getSadDataNascimento()));
+        jTxtSad_Email.setText(sadClientes.getSadEmail());
+        jFmtSad_Cep.setText(sadClientes.getSadCep());
+        jTxtSad_Endereco.setText(sadClientes.getSadEndereco());
+        jTxtSad_Bairro.setText(sadClientes.getSadBairro());
+        jTxtSad_Cidade.setText(sadClientes.getSadCidade());
+        jFmtSad_Residencial.setText(sadClientes.getSadTelefoneResidencial());
+        jFmtSad_Celular.setText(sadClientes.getSadCelular());
+        jPwdSad_Senha.setText(sadClientes.getSadSenha());
+        jTxtSad_Pronomes.setText(sadClientes.getSadPronomes());
 
     }
 
@@ -55,7 +97,7 @@ public class JDlgSad_Clientes extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jFmtSad_Rg = new javax.swing.JFormattedTextField();
         jLabel7 = new javax.swing.JLabel();
-        jCboSad_Sexo = new javax.swing.JComboBox<>();
+        jCboSad_Sexo = new javax.swing.JComboBox<String>();
         jLabel8 = new javax.swing.JLabel();
         jTxtSad_Pronomes = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
@@ -149,7 +191,7 @@ public class JDlgSad_Clientes extends javax.swing.JDialog {
 
         jLabel7.setText("Sexo");
 
-        jCboSad_Sexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Feminino" }));
+        jCboSad_Sexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Feminino" }));
 
         jLabel8.setText("Pronomes");
 
@@ -182,14 +224,12 @@ public class JDlgSad_Clientes extends javax.swing.JDialog {
                                     .addComponent(jFmtSad_Cpf, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel5)
-                                        .addGap(36, 36, 36)
-                                        .addComponent(jLabel6))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jFmtSad_DataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jFmtSad_Rg, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jFmtSad_DataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jFmtSad_Rg, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jCboSad_Sexo, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -331,10 +371,16 @@ public class JDlgSad_Clientes extends javax.swing.JDialog {
 
     private void jBtnSad_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ConfirmarActionPerformed
         // TODO add your handling code here:
-        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Email, jFmtSad_Rg, jCboSad_Sexo, jTxtSad_Pronomes, jTxtSad_Endereco, jFmtSad_Cpf, jFmtSad_DataNascimento, jTxtSad_Bairro, jTxtSad_Cidade, jFmtSad_Cep, jFmtSad_Residencial, jFmtSad_Celular, jPwdSad_Senha, jBtnSad_Confirmar, jBtnSad_Cancelar );
+        SadClientesDAO sadClientesDAO = new SadClientesDAO();
+        if(incluir) {
+            sadClientesDAO.insert(viewBean());
+        } else {
+            sadClientesDAO.update(viewBean());
+        }
+        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Email, jFmtSad_Rg, jCboSad_Sexo, jTxtSad_Pronomes, jTxtSad_Endereco, jFmtSad_Cpf, jFmtSad_DataNascimento, jTxtSad_Bairro, jTxtSad_Cidade, jFmtSad_Cep, jFmtSad_Residencial, jFmtSad_Celular, jPwdSad_Senha, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
         Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Email, jFmtSad_Rg, jCboSad_Sexo, jTxtSad_Pronomes, jTxtSad_Endereco, jFmtSad_Cpf, jFmtSad_DataNascimento, jTxtSad_Bairro, jTxtSad_Cidade, jFmtSad_Cep, jFmtSad_Residencial, jFmtSad_Celular, jPwdSad_Senha);
-    
+
     }//GEN-LAST:event_jBtnSad_ConfirmarActionPerformed
 
     private void jBtnSad_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_CancelarActionPerformed
@@ -347,8 +393,9 @@ public class JDlgSad_Clientes extends javax.swing.JDialog {
 
     private void jBtnSad_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_PesquisarActionPerformed
         // TODO add your handling code here:
-        JDlgSad_ClientesPesquisar jDlgClientesPesquisar = new JDlgSad_ClientesPesquisar(null, true);
-        jDlgClientesPesquisar.setVisible(true);
+        JDlgSad_ClientesPesquisar jDlgSad_ClientesPesquisar = new JDlgSad_ClientesPesquisar(null, true);
+        jDlgSad_ClientesPesquisar.setTelaPai(this);
+        jDlgSad_ClientesPesquisar.setVisible(true);
         Sad_Util.sad_habilitar(true, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
 
@@ -356,22 +403,26 @@ public class JDlgSad_Clientes extends javax.swing.JDialog {
 
     private void jBtnSad_IncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_IncluirActionPerformed
         // TODO add your handling code here:
+        incluir = true;
         Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Email, jFmtSad_Rg, jCboSad_Sexo, jTxtSad_Pronomes, jTxtSad_Endereco, jFmtSad_Cpf, jFmtSad_DataNascimento, jTxtSad_Bairro, jTxtSad_Cidade, jFmtSad_Cep, jFmtSad_Residencial, jFmtSad_Celular, jPwdSad_Senha, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
         Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Email, jFmtSad_Rg, jCboSad_Sexo, jTxtSad_Pronomes, jTxtSad_Endereco, jFmtSad_Cpf, jFmtSad_DataNascimento, jTxtSad_Bairro, jTxtSad_Cidade, jFmtSad_Cep, jFmtSad_Residencial, jFmtSad_Celular, jPwdSad_Senha);
-
+        jTxtSad_Codigo.grabFocus();
     }//GEN-LAST:event_jBtnSad_IncluirActionPerformed
 
     private void jBtnSad_AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_AlterarActionPerformed
         // TODO add your handling code here:
-        Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Email, jFmtSad_Rg, jCboSad_Sexo, jTxtSad_Pronomes, jTxtSad_Endereco, jFmtSad_Cpf, jFmtSad_DataNascimento, jTxtSad_Bairro, jTxtSad_Cidade, jFmtSad_Cep, jFmtSad_Residencial, jFmtSad_Celular, jPwdSad_Senha, jBtnSad_Confirmar, jBtnSad_Cancelar);
+        incluir = false;
+        Sad_Util.sad_habilitar(true, jTxtSad_Nome, jTxtSad_Email, jFmtSad_Rg, jCboSad_Sexo, jTxtSad_Pronomes, jTxtSad_Endereco, jFmtSad_Cpf, jFmtSad_DataNascimento, jTxtSad_Bairro, jTxtSad_Cidade, jFmtSad_Cep, jFmtSad_Residencial, jFmtSad_Celular, jPwdSad_Senha, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Excluir, jBtnSad_Incluir, jBtnSad_Alterar);
-
+        jTxtSad_Nome.grabFocus();
     }//GEN-LAST:event_jBtnSad_AlterarActionPerformed
 
     private void jBtnSad_ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ExcluirActionPerformed
         // TODO add your handling code here:
         if (Sad_Util.sad_perguntar("Excluir?") == true) {
+            SadClientesDAO sadClientesDAO = new SadClientesDAO();
+            sadClientesDAO.delete(viewBean());
             Sad_Util.sad_habilitar(false, jBtnSad_Alterar, jBtnSad_Cancelar, jBtnSad_Excluir);
             Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
             Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Email, jFmtSad_Rg, jCboSad_Sexo, jTxtSad_Pronomes, jTxtSad_Endereco, jFmtSad_Cpf, jFmtSad_DataNascimento, jTxtSad_Bairro, jTxtSad_Cidade, jFmtSad_Cep, jFmtSad_Residencial, jFmtSad_Celular, jPwdSad_Senha);

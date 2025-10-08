@@ -111,8 +111,9 @@ public class JDlgSad_ClientesPesquisar extends javax.swing.JDialog {
 
     private void jBtnSad_OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_OKActionPerformed
         // TODO add your handling code here:
-        
-        setVisible(false);
+        SadClientes sadClientes =  Sad_ControllerClientes.getBean( jTblSad_Tabela.getSelectedRow() );
+        jDlgSad_Clientes.beanView(sadClientes);
+        this.setVisible(false);
     }//GEN-LAST:event_jBtnSad_OKActionPerformed
 
     private void jBtnSad_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_CancelarActionPerformed
