@@ -22,7 +22,7 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
         initComponents();
         setTitle("Cadastro de Usuários");
         setLocationRelativeTo(null);
-        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jPwfSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Confirmar, jBtnSad_Cancelar);
+        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jPwdSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Confirmar, jBtnSad_Cancelar);
     }
     
     public SadUsuarios viewBean() {
@@ -32,7 +32,7 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
         sadusuarios.setSadNome(jTxtSad_Nome.getText());
         sadusuarios.setSadApelido(jTxtSad_Apelido.getText());
         sadusuarios.setSadCpf(jFmtSad_Cpf.getText());
-        sadusuarios.setSadSenha(jPwfSad_Senha.getText());
+        sadusuarios.setSadSenha(jPwdSad_Senha.getText());
         sadusuarios.setSadNivel(jCboSad_Nivel.getSelectedIndex());
         sadusuarios.setSadAtivo(jChbSad_Ativo.isSelected() ? "S" : "N");
         sadusuarios.setSadDataNascimento(Sad_Util.strToDate(jFmtSad_DataNascimento.getText()));
@@ -44,7 +44,7 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
         jTxtSad_Nome.setText(sadusuarios.getSadNome());
         jTxtSad_Apelido.setText(sadusuarios.getSadApelido());
         jFmtSad_Cpf.setText(sadusuarios.getSadCpf());
-        jPwfSad_Senha.setText(sadusuarios.getSadSenha());
+        jPwdSad_Senha.setText(sadusuarios.getSadSenha());
         jCboSad_Nivel.setSelectedIndex(sadusuarios.getSadNivel());
         jChbSad_Ativo.setSelected(sadusuarios.getSadAtivo() == "S");
         jFmtSad_DataNascimento.setText(Sad_Util.dateToStr(sadusuarios.getSadDataNascimento()));
@@ -71,10 +71,10 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
         jLabel5 = new javax.swing.JLabel();
         jFmtSad_DataNascimento = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
-        jPwfSad_Senha = new javax.swing.JPasswordField();
+        jPwdSad_Senha = new javax.swing.JPasswordField();
         jLabel7 = new javax.swing.JLabel();
         jChbSad_Ativo = new javax.swing.JCheckBox();
-        jCboSad_Nivel = new javax.swing.JComboBox<>();
+        jCboSad_Nivel = new javax.swing.JComboBox<String>();
         jLabel8 = new javax.swing.JLabel();
         jBtnSad_Incluir = new javax.swing.JButton();
         jBtnSad_Alterar = new javax.swing.JButton();
@@ -111,7 +111,7 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
 
         jLabel7.setText("Nível");
 
-        jCboSad_Nivel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "administrador", "funcionario", "vendedor", "gerente" }));
+        jCboSad_Nivel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "administrador", "funcionario", "vendedor", "gerente" }));
         jCboSad_Nivel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCboSad_NivelActionPerformed(evt);
@@ -185,7 +185,7 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jPwfSad_Senha, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                                        .addComponent(jPwdSad_Senha, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
                                         .addComponent(jFmtSad_Cpf))
                                     .addComponent(jLabel6))
                                 .addGap(75, 75, 75)
@@ -253,7 +253,7 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jChbSad_Ativo)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jPwfSad_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jPwdSad_Senha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jCboSad_Nivel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -277,9 +277,9 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
     private void jBtnSad_IncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_IncluirActionPerformed
         // TODO add your handling code here:
         incluir = true;
-        Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_Nome, jPwfSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento, jBtnSad_Confirmar, jBtnSad_Cancelar);
+        Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_Nome, jPwdSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
-        Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jPwfSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento);
+        Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jPwdSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento);
         jTxtSad_Codigo.grabFocus();
 
     }//GEN-LAST:event_jBtnSad_IncluirActionPerformed
@@ -287,7 +287,7 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
     private void jBtnSad_AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_AlterarActionPerformed
         // TODO add your handling code here:
         incluir = false;
-        Sad_Util.sad_habilitar(true, jTxtSad_Nome, jPwfSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento, jBtnSad_Confirmar, jBtnSad_Cancelar);
+        Sad_Util.sad_habilitar(true, jTxtSad_Nome, jPwdSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Excluir, jBtnSad_Incluir, jBtnSad_Alterar);
         jTxtSad_Nome.grabFocus();
 
@@ -300,7 +300,7 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
             sadUsuariosDAO.delete(viewBean());
             Sad_Util.sad_habilitar(false, jBtnSad_Alterar, jBtnSad_Cancelar, jBtnSad_Excluir);
             Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);           
-            Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jPwfSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento);
+            Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jPwdSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento);
         }
     }//GEN-LAST:event_jBtnSad_ExcluirActionPerformed
 
@@ -313,9 +313,9 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
         } else {
             sadUsuariosDAO.update(viewBean());
         }
-        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jPwfSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento, jBtnSad_Confirmar, jBtnSad_Cancelar);
+        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jPwdSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
-        Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jPwfSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento);
+        Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jPwdSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento);
 
     }//GEN-LAST:event_jBtnSad_ConfirmarActionPerformed
 
@@ -332,9 +332,9 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
 
     private void jBtnSad_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_CancelarActionPerformed
         // TODO add your handling code here:
-        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jPwfSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento, jBtnSad_Confirmar, jBtnSad_Cancelar, jBtnSad_Alterar, jBtnSad_Excluir);
+        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jPwdSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento, jBtnSad_Confirmar, jBtnSad_Cancelar, jBtnSad_Alterar, jBtnSad_Excluir);
         Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
-        Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jPwfSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento);
+        Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jPwdSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento);
 
     }//GEN-LAST:event_jBtnSad_CancelarActionPerformed
 
@@ -415,7 +415,7 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPasswordField jPwfSad_Senha;
+    private javax.swing.JPasswordField jPwdSad_Senha;
     private javax.swing.JTextField jTxtSad_Apelido;
     private javax.swing.JTextField jTxtSad_Codigo;
     private javax.swing.JTextField jTxtSad_Nome;

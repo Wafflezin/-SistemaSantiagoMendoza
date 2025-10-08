@@ -4,6 +4,8 @@
  */
 package view;
 
+import bean.SadVendedor;
+import dao.SadVendedorDAO;
 import tools.Sad_Util;
 
 /**
@@ -12,15 +14,40 @@ import tools.Sad_Util;
  */
 public class JDlgSad_Vendedor extends javax.swing.JDialog {
 
+    private boolean incluir;
+
     /**
      * Creates new form JDlgVendedor
      */
     public JDlgSad_Vendedor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setTitle("Cadastro de Vendeodr");
+        setTitle("Cadastro de Vendedor");
         setLocationRelativeTo(null);
         Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Confirmar, jBtnSad_Cancelar);
+    }
+
+    public SadVendedor viewBean() {
+        SadVendedor sadVendedor = new SadVendedor();
+        int codigo = Sad_Util.strToInt(jTxtSad_Codigo.getText());
+        sadVendedor.setSadIdVendedor(codigo);
+        sadVendedor.setSadNome(jTxtSad_Nome.getText());
+        sadVendedor.setSadSenha(jPwdSad_Senha.getText());
+        sadVendedor.setSadDataNascimento(Sad_Util.strToDate(jFmtSad_DataNascimento.getText()));
+        sadVendedor.setSadQuantidadeVendas(jTxtSad_QuantidaVendas.getText());
+        sadVendedor.setSadArrecadado(Sad_Util.strToDouble(jFmtSad_Arrecadado.getText()));
+        sadVendedor.setSadCelular(jFmtSad_Celular.getText());
+        return sadVendedor;
+    }
+
+    public void beanView(SadVendedor sadVendedor) {
+        jTxtSad_Codigo.setText(Sad_Util.intToStr(sadVendedor.getSadIdVendedor()));
+        jTxtSad_Nome.setText(sadVendedor.getSadNome());
+        jPwdSad_Senha.setText(sadVendedor.getSadSenha());
+        jFmtSad_DataNascimento.setText(Sad_Util.dateToStr(sadVendedor.getSadDataNascimento()));
+        jTxtSad_QuantidaVendas.setText(sadVendedor.getSadQuantidadeVendas());
+        jFmtSad_Arrecadado.setText(Sad_Util.doubleToStr(sadVendedor.getSadArrecadado()));
+        jFmtSad_Celular.setText(sadVendedor.getSadCelular());
     }
 
     /**
@@ -246,22 +273,26 @@ public class JDlgSad_Vendedor extends javax.swing.JDialog {
 
     private void jBtnSad_IncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_IncluirActionPerformed
         // TODO add your handling code here:
+        incluir = true;
         Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
         Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha);
-
+        jTxtSad_Codigo.grabFocus();
     }//GEN-LAST:event_jBtnSad_IncluirActionPerformed
 
     private void jBtnSad_AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_AlterarActionPerformed
         // TODO add your handling code here:
-        Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha, jBtnSad_Confirmar, jBtnSad_Cancelar);
+        incluir = false;
+        Sad_Util.sad_habilitar(true,jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Excluir, jBtnSad_Incluir, jBtnSad_Alterar);
-
+        jTxtSad_Nome.grabFocus();
     }//GEN-LAST:event_jBtnSad_AlterarActionPerformed
 
     private void jBtnSad_ExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ExcluirActionPerformed
         // TODO add your handling code here:
         if (Sad_Util.sad_perguntar("Excluir?") == true) {
+            SadVendedorDAO sadVendedorDAO = new SadVendedorDAO();
+            sadVendedorDAO.delete(viewBean());
             Sad_Util.sad_habilitar(false, jBtnSad_Alterar, jBtnSad_Cancelar, jBtnSad_Excluir);
             Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
             Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha);
@@ -270,6 +301,12 @@ public class JDlgSad_Vendedor extends javax.swing.JDialog {
 
     private void jBtnSad_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ConfirmarActionPerformed
         // TODO add your handling code here:
+        SadVendedorDAO sadVendedorDAO = new SadVendedorDAO();
+        if(incluir) {
+            sadVendedorDAO.insert(viewBean());
+        } else {
+            sadVendedorDAO.update(viewBean());
+        }
         Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
         Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha);
@@ -284,8 +321,9 @@ public class JDlgSad_Vendedor extends javax.swing.JDialog {
 
     private void jBtnSad_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_PesquisarActionPerformed
         // TODO add your handling code here:
-        JDlgSad_VendedorPesquisar jDlgVendedorPesquisar = new JDlgSad_VendedorPesquisar(null, true);
-        jDlgVendedorPesquisar.setVisible(true);
+        JDlgSad_VendedorPesquisar jDlgSad_VendedorPesquisar = new JDlgSad_VendedorPesquisar(null, true);
+        jDlgSad_VendedorPesquisar.setTelaPai(this);
+        jDlgSad_VendedorPesquisar.setVisible(true);
         Sad_Util.sad_habilitar(true, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
 

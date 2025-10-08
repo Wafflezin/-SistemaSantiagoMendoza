@@ -50,7 +50,7 @@ public class JDlgSad_ClientesPesquisar extends javax.swing.JDialog {
         jScrollPanelSad_Painel = new javax.swing.JScrollPane();
         jTblSad_Tabela = new javax.swing.JTable();
         jBtnSad_OK = new javax.swing.JButton();
-        jBtnSad_OK1 = new javax.swing.JButton();
+        jBtnSad_Cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -74,10 +74,10 @@ public class JDlgSad_ClientesPesquisar extends javax.swing.JDialog {
             }
         });
 
-        jBtnSad_OK1.setText("Cancelar");
-        jBtnSad_OK1.addActionListener(new java.awt.event.ActionListener() {
+        jBtnSad_Cancelar.setText("Cancelar");
+        jBtnSad_Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnSad_OK1ActionPerformed(evt);
+                jBtnSad_CancelarActionPerformed(evt);
             }
         });
 
@@ -91,9 +91,9 @@ public class JDlgSad_ClientesPesquisar extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jBtnSad_OK)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnSad_OK1))
+                        .addComponent(jBtnSad_Cancelar))
                     .addComponent(jScrollPanelSad_Painel, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,7 +102,7 @@ public class JDlgSad_ClientesPesquisar extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnSad_OK)
-                    .addComponent(jBtnSad_OK1))
+                    .addComponent(jBtnSad_Cancelar))
                 .addContainerGap())
         );
 
@@ -115,10 +115,10 @@ public class JDlgSad_ClientesPesquisar extends javax.swing.JDialog {
         setVisible(false);
     }//GEN-LAST:event_jBtnSad_OKActionPerformed
 
-    private void jBtnSad_OK1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_OK1ActionPerformed
+    private void jBtnSad_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_CancelarActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-    }//GEN-LAST:event_jBtnSad_OK1ActionPerformed
+    }//GEN-LAST:event_jBtnSad_CancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -178,8 +178,8 @@ public class JDlgSad_ClientesPesquisar extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnSad_Cancelar;
     private javax.swing.JButton jBtnSad_OK;
-    private javax.swing.JButton jBtnSad_OK1;
     private javax.swing.JScrollPane jScrollPanelSad_Painel;
     private javax.swing.JTable jTblSad_Tabela;
     // End of variables declaration//GEN-END:variables

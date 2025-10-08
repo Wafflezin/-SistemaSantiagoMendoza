@@ -36,7 +36,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jPwfSad_Senha" pref="169" max="32767" attributes="0"/>
+                                      <Component id="jPwdSad_Senha" pref="169" max="32767" attributes="0"/>
                                       <Component id="jFmtSad_Cpf" max="32767" attributes="0"/>
                                   </Group>
                                   <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -121,7 +121,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jChbSad_Ativo" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jPwfSad_Senha" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jPwdSad_Senha" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jCboSad_Nivel" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabel8" min="-2" pref="21" max="-2" attributes="0"/>
@@ -187,7 +187,7 @@
         <Property name="text" type="java.lang.String" value="Senha"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JPasswordField" name="jPwfSad_Senha">
+    <Component class="javax.swing.JPasswordField" name="jPwdSad_Senha">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
       <Properties>

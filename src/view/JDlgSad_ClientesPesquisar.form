@@ -29,11 +29,11 @@
                   <Group type="102" attributes="0">
                       <Component id="jBtnSad_OK" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jBtnSad_OK1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBtnSad_Cancelar" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPanelSad_Painel" min="-2" pref="353" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="26" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -44,7 +44,7 @@
               <EmptySpace pref="28" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jBtnSad_OK" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jBtnSad_OK1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jBtnSad_Cancelar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -81,12 +81,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnSad_OKActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jBtnSad_OK1">
+    <Component class="javax.swing.JButton" name="jBtnSad_Cancelar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnSad_OK1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnSad_CancelarActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
