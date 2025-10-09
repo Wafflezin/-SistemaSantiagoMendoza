@@ -283,7 +283,7 @@ public class JDlgSad_Vendedor extends javax.swing.JDialog {
     private void jBtnSad_AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_AlterarActionPerformed
         // TODO add your handling code here:
         incluir = false;
-        Sad_Util.sad_habilitar(true,jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha, jBtnSad_Confirmar, jBtnSad_Cancelar);
+        Sad_Util.sad_habilitar(true, jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Excluir, jBtnSad_Incluir, jBtnSad_Alterar);
         jTxtSad_Nome.grabFocus();
     }//GEN-LAST:event_jBtnSad_AlterarActionPerformed
@@ -302,7 +302,7 @@ public class JDlgSad_Vendedor extends javax.swing.JDialog {
     private void jBtnSad_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ConfirmarActionPerformed
         // TODO add your handling code here:
         SadVendedorDAO sadVendedorDAO = new SadVendedorDAO();
-        if(incluir) {
+        if (incluir) {
             sadVendedorDAO.insert(viewBean());
         } else {
             sadVendedorDAO.update(viewBean());

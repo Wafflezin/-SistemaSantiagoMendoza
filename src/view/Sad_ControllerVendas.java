@@ -86,11 +86,11 @@ public class Sad_ControllerVendas extends AbstractTableModel {
                     vendedor = "\"" + vendedor.replace("\"", "\"\"") + "\"";
 
                     pw.printf("%d;%s;%s;%s;%.2f%n",
-                        v.getSadIdVendas(),
-                        cliente,
-                        vendedor,
-                        data,
-                        v.getSadTotal()
+                            v.getSadIdVendas(),
+                            cliente,
+                            vendedor,
+                            data,
+                            v.getSadTotal()
                     );
                 }
             }

@@ -14,7 +14,7 @@ public class Sad_ControllerClientes extends AbstractTableModel {
 
     public void setList(List<SadClientes> lstClientes) {
         this.lstClientes = lstClientes;
-        fireTableDataChanged(); // Atualiza a JTable automaticamente
+        fireTableDataChanged();
     }
 
     public List<SadClientes> getClientes() {
@@ -44,7 +44,8 @@ public class Sad_ControllerClientes extends AbstractTableModel {
             case 1:
                 return c.getSadNome();
             case 2:
-                return (c.getSadSexo() == 0) ? "Masculino" : "Feminino"; // Mostra sexo formatado
+                return (c.getSadSexo() == 0) ? "Masculino" : "Feminino";
+
             case 3:
                 return c.getSadCpf();
             default:

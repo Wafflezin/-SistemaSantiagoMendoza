@@ -81,6 +81,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="jBtnSad_OK">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/confirmar.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Ok"/>
       </Properties>
       <Events>
@@ -89,6 +92,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jBtnSad_Cancelar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/cancelar.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Cancelar"/>
       </Properties>
       <Events>
@@ -97,6 +103,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="jBtnSad_Exportar">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/img/incluir.png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Exportar"/>
       </Properties>
       <Events>

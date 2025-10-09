@@ -41,6 +41,13 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
         for (int i = 0; i < vendedores.size(); i++) {
             jCboSad_Vendedor.addItem((SadVendedor) vendedores.get(i));
         }
+        try {
+            javax.swing.text.MaskFormatter mascaraData = new javax.swing.text.MaskFormatter("##/##/####");
+            mascaraData.setPlaceholderCharacter(' ');
+            jFmtSad_DataVendas.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mascaraData));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public SadVendas viewBean() {

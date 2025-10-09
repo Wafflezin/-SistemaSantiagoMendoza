@@ -5,7 +5,7 @@
  */
 package dao;
 
-import bean.SadProdutos; 
+import bean.SadProdutos;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
@@ -14,12 +14,11 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author u70874542189
  */
-public class SadProdutosDAO extends AbstractDAO{
-    
+public class SadProdutosDAO extends AbstractDAO {
 
     @Override
     public void insert(Object object) {
-        session.beginTransaction(); 
+        session.beginTransaction();
         session.save(object);
         session.getTransaction().commit();
     }
@@ -60,10 +59,11 @@ public class SadProdutosDAO extends AbstractDAO{
         session.getTransaction().commit();
         return lista;
     }
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         SadProdutosDAO sadProdutosDAO = new SadProdutosDAO();
         sadProdutosDAO.listAll();
         System.out.println("deu certo");
     }
-    
+
 }

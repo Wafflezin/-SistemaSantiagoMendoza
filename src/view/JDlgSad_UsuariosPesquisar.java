@@ -76,6 +76,7 @@ public class JDlgSad_UsuariosPesquisar extends javax.swing.JDialog {
         ));
         jScrollPanelSad_Painel.setViewportView(jTblSad_Tabela);
 
+        jBtnSad_OK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/confirmar.png"))); // NOI18N
         jBtnSad_OK.setText("Ok");
         jBtnSad_OK.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -83,6 +84,7 @@ public class JDlgSad_UsuariosPesquisar extends javax.swing.JDialog {
             }
         });
 
+        jBtnSad_Cancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cancelar.png"))); // NOI18N
         jBtnSad_Cancelar.setText("Cancelar");
         jBtnSad_Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +92,7 @@ public class JDlgSad_UsuariosPesquisar extends javax.swing.JDialog {
             }
         });
 
+        jBtnSad_Exportar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/incluir.png"))); // NOI18N
         jBtnSad_Exportar.setText("Exportar");
         jBtnSad_Exportar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,7 +123,7 @@ public class JDlgSad_UsuariosPesquisar extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPanelSad_Painel, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnSad_OK)
                     .addComponent(jBtnSad_Cancelar)

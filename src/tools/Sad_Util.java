@@ -54,15 +54,15 @@ public class Sad_Util {
     }
 
     public static boolean sad_perguntar(String mes) {
-        int resp = JOptionPane.showConfirmDialog(null,mes,
+        int resp = JOptionPane.showConfirmDialog(null, mes,
                 "Perguntar", JOptionPane.YES_NO_OPTION);
         return resp == JOptionPane.YES_NO_OPTION;
     }
-    
-    public static int strToInt(String str){
+
+    public static int strToInt(String str) {
         return Integer.valueOf(str);
     }
-    
+
     public static String intToStr(int num) {
         return String.valueOf(num);
     }
@@ -71,7 +71,6 @@ public class Sad_Util {
         return Double.valueOf(cad);
     }
 
-    
     public static Date strToDate(String str) {
         SimpleDateFormat dateNascFormat = new SimpleDateFormat("dd/MM/yyyy");
         try {
@@ -86,8 +85,9 @@ public class Sad_Util {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return sdf.format(data);
     }
+
     public static String doubleToStr(double num) {
         return String.valueOf(num);
     }
-    
+
 };

@@ -140,7 +140,7 @@ public class JFrmSad_Principal extends javax.swing.JFrame {
 
     private void jMnuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMnuClientesActionPerformed
         // TODO add your handling code here:
-        JDlgSad_Clientes jDlgClientes = new JDlgSad_Clientes(this,true);
+        JDlgSad_Clientes jDlgClientes = new JDlgSad_Clientes(this, true);
         jDlgClientes.setVisible(true);
     }//GEN-LAST:event_jMnuClientesActionPerformed
 

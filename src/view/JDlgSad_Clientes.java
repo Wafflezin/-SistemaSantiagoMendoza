@@ -26,7 +26,13 @@ public class JDlgSad_Clientes extends javax.swing.JDialog {
         setTitle("Cadastro de Clientes");
         setLocationRelativeTo(null);
         Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Email, jFmtSad_Rg, jCboSad_Sexo, jTxtSad_Pronomes, jTxtSad_Endereco, jFmtSad_Cpf, jFmtSad_DataNascimento, jTxtSad_Bairro, jTxtSad_Cidade, jFmtSad_Cep, jFmtSad_Residencial, jFmtSad_Celular, jPwdSad_Senha, jBtnSad_Confirmar, jBtnSad_Cancelar, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Confirmar, jBtnSad_Cancelar);
-
+        try {
+            javax.swing.text.MaskFormatter mascaraData = new javax.swing.text.MaskFormatter("##/##/####");
+            mascaraData.setPlaceholderCharacter(' ');
+            jFmtSad_DataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mascaraData));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public SadClientes viewBean() {

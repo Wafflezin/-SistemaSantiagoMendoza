@@ -30,29 +30,39 @@ public class Sad_ControllerProdutos extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 4; // Mostrando apenas 4 colunas na tabela
+        return 4;
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         SadProdutos p = lstProdutos.get(rowIndex);
         switch (columnIndex) {
-            case 0: return p.getSadIdProdutos();
-            case 1: return p.getSadNome();
-            case 2: return p.getSadPeso();
-            case 3: return "1".equals(p.getSadNovo()) ? "Novo" : "Usado";
-            default: return "";
+            case 0:
+                return p.getSadIdProdutos();
+            case 1:
+                return p.getSadNome();
+            case 2:
+                return p.getSadPeso();
+            case 3:
+                return "1".equals(p.getSadNovo()) ? "Novo" : "Usado";
+            default:
+                return "";
         }
     }
 
     @Override
     public String getColumnName(int columnIndex) {
         switch (columnIndex) {
-            case 0: return "Código";
-            case 1: return "Nome";
-            case 2: return "Peso";
-            case 3: return "Novo?";
-            default: return "";
+            case 0:
+                return "Código";
+            case 1:
+                return "Nome";
+            case 2:
+                return "Peso";
+            case 3:
+                return "Novo?";
+            default:
+                return "";
         }
     }
 

@@ -14,12 +14,11 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author u70874542189
  */
-public class SadClientesDAO extends AbstractDAO{
-    
+public class SadClientesDAO extends AbstractDAO {
 
     @Override
     public void insert(Object object) {
-        session.beginTransaction(); 
+        session.beginTransaction();
         session.save(object);
         session.getTransaction().commit();
     }
@@ -60,7 +59,8 @@ public class SadClientesDAO extends AbstractDAO{
         session.getTransaction().commit();
         return lista;
     }
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         SadClientesDAO sadClientesDAO = new SadClientesDAO();
         sadClientesDAO.listAll();
         System.out.println("deu certo");

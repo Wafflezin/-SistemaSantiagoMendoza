@@ -11,10 +11,10 @@ import tools.Sad_Util;
 
 /**
  *
- * @author u10916731103
+ * @author u70874542189
  */
 public class JDlgSad_Usuarios extends javax.swing.JDialog {
-    
+
     private boolean incluir;
 
     public JDlgSad_Usuarios(java.awt.Frame parent, boolean modal) {
@@ -23,8 +23,15 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
         setTitle("Cadastro de Usuários");
         setLocationRelativeTo(null);
         Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jPwdSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Confirmar, jBtnSad_Cancelar);
+        try {
+            javax.swing.text.MaskFormatter mascaraData = new javax.swing.text.MaskFormatter("##/##/####");
+            mascaraData.setPlaceholderCharacter(' ');
+            jFmtSad_DataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mascaraData));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
     }
-    
+
     public SadUsuarios viewBean() {
         SadUsuarios sadUsuarios = new SadUsuarios();
         int codigo = Sad_Util.strToInt(jTxtSad_Codigo.getText());
@@ -38,7 +45,7 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
         sadUsuarios.setSadDataNascimento(Sad_Util.strToDate(jFmtSad_DataNascimento.getText()));
         return sadUsuarios;
     }
-    
+
     public void beanView(SadUsuarios sadUsuarios) {
         jTxtSad_Codigo.setText(Sad_Util.intToStr(sadUsuarios.getSadIdUsuarios()));
         jTxtSad_Nome.setText(sadUsuarios.getSadNome());
@@ -49,7 +56,6 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
         jChbSad_Ativo.setSelected("S".equals(sadUsuarios.getSadAtivo()));
         jFmtSad_DataNascimento.setText(Sad_Util.dateToStr(sadUsuarios.getSadDataNascimento()));
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -299,7 +305,7 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
             SadUsuariosDAO sadUsuariosDAO = new SadUsuariosDAO();
             sadUsuariosDAO.delete(viewBean());
             Sad_Util.sad_habilitar(false, jBtnSad_Alterar, jBtnSad_Cancelar, jBtnSad_Excluir);
-            Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);           
+            Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
             Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jPwdSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento);
         }
     }//GEN-LAST:event_jBtnSad_ExcluirActionPerformed
@@ -308,7 +314,7 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
     private void jBtnSad_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ConfirmarActionPerformed
         // TODO add your handling code here:
         SadUsuariosDAO sadUsuariosDAO = new SadUsuariosDAO();
-        if(incluir) {
+        if (incluir) {
             sadUsuariosDAO.insert(viewBean());
         } else {
             sadUsuariosDAO.update(viewBean());

@@ -37,33 +37,48 @@ public class Sad_ControllerUsuarios extends AbstractTableModel {
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
         SadUsuarios u = lstUsuarios.get(rowIndex);
-        switch(columnIndex) {
-            case 0: return u.getSadIdUsuarios();
-            case 1: return u.getSadNome();
-            case 2: return u.getSadApelido();
-            case 3: return u.getSadCpf();
-            default: return "";
+        switch (columnIndex) {
+            case 0:
+                return u.getSadIdUsuarios();
+            case 1:
+                return u.getSadNome();
+            case 2:
+                return u.getSadApelido();
+            case 3:
+                return u.getSadCpf();
+            default:
+                return "";
         }
     }
 
     @Override
     public String getColumnName(int columnIndex) {
-        switch(columnIndex) {
-            case 0: return "Código";
-            case 1: return "Nome";
-            case 2: return "Apelido";
-            case 3: return "Cpf";
-            default: return "";
+        switch (columnIndex) {
+            case 0:
+                return "Código";
+            case 1:
+                return "Nome";
+            case 2:
+                return "Apelido";
+            case 3:
+                return "Cpf";
+            default:
+                return "";
         }
     }
 
     private static String conversordeNivel(int nivel) {
-        switch(nivel) {
-            case 0: return "Administrador";
-            case 1: return "Funcionário";
-            case 2: return "Vendedor";
-            case 3: return "Gerente";
-            default: return "Desconhecido";
+        switch (nivel) {
+            case 0:
+                return "Administrador";
+            case 1:
+                return "Funcionário";
+            case 2:
+                return "Vendedor";
+            case 3:
+                return "Gerente";
+            default:
+                return "Desconhecido";
         }
     }
 
@@ -84,14 +99,14 @@ public class Sad_ControllerUsuarios extends AbstractTableModel {
                     String nivelStr = conversordeNivel(u.getSadNivel());
 
                     pw.printf("%d;%s;%s;%s;%s;%s;%s;%s%n",
-                        u.getSadIdUsuarios(),
-                        nome,
-                        apelido,
-                        u.getSadCpf(),
-                        dataNasc,
-                        senha,
-                        nivelStr,
-                        u.getSadAtivo()
+                            u.getSadIdUsuarios(),
+                            nome,
+                            apelido,
+                            u.getSadCpf(),
+                            dataNasc,
+                            senha,
+                            nivelStr,
+                            u.getSadAtivo()
                     );
                 }
             }
