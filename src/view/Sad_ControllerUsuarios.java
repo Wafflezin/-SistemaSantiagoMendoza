@@ -15,7 +15,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class Sad_ControllerUsuarios extends AbstractTableModel {
 
-    private List lstUsuarios;
+    List lstUsuarios;
 
     public void setList(List lstUsuarios) {
         this.lstUsuarios = lstUsuarios;

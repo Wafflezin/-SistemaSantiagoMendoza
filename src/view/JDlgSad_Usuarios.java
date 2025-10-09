@@ -280,6 +280,7 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
         Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_Nome, jPwdSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
         Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jPwdSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento);
+        jFmtSad_DataNascimento.setText(Sad_Util.dateToStr(new java.util.Date()));
         jTxtSad_Codigo.grabFocus();
 
     }//GEN-LAST:event_jBtnSad_IncluirActionPerformed
