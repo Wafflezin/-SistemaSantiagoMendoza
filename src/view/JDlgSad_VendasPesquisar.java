@@ -8,6 +8,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import bean.SadVendas;
 import dao.SadVendasDAO;
+import tools.Sad_Util;
 
 /**
  *
@@ -15,13 +16,18 @@ import dao.SadVendasDAO;
  */
 public class JDlgSad_VendasPesquisar extends javax.swing.JDialog {
 
+    private boolean confirmou = false;
+
+    public boolean ativarBotoes() {
+        return confirmou;
+    }
     /**
      * Creates new form JDlgSad_VendasPesquisar
      */
-    
+
     private JDlgSad_Vendas jDlgSad_Vendas;
     Sad_ControllerVendas Sad_ControllerVendas;
-    
+
     public JDlgSad_VendasPesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -33,10 +39,10 @@ public class JDlgSad_VendasPesquisar extends javax.swing.JDialog {
         Sad_ControllerVendas.setList(lista);
         jTblSad_Tabela.setModel(Sad_ControllerVendas);
     }
-    public void setTelaPai( JDlgSad_Vendas jDlgSad_Vendas) {;
+
+    public void setTelaPai(JDlgSad_Vendas jDlgSad_Vendas) {;
         this.jDlgSad_Vendas = jDlgSad_Vendas;
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,7 +56,7 @@ public class JDlgSad_VendasPesquisar extends javax.swing.JDialog {
         jScrollPanelSad_Painel = new javax.swing.JScrollPane();
         jTblSad_Tabela = new javax.swing.JTable();
         jBtnSad_OK = new javax.swing.JButton();
-        jBtnSad_OK1 = new javax.swing.JButton();
+        jBtnSad_Cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -74,10 +80,10 @@ public class JDlgSad_VendasPesquisar extends javax.swing.JDialog {
             }
         });
 
-        jBtnSad_OK1.setText("Cancelar");
-        jBtnSad_OK1.addActionListener(new java.awt.event.ActionListener() {
+        jBtnSad_Cancelar.setText("Cancelar");
+        jBtnSad_Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBtnSad_OK1ActionPerformed(evt);
+                jBtnSad_CancelarActionPerformed(evt);
             }
         });
 
@@ -91,7 +97,7 @@ public class JDlgSad_VendasPesquisar extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jBtnSad_OK)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnSad_OK1))
+                        .addComponent(jBtnSad_Cancelar))
                     .addComponent(jScrollPanelSad_Painel, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
@@ -101,7 +107,7 @@ public class JDlgSad_VendasPesquisar extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnSad_OK)
-                    .addComponent(jBtnSad_OK1))
+                    .addComponent(jBtnSad_Cancelar))
                 .addContainerGap())
         );
 
@@ -110,16 +116,23 @@ public class JDlgSad_VendasPesquisar extends javax.swing.JDialog {
 
     private void jBtnSad_OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_OKActionPerformed
         // TODO add your handling code here:
-        SadVendas sadVendas =  Sad_ControllerVendas.getBean( jTblSad_Tabela.getSelectedRow() );
-        jDlgSad_Vendas.beanView(sadVendas);
-        this.setVisible(false);
+        int selectedRow = jTblSad_Tabela.getSelectedRow();
+        if (selectedRow >= 0) {
+            SadVendas sadVendas = Sad_ControllerVendas.getBean(selectedRow);
+            jDlgSad_Vendas.beanView(sadVendas);
+            confirmou = true;
+            this.setVisible(false);
+        } else {
+            Sad_Util.sad_mensagem("Selecione uma venda!");
+        }
+
     }//GEN-LAST:event_jBtnSad_OKActionPerformed
 
-    private void jBtnSad_OK1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_OK1ActionPerformed
+    private void jBtnSad_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_CancelarActionPerformed
         // TODO add your handling code here:
-        
+        confirmou = false;
         setVisible(false);
-    }//GEN-LAST:event_jBtnSad_OK1ActionPerformed
+    }//GEN-LAST:event_jBtnSad_CancelarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,8 +208,8 @@ public class JDlgSad_VendasPesquisar extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBtnSad_Cancelar;
     private javax.swing.JButton jBtnSad_OK;
-    private javax.swing.JButton jBtnSad_OK1;
     private javax.swing.JScrollPane jScrollPanelSad_Painel;
     private javax.swing.JTable jTblSad_Tabela;
     // End of variables declaration//GEN-END:variables

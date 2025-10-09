@@ -324,8 +324,10 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
         JDlgSad_UsuariosPesquisar jDlgSad_UsuariosPesquisar = new JDlgSad_UsuariosPesquisar(null, true);
         jDlgSad_UsuariosPesquisar.setTelaPai(this);
         jDlgSad_UsuariosPesquisar.setVisible(true);
-        Sad_Util.sad_habilitar(true, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Cancelar);
-        Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
+        if (jDlgSad_UsuariosPesquisar.ativarBotoes()) {
+            Sad_Util.sad_habilitar(true, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Cancelar);
+            Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
+        }
 
 
     }//GEN-LAST:event_jBtnSad_PesquisarActionPerformed

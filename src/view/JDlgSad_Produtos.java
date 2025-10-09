@@ -309,8 +309,10 @@ public class JDlgSad_Produtos extends javax.swing.JDialog {
         JDlgSad_ProdutosPesquisar jDlgSad_ProdutosPesquisar = new JDlgSad_ProdutosPesquisar(null, true);
         jDlgSad_ProdutosPesquisar.setTelaPai(this);
         jDlgSad_ProdutosPesquisar.setVisible(true);
-        Sad_Util.sad_habilitar(true, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Cancelar);
-        Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
+        if (jDlgSad_ProdutosPesquisar.ativarBotoes()) {
+            Sad_Util.sad_habilitar(true, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Cancelar);
+            Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
+        };
 
     }//GEN-LAST:event_jBtnSad_PesquisarActionPerformed
 

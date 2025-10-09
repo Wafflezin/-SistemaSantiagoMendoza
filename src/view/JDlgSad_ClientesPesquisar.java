@@ -16,13 +16,18 @@ import tools.Sad_Util;
  */
 public class JDlgSad_ClientesPesquisar extends javax.swing.JDialog {
 
+    private boolean confirmou = false;
+
+    public boolean ativarBotoes() {
+        return confirmou;
+    }
+
     /**
      * Creates new form JDlgSad_ClientesPesquisar
      */
-    
     private JDlgSad_Clientes jDlgSad_Clientes;
     Sad_ControllerClientes Sad_ControllerClientes;
-    
+
     public JDlgSad_ClientesPesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -34,10 +39,10 @@ public class JDlgSad_ClientesPesquisar extends javax.swing.JDialog {
         Sad_ControllerClientes.setList(lista);
         jTblSad_Tabela.setModel(Sad_ControllerClientes);
     }
-    public void setTelaPai( JDlgSad_Clientes jDlgSad_Clientes) {;
+
+    public void setTelaPai(JDlgSad_Clientes jDlgSad_Clientes) {;
         this.jDlgSad_Clientes = jDlgSad_Clientes;
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -113,18 +118,22 @@ public class JDlgSad_ClientesPesquisar extends javax.swing.JDialog {
     private void jBtnSad_OKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_OKActionPerformed
         // TODO add your handling code here:
         int selectedRow = jTblSad_Tabela.getSelectedRow();
-        if(selectedRow >= 0) { 
-        SadClientes sadClientes = Sad_ControllerClientes.getBean(selectedRow);
-        jDlgSad_Clientes.beanView(sadClientes);
-        this.setVisible(false);
-    } else {
-        Sad_Util.sad_mensagem("Selecione um cliente!");
-    }
+        if (selectedRow >= 0) {
+            SadClientes sadClientes = Sad_ControllerClientes.getBean(selectedRow);
+            jDlgSad_Clientes.beanView(sadClientes);
+            confirmou = true;
+            this.setVisible(false);
+        } else {
+            Sad_Util.sad_mensagem("Selecione um cliente!");
+        }
     }//GEN-LAST:event_jBtnSad_OKActionPerformed
 
     private void jBtnSad_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_CancelarActionPerformed
         // TODO add your handling code here:
+        confirmou = false;
         setVisible(false);
+
+
     }//GEN-LAST:event_jBtnSad_CancelarActionPerformed
 
     /**

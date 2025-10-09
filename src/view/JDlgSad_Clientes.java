@@ -372,7 +372,7 @@ public class JDlgSad_Clientes extends javax.swing.JDialog {
     private void jBtnSad_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ConfirmarActionPerformed
         // TODO add your handling code here:
         SadClientesDAO sadClientesDAO = new SadClientesDAO();
-        if(incluir) {
+        if (incluir) {
             sadClientesDAO.insert(viewBean());
         } else {
             sadClientesDAO.update(viewBean());
@@ -396,8 +396,10 @@ public class JDlgSad_Clientes extends javax.swing.JDialog {
         JDlgSad_ClientesPesquisar jDlgSad_ClientesPesquisar = new JDlgSad_ClientesPesquisar(null, true);
         jDlgSad_ClientesPesquisar.setTelaPai(this);
         jDlgSad_ClientesPesquisar.setVisible(true);
-        Sad_Util.sad_habilitar(true, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Cancelar);
-        Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
+        if (jDlgSad_ClientesPesquisar.ativarBotoes()) {
+            Sad_Util.sad_habilitar(true, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Cancelar);
+            Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
+        }
 
     }//GEN-LAST:event_jBtnSad_PesquisarActionPerformed
 

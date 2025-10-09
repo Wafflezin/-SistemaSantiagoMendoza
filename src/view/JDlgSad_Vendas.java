@@ -350,8 +350,10 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
         JDlgSad_VendasPesquisar jDlgSad_VendasPesquisar = new JDlgSad_VendasPesquisar(null, true);
         jDlgSad_VendasPesquisar.setTelaPai(this);
         jDlgSad_VendasPesquisar.setVisible(true);
-        Sad_Util.sad_habilitar(true, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Cancelar);
-        Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
+        if (jDlgSad_VendasPesquisar.ativarBotoes()) {
+            Sad_Util.sad_habilitar(true, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Cancelar);
+            Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
+        }
 
     }//GEN-LAST:event_jBtnSad_PesquisarActionPerformed
 
