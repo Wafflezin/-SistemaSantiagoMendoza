@@ -8,6 +8,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import bean.SadClientes;
 import dao.SadClientesDAO;
+import java.io.File;
+import javax.swing.JFileChooser;
 import tools.Sad_Util;
 
 /**
@@ -57,6 +59,7 @@ public class JDlgSad_ClientesPesquisar extends javax.swing.JDialog {
         jTblSad_Tabela = new javax.swing.JTable();
         jBtnSad_OK = new javax.swing.JButton();
         jBtnSad_Cancelar = new javax.swing.JButton();
+        jBtnSad_Exportar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -87,29 +90,41 @@ public class JDlgSad_ClientesPesquisar extends javax.swing.JDialog {
             }
         });
 
+        jBtnSad_Exportar.setText("Exportar");
+        jBtnSad_Exportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSad_ExportarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPanelSad_Painel, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jBtnSad_OK)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnSad_Cancelar))
-                    .addComponent(jScrollPanelSad_Painel, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jBtnSad_Cancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnSad_Exportar)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPanelSad_Painel, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnSad_OK)
-                    .addComponent(jBtnSad_Cancelar))
+                    .addComponent(jBtnSad_Exportar)
+                    .addComponent(jBtnSad_Cancelar)
+                    .addComponent(jBtnSad_OK))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPanelSad_Painel, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 62, Short.MAX_VALUE))
         );
 
         pack();
@@ -135,6 +150,27 @@ public class JDlgSad_ClientesPesquisar extends javax.swing.JDialog {
 
 
     }//GEN-LAST:event_jBtnSad_CancelarActionPerformed
+
+    private void jBtnSad_ExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ExportarActionPerformed
+        // TODO add your handling code here:
+        List<SadClientes> clientes = Sad_ControllerClientes.getClientes();
+        if (clientes == null || clientes.isEmpty()) {
+            Sad_Util.sad_mensagem("Nenhum cliente para exportar!");
+            return;
+        }
+
+        JFileChooser fc = new JFileChooser();
+        fc.setDialogTitle("Salvar CSV");
+        if (fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+
+            if (!file.getName().toLowerCase().endsWith(".csv")) {
+                file = new File(file.getAbsolutePath() + ".csv");
+            }
+
+            Sad_ControllerClientes.exportar(clientes, file);
+        }
+    }//GEN-LAST:event_jBtnSad_ExportarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,6 +231,7 @@ public class JDlgSad_ClientesPesquisar extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnSad_Cancelar;
+    private javax.swing.JButton jBtnSad_Exportar;
     private javax.swing.JButton jBtnSad_OK;
     private javax.swing.JScrollPane jScrollPanelSad_Painel;
     private javax.swing.JTable jTblSad_Tabela;

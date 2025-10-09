@@ -8,6 +8,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import bean.SadVendas;
 import dao.SadVendasDAO;
+import java.io.File;
+import javax.swing.JFileChooser;
 import tools.Sad_Util;
 
 /**
@@ -57,6 +59,7 @@ public class JDlgSad_VendasPesquisar extends javax.swing.JDialog {
         jTblSad_Tabela = new javax.swing.JTable();
         jBtnSad_OK = new javax.swing.JButton();
         jBtnSad_Cancelar = new javax.swing.JButton();
+        jBtnSad_Exportar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -87,18 +90,28 @@ public class JDlgSad_VendasPesquisar extends javax.swing.JDialog {
             }
         });
 
+        jBtnSad_Exportar.setText("Exportar");
+        jBtnSad_Exportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSad_ExportarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jBtnSad_OK)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnSad_Cancelar))
-                    .addComponent(jScrollPanelSad_Painel, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jBtnSad_Cancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnSad_Exportar))
+                    .addComponent(jScrollPanelSad_Painel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,7 +120,8 @@ public class JDlgSad_VendasPesquisar extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnSad_OK)
-                    .addComponent(jBtnSad_Cancelar))
+                    .addComponent(jBtnSad_Cancelar)
+                    .addComponent(jBtnSad_Exportar))
                 .addContainerGap())
         );
 
@@ -133,6 +147,27 @@ public class JDlgSad_VendasPesquisar extends javax.swing.JDialog {
         confirmou = false;
         setVisible(false);
     }//GEN-LAST:event_jBtnSad_CancelarActionPerformed
+
+    private void jBtnSad_ExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ExportarActionPerformed
+        // TODO add your handling code here:
+        List<SadVendas> vendas = Sad_ControllerVendas.getVendas();
+        if (vendas == null || vendas.isEmpty()) {
+            Sad_Util.sad_mensagem("Nenhuma venda para exportar!");
+            return;
+        }
+
+        JFileChooser fc = new JFileChooser();
+        fc.setDialogTitle("Salvar CSV");
+        if (fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+
+            if (!file.getName().toLowerCase().endsWith(".csv")) {
+                file = new File(file.getAbsolutePath() + ".csv");
+            }
+
+            Sad_ControllerVendas.exportar(vendas, file);
+        }
+    }//GEN-LAST:event_jBtnSad_ExportarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,6 +244,7 @@ public class JDlgSad_VendasPesquisar extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnSad_Cancelar;
+    private javax.swing.JButton jBtnSad_Exportar;
     private javax.swing.JButton jBtnSad_OK;
     private javax.swing.JScrollPane jScrollPanelSad_Painel;
     private javax.swing.JTable jTblSad_Tabela;

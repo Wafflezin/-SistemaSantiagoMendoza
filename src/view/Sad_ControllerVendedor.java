@@ -1,34 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import bean.SadVendedor;
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import static tools.Sad_Util.dateToStr;
+import static tools.Sad_Util.sad_mensagem;
 
-/**
- *
- * @author u1845853
- */
 public class Sad_ControllerVendedor extends AbstractTableModel {
 
-    private List lstUsuarios;
+    private List<SadVendedor> lstVendedor;
 
-    public void setList(List lstUsuarios) {
-        this.lstUsuarios = lstUsuarios;
+    public void setList(List<SadVendedor> lstVendedor) {
+        this.lstVendedor = lstVendedor;
+        fireTableDataChanged();
     }
-    
+
+    public List<SadVendedor> getVendedores() {
+        return lstVendedor;
+    }
+
     public SadVendedor getBean(int rowIndex) {
-        return (SadVendedor) lstUsuarios.get(rowIndex);
+        return lstVendedor.get(rowIndex);
     }
 
     @Override
     public int getRowCount() {
-        return lstUsuarios.size();
-                
+        return lstVendedor != null ? lstVendedor.size() : 0;
     }
 
     @Override
@@ -38,31 +37,70 @@ public class Sad_ControllerVendedor extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        SadVendedor sadVendedor = (SadVendedor) lstUsuarios.get( rowIndex);
-        if ( columnIndex == 0 ){
-            return sadVendedor.getSadIdVendedor();
-        } else if (columnIndex ==1) {
-            return sadVendedor.getSadNome();        
-        } else if (columnIndex ==2) {
-            return sadVendedor.getSadSenha();
-        } else if (columnIndex ==3) {
-            return sadVendedor.getSadArrecadado();
+        SadVendedor v = lstVendedor.get(rowIndex);
+        switch (columnIndex) {
+            case 0:
+                return v.getSadIdVendedor();
+            case 1:
+                return v.getSadNome();
+            case 2:
+                return v.getSadSenha();
+            case 3:
+                return v.getSadArrecadado();
+            default:
+                return "";
         }
-        return "";
     }
 
     @Override
     public String getColumnName(int columnIndex) {
-        if ( columnIndex == 0) {
-            return "Código";
-        } else if ( columnIndex == 1) {
-            return "Nome";         
-        } else if ( columnIndex == 2) {
-            return "Senha";
-        } else if ( columnIndex == 3) {
-            return "Arrecadado";
-        } 
-        return "";
+        switch (columnIndex) {
+            case 0:
+                return "Código";
+            case 1:
+                return "Nome";
+            case 2:
+                return "Senha";
+            case 3:
+                return "Arrecadado";
+            default:
+                return "";
+        }
     }
-    
+
+    public static void exportar(List<SadVendedor> vendedores, File file) {
+        try {
+            if (!file.getName().toLowerCase().endsWith(".csv")) {
+                file = new File(file.getAbsolutePath() + ".csv");
+            }
+
+            try (PrintWriter pw = new PrintWriter(file, "UTF-8")) {
+                pw.println("Código;Nome;Senha;DataNascimento;QuantidadeVendas;Arrecadado;Celular");
+
+                for (SadVendedor v : vendedores) {
+                    String dataNasc = (v.getSadDataNascimento() != null)
+                            ? dateToStr(v.getSadDataNascimento()) : "";
+
+                    String nome = "\"" + v.getSadNome().replace("\"", "\"\"") + "\"";
+                    String senha = "\"" + v.getSadSenha().replace("\"", "\"\"") + "\"";
+                    String qtdVendas = (v.getSadQuantidadeVendas() != null) ? v.getSadQuantidadeVendas() : "";
+                    String celular = (v.getSadCelular() != null) ? v.getSadCelular() : "";
+
+                    pw.printf("%d;%s;%s;%s;%s;%.2f;%s%n",
+                            v.getSadIdVendedor(),
+                            nome,
+                            senha,
+                            dataNasc,
+                            qtdVendas,
+                            v.getSadArrecadado(),
+                            celular
+                    );
+                }
+            }
+
+            sad_mensagem("Vendedores exportados com sucesso!!");
+        } catch (Exception ex) {
+            sad_mensagem("Erro ao exportar os Vendedores: " + ex.getMessage());
+        }
+    }
 }

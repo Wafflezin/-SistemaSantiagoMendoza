@@ -163,7 +163,7 @@ public class JDlgSad_UsuariosPesquisar extends javax.swing.JDialog {
         fc.setDialogTitle("Salvar CSV");
         if (fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
-            Sad_ControllerUsuarios.exportUsuariosToCSV(usuarios, file);
+            Sad_ControllerUsuarios.exportar(usuarios, file);
         }
     }//GEN-LAST:event_jBtnSad_ExportarActionPerformed
 

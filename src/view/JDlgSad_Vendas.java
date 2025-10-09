@@ -369,7 +369,7 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
     private void jBtnSad_AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_AlterarActionPerformed
         // TODO add your handling code here:
         incluir = false;
-        Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas, jBtnSad_Confirmar, jBtnSad_Cancelar);
+        Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Excluir, jBtnSad_Incluir, jBtnSad_Alterar);
         jTxtSad_Total.grabFocus();
     }//GEN-LAST:event_jBtnSad_AlterarActionPerformed

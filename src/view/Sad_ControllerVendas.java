@@ -1,34 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import bean.SadVendas;
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import static tools.Sad_Util.dateToStr;
+import static tools.Sad_Util.sad_mensagem;
 
-/**
- *
- * @author u1845853
- */
 public class Sad_ControllerVendas extends AbstractTableModel {
 
-    private List lstUsuarios;
+    private List<SadVendas> lstVendas;
 
-    public void setList(List lstUsuarios) {
-        this.lstUsuarios = lstUsuarios;
+    public void setList(List<SadVendas> lstVendas) {
+        this.lstVendas = lstVendas;
+        fireTableDataChanged();
     }
-    
+
+    public List<SadVendas> getVendas() {
+        return lstVendas;
+    }
+
     public SadVendas getBean(int rowIndex) {
-        return (SadVendas) lstUsuarios.get(rowIndex);
+        return lstVendas.get(rowIndex);
     }
 
     @Override
     public int getRowCount() {
-        return lstUsuarios.size();
-                
+        return lstVendas != null ? lstVendas.size() : 0;
     }
 
     @Override
@@ -38,31 +37,67 @@ public class Sad_ControllerVendas extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        SadVendas sadVendas = (SadVendas) lstUsuarios.get( rowIndex);
-        if ( columnIndex == 0 ){
-            return sadVendas.getSadIdVendas();
-        } else if (columnIndex ==1) {
-            return sadVendas.getSadDataVendas();        
-        } else if (columnIndex ==2) {
-            return sadVendas.getSadVendedor();
-        } else if (columnIndex ==3) {
-            return sadVendas.getSadTotal();
+        SadVendas v = lstVendas.get(rowIndex);
+        switch (columnIndex) {
+            case 0:
+                return v.getSadIdVendas();
+            case 1:
+                return (v.getSadClientes() != null) ? v.getSadClientes().getSadNome() : "";
+            case 2:
+                return (v.getSadVendedor() != null) ? v.getSadVendedor().getSadNome() : "";
+            case 3:
+                return v.getSadTotal();
+            default:
+                return "";
         }
-        return "";
     }
 
     @Override
     public String getColumnName(int columnIndex) {
-        if ( columnIndex == 0) {
-            return "Código";
-        } else if ( columnIndex == 1) {
-            return "Nome";         
-        } else if ( columnIndex == 2) {
-            return "Apelido";
-        } else if ( columnIndex == 3) {
-            return "Cpf";
-        } 
-        return "";
+        switch (columnIndex) {
+            case 0:
+                return "Código";
+            case 1:
+                return "Cliente";
+            case 2:
+                return "Vendedor";
+            case 3:
+                return "Total";
+            default:
+                return "";
+        }
     }
-    
+
+    public static void exportar(List<SadVendas> vendas, File file) {
+        try {
+            if (!file.getName().toLowerCase().endsWith(".csv")) {
+                file = new File(file.getAbsolutePath() + ".csv");
+            }
+
+            try (PrintWriter pw = new PrintWriter(file, "UTF-8")) {
+                pw.println("Código;Cliente;Vendedor;Data;Total");
+
+                for (SadVendas v : vendas) {
+                    String cliente = (v.getSadClientes() != null) ? v.getSadClientes().getSadNome() : "";
+                    String vendedor = (v.getSadVendedor() != null) ? v.getSadVendedor().getSadNome() : "";
+                    String data = (v.getSadDataVendas() != null) ? dateToStr(v.getSadDataVendas()) : "";
+
+                    cliente = "\"" + cliente.replace("\"", "\"\"") + "\"";
+                    vendedor = "\"" + vendedor.replace("\"", "\"\"") + "\"";
+
+                    pw.printf("%d;%s;%s;%s;%.2f%n",
+                        v.getSadIdVendas(),
+                        cliente,
+                        vendedor,
+                        data,
+                        v.getSadTotal()
+                    );
+                }
+            }
+
+            sad_mensagem("CSV exportado com sucesso!");
+        } catch (Exception ex) {
+            sad_mensagem("Erro ao exportar CSV: " + ex.getMessage());
+        }
+    }
 }

@@ -4,9 +4,12 @@
  */
 package view;
 
+import bean.SadClientes;
 import dao.SadProdutosDAO;
 import bean.SadProdutos;
+import java.io.File;
 import java.util.List;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import tools.Sad_Util;
 
@@ -56,6 +59,7 @@ public class JDlgSad_ProdutosPesquisar extends javax.swing.JDialog {
         jTblSad_Tabela = new javax.swing.JTable();
         jBtnSad_OK = new javax.swing.JButton();
         jBtnSad_Cancelar = new javax.swing.JButton();
+        jBtnSad_Exportar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -86,6 +90,13 @@ public class JDlgSad_ProdutosPesquisar extends javax.swing.JDialog {
             }
         });
 
+        jBtnSad_Exportar.setText("Exportar");
+        jBtnSad_Exportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSad_ExportarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,15 +104,17 @@ public class JDlgSad_ProdutosPesquisar extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jScrollPanelSad_Painel, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jBtnSad_OK)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnSad_Cancelar)))
-                .addContainerGap())
+                        .addComponent(jBtnSad_Cancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jBtnSad_Exportar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,7 +123,8 @@ public class JDlgSad_ProdutosPesquisar extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnSad_OK)
-                    .addComponent(jBtnSad_Cancelar))
+                    .addComponent(jBtnSad_Cancelar)
+                    .addComponent(jBtnSad_Exportar))
                 .addContainerGap())
         );
 
@@ -123,7 +137,7 @@ public class JDlgSad_ProdutosPesquisar extends javax.swing.JDialog {
         if (selectedRow >= 0) {
             SadProdutos sadProdutos = Sad_ControllerProdutos.getBean(selectedRow);
             jDlgSad_Produtos.beanView(sadProdutos);
-            confirmou = true; 
+            confirmou = true;
             this.setVisible(false);
         } else {
             Sad_Util.sad_mensagem("Selecione um produto!");
@@ -137,6 +151,28 @@ public class JDlgSad_ProdutosPesquisar extends javax.swing.JDialog {
         confirmou = false;
         setVisible(false);
     }//GEN-LAST:event_jBtnSad_CancelarActionPerformed
+
+    private void jBtnSad_ExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ExportarActionPerformed
+        // TODO add your handling code here:
+        List<SadProdutos> produtos = Sad_ControllerProdutos.getProdutos();
+        if (produtos == null || produtos.isEmpty()) {
+            Sad_Util.sad_mensagem("Nenhum produto para exportar!");
+            return;
+        }
+
+        JFileChooser fc = new JFileChooser();
+        fc.setDialogTitle("Salvar CSV");
+        if (fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+
+            if (!file.getName().toLowerCase().endsWith(".csv")) {
+                file = new File(file.getAbsolutePath() + ".csv");
+            }
+
+            Sad_ControllerProdutos.exportar(produtos, file);
+        }
+
+    }//GEN-LAST:event_jBtnSad_ExportarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,6 +233,7 @@ public class JDlgSad_ProdutosPesquisar extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnSad_Cancelar;
+    private javax.swing.JButton jBtnSad_Exportar;
     private javax.swing.JButton jBtnSad_OK;
     private javax.swing.JScrollPane jScrollPanelSad_Painel;
     private javax.swing.JTable jTblSad_Tabela;

@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.PrintWriter;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import tools.Sad_Util;
 import static tools.Sad_Util.dateToStr;
 import static tools.Sad_Util.sad_mensagem;
 
@@ -20,14 +19,14 @@ public class Sad_ControllerUsuarios extends AbstractTableModel {
     public List<SadUsuarios> getUsuarios() {
         return lstUsuarios;
     }
-    
+
     public SadUsuarios getBean(int rowIndex) {
         return lstUsuarios.get(rowIndex);
     }
 
     @Override
     public int getRowCount() {
-        return lstUsuarios != null ? lstUsuarios.size() : 0;      
+        return lstUsuarios != null ? lstUsuarios.size() : 0;
     }
 
     @Override
@@ -57,41 +56,50 @@ public class Sad_ControllerUsuarios extends AbstractTableModel {
             default: return "";
         }
     }
-    
-    public static void exportUsuariosToCSV(List<SadUsuarios> usuarios, File file) {
-    try {
-        if (!file.getName().toLowerCase().endsWith(".csv")) {
-            file = new File(file.getAbsolutePath() + ".csv");
+
+    private static String conversordeNivel(int nivel) {
+        switch(nivel) {
+            case 0: return "Administrador";
+            case 1: return "Funcionário";
+            case 2: return "Vendedor";
+            case 3: return "Gerente";
+            default: return "Desconhecido";
         }
-
-        try (PrintWriter pw = new PrintWriter(file, "UTF-8")) {
-            pw.println("Código;Nome;Apelido;CPF;DataNascimento;Senha;Nivel;Ativo");
-
-            for (SadUsuarios u : usuarios) {
-                String dataNasc = (u.getSadDataNascimento() != null) ? Sad_Util.dateToStr(u.getSadDataNascimento()) : "";
-
-                String nome = "\"" + u.getSadNome().replace("\"", "\"\"") + "\"";
-                String apelido = "\"" + u.getSadApelido().replace("\"", "\"\"") + "\"";
-                String senha = "\"" + u.getSadSenha().replace("\"", "\"\"") + "\"";
-
-                pw.printf("%d;%s;%s;%s;%s;%s;%d;%s%n",
-                    u.getSadIdUsuarios(),
-                    nome,
-                    apelido,
-                    u.getSadCpf(),
-                    dataNasc,
-                    senha,
-                    u.getSadNivel(),
-                    u.getSadAtivo()
-                );
-            }
-        }
-
-        Sad_Util.sad_mensagem("CSV exportado com sucesso!");
-
-    } catch (Exception ex) {
-        Sad_Util.sad_mensagem("Erro ao exportar CSV: " + ex.getMessage());
     }
-}
 
+    public static void exportar(List<SadUsuarios> usuarios, File file) {
+        try {
+            if (!file.getName().toLowerCase().endsWith(".csv")) {
+                file = new File(file.getAbsolutePath() + ".csv");
+            }
+
+            try (PrintWriter pw = new PrintWriter(file, "UTF-8")) {
+                pw.println("Código;Nome;Apelido;CPF;DataNascimento;Senha;Nível;Ativo");
+
+                for (SadUsuarios u : usuarios) {
+                    String dataNasc = (u.getSadDataNascimento() != null) ? dateToStr(u.getSadDataNascimento()) : "";
+                    String nome = "\"" + u.getSadNome().replace("\"", "\"\"") + "\"";
+                    String apelido = "\"" + u.getSadApelido().replace("\"", "\"\"") + "\"";
+                    String senha = "\"" + u.getSadSenha().replace("\"", "\"\"") + "\"";
+                    String nivelStr = conversordeNivel(u.getSadNivel());
+
+                    pw.printf("%d;%s;%s;%s;%s;%s;%s;%s%n",
+                        u.getSadIdUsuarios(),
+                        nome,
+                        apelido,
+                        u.getSadCpf(),
+                        dataNasc,
+                        senha,
+                        nivelStr,
+                        u.getSadAtivo()
+                    );
+                }
+            }
+
+            sad_mensagem("CSV exportado com sucesso!");
+
+        } catch (Exception ex) {
+            sad_mensagem("Erro ao exportar CSV: " + ex.getMessage());
+        }
+    }
 }
