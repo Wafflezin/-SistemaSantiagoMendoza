@@ -8,6 +8,8 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import bean.SadUsuarios;
 import dao.SadUsuariosDAO;
+import java.io.File;
+import javax.swing.JFileChooser;
 import tools.Sad_Util;
 
 /**
@@ -151,18 +153,17 @@ public class JDlgSad_UsuariosPesquisar extends javax.swing.JDialog {
 
     private void jBtnSad_ExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ExportarActionPerformed
         // TODO add your handling code here:
-        javax.swing.JFileChooser fileChooser = new javax.swing.JFileChooser();
-        fileChooser.setDialogTitle("Salvar CSV");
-        int userSelection = fileChooser.showSaveDialog(this);
+        List<SadUsuarios> usuarios = Sad_ControllerUsuarios.getUsuarios();
+        if (usuarios == null || usuarios.isEmpty()) {
+            Sad_Util.sad_mensagem("Nenhum usuário para exportar!");
+            return;
+        }
 
-        if (userSelection == javax.swing.JFileChooser.APPROVE_OPTION) {
-            java.io.File fileToSave = fileChooser.getSelectedFile();
-            if (!fileToSave.getName().toLowerCase().endsWith(".csv")) {
-                fileToSave = new java.io.File(fileToSave.getAbsolutePath() + ".csv");
-            }
-
-            // Usa o método do Util
-            Sad_Util.exportUsuariosToCSV(Sad_ControllerUsuarios.lstUsuarios, fileToSave);
+        JFileChooser fc = new JFileChooser();
+        fc.setDialogTitle("Salvar CSV");
+        if (fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            Sad_ControllerUsuarios.exportUsuariosToCSV(usuarios, file);
         }
     }//GEN-LAST:event_jBtnSad_ExportarActionPerformed
 

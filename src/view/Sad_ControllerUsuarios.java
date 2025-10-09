@@ -1,34 +1,33 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package view;
 
 import bean.SadUsuarios;
+import java.io.File;
+import java.io.PrintWriter;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import tools.Sad_Util;
+import static tools.Sad_Util.dateToStr;
+import static tools.Sad_Util.sad_mensagem;
 
-/**
- *
- * @author u1845853
- */
 public class Sad_ControllerUsuarios extends AbstractTableModel {
 
-    List lstUsuarios;
+    private List<SadUsuarios> lstUsuarios;
 
-    public void setList(List lstUsuarios) {
+    public void setList(List<SadUsuarios> lstUsuarios) {
         this.lstUsuarios = lstUsuarios;
+    }
+
+    public List<SadUsuarios> getUsuarios() {
+        return lstUsuarios;
     }
     
     public SadUsuarios getBean(int rowIndex) {
-        return (SadUsuarios) lstUsuarios.get(rowIndex);
+        return lstUsuarios.get(rowIndex);
     }
 
     @Override
     public int getRowCount() {
-        return lstUsuarios.size();
-                
+        return lstUsuarios != null ? lstUsuarios.size() : 0;      
     }
 
     @Override
@@ -38,31 +37,61 @@ public class Sad_ControllerUsuarios extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        SadUsuarios sadUsuarios = (SadUsuarios) lstUsuarios.get( rowIndex);
-        if ( columnIndex == 0 ){
-            return sadUsuarios.getSadIdUsuarios();
-        } else if (columnIndex ==1) {
-            return sadUsuarios.getSadNome();        
-        } else if (columnIndex ==2) {
-            return sadUsuarios.getSadApelido();
-        } else if (columnIndex ==3) {
-            return sadUsuarios.getSadCpf();
+        SadUsuarios u = lstUsuarios.get(rowIndex);
+        switch(columnIndex) {
+            case 0: return u.getSadIdUsuarios();
+            case 1: return u.getSadNome();
+            case 2: return u.getSadApelido();
+            case 3: return u.getSadCpf();
+            default: return "";
         }
-        return "";
     }
 
     @Override
     public String getColumnName(int columnIndex) {
-        if ( columnIndex == 0) {
-            return "Código";
-        } else if ( columnIndex == 1) {
-            return "Nome";         
-        } else if ( columnIndex == 2) {
-            return "Apelido";
-        } else if ( columnIndex == 3) {
-            return "Cpf";
-        } 
-        return "";
+        switch(columnIndex) {
+            case 0: return "Código";
+            case 1: return "Nome";
+            case 2: return "Apelido";
+            case 3: return "Cpf";
+            default: return "";
+        }
     }
     
+    public static void exportUsuariosToCSV(List<SadUsuarios> usuarios, File file) {
+    try {
+        if (!file.getName().toLowerCase().endsWith(".csv")) {
+            file = new File(file.getAbsolutePath() + ".csv");
+        }
+
+        try (PrintWriter pw = new PrintWriter(file, "UTF-8")) {
+            pw.println("Código;Nome;Apelido;CPF;DataNascimento;Senha;Nivel;Ativo");
+
+            for (SadUsuarios u : usuarios) {
+                String dataNasc = (u.getSadDataNascimento() != null) ? Sad_Util.dateToStr(u.getSadDataNascimento()) : "";
+
+                String nome = "\"" + u.getSadNome().replace("\"", "\"\"") + "\"";
+                String apelido = "\"" + u.getSadApelido().replace("\"", "\"\"") + "\"";
+                String senha = "\"" + u.getSadSenha().replace("\"", "\"\"") + "\"";
+
+                pw.printf("%d;%s;%s;%s;%s;%s;%d;%s%n",
+                    u.getSadIdUsuarios(),
+                    nome,
+                    apelido,
+                    u.getSadCpf(),
+                    dataNasc,
+                    senha,
+                    u.getSadNivel(),
+                    u.getSadAtivo()
+                );
+            }
+        }
+
+        Sad_Util.sad_mensagem("CSV exportado com sucesso!");
+
+    } catch (Exception ex) {
+        Sad_Util.sad_mensagem("Erro ao exportar CSV: " + ex.getMessage());
+    }
+}
+
 }

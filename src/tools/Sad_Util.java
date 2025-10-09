@@ -89,32 +89,5 @@ public class Sad_Util {
     public static String doubleToStr(double num) {
         return String.valueOf(num);
     }
-    public static void exportUsuariosToCSV(List<SadUsuarios> usuarios, File file) {
-        try (PrintWriter pw = new PrintWriter(file)) {
-            pw.println("Código,Nome,Apelido,CPF,DataNascimento,Senha,Nivel,Ativo");
-
-            for (SadUsuarios u : usuarios) {
-                String dataNasc = (u.getSadDataNascimento() != null) ? dateToStr(u.getSadDataNascimento()) : "";
-
-                String nome = "\"" + u.getSadNome().replace("\"", "\"\"") + "\"";
-                String apelido = "\"" + u.getSadApelido().replace("\"", "\"\"") + "\"";
-                String senha = "\"" + u.getSadSenha().replace("\"", "\"\"") + "\"";
-                
-                pw.printf("%d,%s,%s,%s,%s,%s,%d,%s%n",
-                    u.getSadIdUsuarios(),
-                    nome,
-                    apelido,
-                    u.getSadCpf(),
-                    dataNasc,
-                    senha,
-                    u.getSadNivel(),
-                    u.getSadAtivo()
-                );
-            }
-
-            sad_mensagem("CSV exportado com sucesso!");
-        } catch (Exception ex) {
-            sad_mensagem("Erro ao exportar CSV: " + ex.getMessage());
-        }
-    }
+    
 };
