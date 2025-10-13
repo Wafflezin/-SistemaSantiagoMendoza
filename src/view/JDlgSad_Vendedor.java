@@ -25,6 +25,13 @@ public class JDlgSad_Vendedor extends javax.swing.JDialog {
         setTitle("Cadastro de Vendedor");
         setLocationRelativeTo(null);
         Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_QuantidaVendas, jFmtSad_DataNascimento, jFmtSad_Celular, jFmtSad_Arrecadado, jPwdSad_Senha, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Confirmar, jBtnSad_Cancelar);
+        try {
+            javax.swing.text.MaskFormatter mascaraData = new javax.swing.text.MaskFormatter("##/##/####");
+            mascaraData.setPlaceholderCharacter(' ');
+            jFmtSad_DataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mascaraData));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public SadVendedor viewBean() {
