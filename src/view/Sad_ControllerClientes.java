@@ -72,7 +72,7 @@ public class Sad_ControllerClientes extends AbstractTableModel {
     public static void exportar(List<SadClientes> clientes, File file) {
         try {
             if (!file.getName().toLowerCase().endsWith(".csv")) {
-                file = new File(file.getAbsolutePath() + ".csv"); // Adiciona .csv automaticamente
+                file = new File(file.getAbsolutePath() + ".csv");
             }
             try (PrintWriter pw = new PrintWriter(file)) {
                 pw.println("Código;Nome;CPF;RG;Sexo;DataNascimento;Email;CEP;Endereço;Bairro;Cidade;TelefoneResidencial;Celular;Senha;Pronomes");
