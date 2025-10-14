@@ -34,6 +34,13 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
         SadClientesDAO clientesDAO = new SadClientesDAO();
         SadVendedorDAO vendedoresDAO = new SadVendedorDAO();
         List clientes = (List) clientesDAO.listAll();
+        try {
+            javax.swing.text.MaskFormatter mascaraData = new javax.swing.text.MaskFormatter("##/##/####");
+            mascaraData.setPlaceholderCharacter(' ');
+            jFmtSad_DataVendas.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mascaraData));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
         for (int i = 0; i < clientes.size(); i++) {
             jCboSad_Clientes.addItem((SadClientes) clientes.get(i));
         }
@@ -376,7 +383,7 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
     private void jBtnSad_AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_AlterarActionPerformed
         // TODO add your handling code here:
         incluir = false;
-        Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_Total, jFmtSad_DataVendas, jBtnSad_Confirmar, jBtnSad_Cancelar);
+        Sad_Util.sad_habilitar(true, jTxtSad_Total, jFmtSad_DataVendas, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Excluir, jBtnSad_Incluir, jBtnSad_Alterar);
         jTxtSad_Total.grabFocus();
     }//GEN-LAST:event_jBtnSad_AlterarActionPerformed
