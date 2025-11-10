@@ -78,7 +78,7 @@ public class Sad_ControllerProdutos extends AbstractTableModel {
                 for (SadProdutos p : produtos) {
                     String nome = "\"" + p.getSadNome().replace("\"", "\"\"") + "\"";
                     String peso = p.getSadPeso();
-                    String quantidade = p.getSadQuantidade();
+                    double quantidade = p.getSadValor();
                     String testado = "1".equals(p.getSadTestado()) ? "Testado" : "Não Testado";
                     String novo = "1".equals(p.getSadNovo()) ? "Novo" : "Usado";
                     String marca = "\"" + p.getSadMarca().replace("\"", "\"\"") + "\"";

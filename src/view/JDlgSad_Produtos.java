@@ -24,7 +24,7 @@ public class JDlgSad_Produtos extends javax.swing.JDialog {
         initComponents();
         setTitle("Cadastro de Produtos");
         setLocationRelativeTo(null);
-        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Confirmar, jBtnSad_Cancelar);
+        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Valor, jChbSad_Testado, jChbSad_Novo, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Confirmar, jBtnSad_Cancelar);
     }
 
     public SadProdutos viewBean() {
@@ -32,7 +32,7 @@ public class JDlgSad_Produtos extends javax.swing.JDialog {
         int codigo = Sad_Util.strToInt(jTxtSad_Codigo.getText());
         sadProdutos.setSadIdProdutos(codigo);
         sadProdutos.setSadPeso(jTxtSad_Peso.getText());
-        sadProdutos.setSadQuantidade(jTxtSad_Quantidade.getText());
+        sadProdutos.setSadValor(Sad_Util.strToDouble(jTxtSad_Valor.getText()));
         sadProdutos.setSadNome(jTxtSad_Nome.getText());
         sadProdutos.setSadTestado(jChbSad_Testado.isSelected() ? "S" : "N");
         sadProdutos.setSadNovo(jChbSad_Novo.isSelected() ? "S" : "N");
@@ -43,7 +43,7 @@ public class JDlgSad_Produtos extends javax.swing.JDialog {
     public void beanView(SadProdutos sadProdutos) {
         jTxtSad_Codigo.setText(Sad_Util.intToStr(sadProdutos.getSadIdProdutos()));
         jTxtSad_Peso.setText(sadProdutos.getSadPeso());
-        jTxtSad_Quantidade.setText(sadProdutos.getSadQuantidade());
+        jTxtSad_Valor.setText(Sad_Util.doubleToStr(sadProdutos.getSadValor()));
         jTxtSad_Nome.setText(sadProdutos.getSadNome());
         jChbSad_Testado.setSelected("S".equals(sadProdutos.getSadTestado()));
         jChbSad_Novo.setSelected("S".equals(sadProdutos.getSadNovo()));
@@ -64,7 +64,7 @@ public class JDlgSad_Produtos extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jChbSad_Testado = new javax.swing.JCheckBox();
-        jTxtSad_Quantidade = new javax.swing.JTextField();
+        jTxtSad_Valor = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jTxtSad_Peso = new javax.swing.JTextField();
         jTxtSad_Codigo = new javax.swing.JTextField();
@@ -90,7 +90,7 @@ public class JDlgSad_Produtos extends javax.swing.JDialog {
 
         jLabel4.setText("Peso");
 
-        jLabel5.setText("Quantidade");
+        jLabel5.setText("Valor");
 
         jChbSad_Testado.setText("Testado");
 
@@ -180,7 +180,7 @@ public class JDlgSad_Produtos extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel6)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTxtSad_Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTxtSad_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jChbSad_Testado)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -231,7 +231,7 @@ public class JDlgSad_Produtos extends javax.swing.JDialog {
                     .addComponent(jTxtSad_Marca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTxtSad_Peso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
-                    .addComponent(jTxtSad_Quantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtSad_Valor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jChbSad_Testado)
                     .addComponent(jChbSad_Novo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
@@ -259,16 +259,16 @@ public class JDlgSad_Produtos extends javax.swing.JDialog {
     private void jBtnSad_IncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_IncluirActionPerformed
         // TODO add your handling code here:
         incluir = true;
-        Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo, jBtnSad_Confirmar, jBtnSad_Cancelar);
+        Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Valor, jChbSad_Testado, jChbSad_Novo, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
-        Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo);
+        Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Valor, jChbSad_Testado, jChbSad_Novo);
         jTxtSad_Codigo.grabFocus();
     }//GEN-LAST:event_jBtnSad_IncluirActionPerformed
 
     private void jBtnSad_AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_AlterarActionPerformed
         // TODO add your handling code here:
         incluir = false;
-        Sad_Util.sad_habilitar(true, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo, jBtnSad_Confirmar, jBtnSad_Cancelar);
+        Sad_Util.sad_habilitar(true, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Valor, jChbSad_Testado, jChbSad_Novo, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(false, jBtnSad_Excluir, jBtnSad_Incluir, jBtnSad_Alterar);
         jTxtSad_Nome.grabFocus();
     }//GEN-LAST:event_jBtnSad_AlterarActionPerformed
@@ -280,7 +280,7 @@ public class JDlgSad_Produtos extends javax.swing.JDialog {
             sadProdutosDAO.delete(viewBean());
             Sad_Util.sad_habilitar(false, jBtnSad_Alterar, jBtnSad_Cancelar, jBtnSad_Excluir);
             Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
-            Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo);
+            Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Valor, jChbSad_Testado, jChbSad_Novo);
         }
     }//GEN-LAST:event_jBtnSad_ExcluirActionPerformed
 
@@ -292,16 +292,16 @@ public class JDlgSad_Produtos extends javax.swing.JDialog {
         } else {
             sadProdutosDAO.update(viewBean());
         }
-        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo, jBtnSad_Confirmar, jBtnSad_Cancelar);
+        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Valor, jChbSad_Testado, jChbSad_Novo, jBtnSad_Confirmar, jBtnSad_Cancelar);
         Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
-        Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo);
+        Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Valor, jChbSad_Testado, jChbSad_Novo);
     }//GEN-LAST:event_jBtnSad_ConfirmarActionPerformed
 
     private void jBtnSad_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_CancelarActionPerformed
         // TODO add your handling code here:
-        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo, jBtnSad_Confirmar, jBtnSad_Cancelar, jBtnSad_Alterar, jBtnSad_Excluir);
+        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Valor, jChbSad_Testado, jChbSad_Novo, jBtnSad_Confirmar, jBtnSad_Cancelar, jBtnSad_Alterar, jBtnSad_Excluir);
         Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
-        Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Quantidade, jChbSad_Testado, jChbSad_Novo);
+        Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Nome, jTxtSad_Marca, jTxtSad_Peso, jTxtSad_Valor, jChbSad_Testado, jChbSad_Novo);
     }//GEN-LAST:event_jBtnSad_CancelarActionPerformed
 
     private void jBtnSad_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_PesquisarActionPerformed
@@ -377,6 +377,6 @@ public class JDlgSad_Produtos extends javax.swing.JDialog {
     private javax.swing.JTextField jTxtSad_Marca;
     private javax.swing.JTextField jTxtSad_Nome;
     private javax.swing.JTextField jTxtSad_Peso;
-    private javax.swing.JTextField jTxtSad_Quantidade;
+    private javax.swing.JTextField jTxtSad_Valor;
     // End of variables declaration//GEN-END:variables
 }

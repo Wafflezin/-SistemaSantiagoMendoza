@@ -20,7 +20,7 @@ public class SadProdutos implements java.io.Serializable {
 
     private int sadIdProdutos;
     private String sadPeso;
-    private String sadQuantidade;
+    private double sadValor;
     private String sadNome;
     private String sadTestado;
     private String sadNovo;
@@ -29,10 +29,10 @@ public class SadProdutos implements java.io.Serializable {
     public SadProdutos() {
     }
 
-    public SadProdutos(int sadIdProdutos, String sadPeso, String sadQuantidade, String sadNome, String sadTestado, String sadNovo, String sadMarca) {
+    public SadProdutos(int sadIdProdutos, String sadPeso, double sadValor, String sadNome, String sadTestado, String sadNovo, String sadMarca) {
         this.sadIdProdutos = sadIdProdutos;
         this.sadPeso = sadPeso;
-        this.sadQuantidade = sadQuantidade;
+        this.sadValor = sadValor;
         this.sadNome = sadNome;
         this.sadTestado = sadTestado;
         this.sadNovo = sadNovo;
@@ -59,13 +59,13 @@ public class SadProdutos implements java.io.Serializable {
         this.sadPeso = sadPeso;
     }
 
-    @Column(name = "sad_quantidade", nullable = false, length = 4)
-    public String getSadQuantidade() {
-        return this.sadQuantidade;
+    @Column(name = "sad_valor", nullable = false, length = 4)
+    public double getSadValor() {
+        return this.sadValor;
     }
 
-    public void setSadQuantidade(String sadQuantidade) {
-        this.sadQuantidade = sadQuantidade;
+    public void setSadValor(double sadValor) {
+        this.sadValor = sadValor;
     }
 
     @Column(name = "sad_nome", nullable = false, length = 50)
