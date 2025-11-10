@@ -6,6 +6,7 @@
 package view;
 
 import bean.SadProdutos;
+import bean.SadProdutos;
 import dao.SadProdutosDAO;
 import java.util.List;
 import tools.Sad_Util;
@@ -15,9 +16,12 @@ import tools.Sad_Util;
  * @author u70874542189
  */
 public class JDlgSad_VendaProdutos extends javax.swing.JDialog {
-
+    
+    JDlgSad_Vendas jDlgSad_Vendas;
+    
+   
     /**
-     * Creates new form JDlgPedidosProdutos
+     * Creates new form JDlgSad_VendasSadProdutos
      */
     public JDlgSad_VendaProdutos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -25,11 +29,15 @@ public class JDlgSad_VendaProdutos extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         Sad_Util.sad_habilitar(false, jTxtSad_Valor, jTxtSad_Total);
         jTxtSad_Quantidade.setText("1");
-        SadProdutosDAO sadProdutosDAO = new SadProdutosDAO();
-        List lista = (List) sadProdutosDAO.listAll();
+        SadProdutosDAO sadSadProdutosDAO = new SadProdutosDAO();
+        List lista = (List) sadSadProdutosDAO.listAll();
         for (Object object : lista) {
             jCboSad_Produtos.addItem((SadProdutos) object);
         }
+        
+    }
+     public void setTelaPai(JDlgSad_Vendas jDlgSad_Vendas){
+        this.jDlgSad_Vendas = jDlgSad_Vendas;
     }
 
     /**
@@ -57,6 +65,18 @@ public class JDlgSad_VendaProdutos extends javax.swing.JDialog {
         jLabel1.setText("Produtos");
 
         jLabel2.setText("Quantidade");
+
+        jCboSad_Produtos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCboSad_ProdutosActionPerformed(evt);
+            }
+        });
+
+        jTxtSad_Quantidade.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTxtSad_QuantidadeKeyReleased(evt);
+            }
+        });
 
         jLabel3.setText("Valor unitario");
 
@@ -147,6 +167,26 @@ public class JDlgSad_VendaProdutos extends javax.swing.JDialog {
         // TODO add your handling code here:
         setVisible(false);
     }//GEN-LAST:event_jBtnCancelarActionPerformed
+
+    private void jCboSad_ProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCboSad_ProdutosActionPerformed
+        // TODO add your handling code here:
+        SadProdutos produtos = (SadProdutos) jCboSad_Produtos.getSelectedItem();
+        jTxtSad_Valor.setText(Sad_Util.doubleToStr(produtos.getSadValor()));
+        int quant = Sad_Util.strToInt(jTxtSad_Quantidade.getText());
+        jTxtSad_Total.setText(Sad_Util.doubleToStr(quant * produtos.getSadValor()));
+    }//GEN-LAST:event_jCboSad_ProdutosActionPerformed
+
+    private void jTxtSad_QuantidadeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTxtSad_QuantidadeKeyReleased
+        // TODO add your handling code here:
+        if (!jTxtSad_Quantidade.getText().isEmpty()) {
+            SadProdutos produtos = (SadProdutos) jCboSad_Produtos.getSelectedItem();
+            jTxtSad_Valor.setText(Sad_Util.doubleToStr(produtos.getSadValor()));
+            int quant = Sad_Util.strToInt(jTxtSad_Quantidade.getText());
+            jTxtSad_Total.setText(Sad_Util.doubleToStr(quant * produtos.getSadValor()));
+        } else {
+            jTxtSad_Total.setText("");
+        }
+    }//GEN-LAST:event_jTxtSad_QuantidadeKeyReleased
 
     /**
      * @param args the command line arguments
