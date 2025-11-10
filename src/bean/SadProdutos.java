@@ -103,5 +103,19 @@ public class SadProdutos implements java.io.Serializable {
     public void setSadMarca(String sadMarca) {
         this.sadMarca = sadMarca;
     }
+    @Override
+    public String toString() {
+        return this.sadNome;
+    }
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof SadProdutos) {
+            SadProdutos sadProdutos = (SadProdutos) object;
+            if (this.getSadIdProdutos() == sadProdutos.getSadIdProdutos()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

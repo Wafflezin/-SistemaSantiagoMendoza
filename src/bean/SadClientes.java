@@ -215,5 +215,15 @@ public class SadClientes implements java.io.Serializable {
     public String toString() {
         return this.sadNome;
     }
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof SadClientes) {
+            SadClientes sadClientes = (SadClientes) object;
+            if (this.getSadIdClientes() == sadClientes.getSadIdClientes()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

@@ -74,6 +74,11 @@ public class JDlgSad_ProdutosPesquisar extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTblSad_Tabela.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTblSad_TabelaMouseClicked(evt);
+            }
+        });
         jScrollPanelSad_Painel.setViewportView(jTblSad_Tabela);
 
         jBtnSad_OK.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/confirmar.png"))); // NOI18N
@@ -176,6 +181,13 @@ public class JDlgSad_ProdutosPesquisar extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_jBtnSad_ExportarActionPerformed
+
+    private void jTblSad_TabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblSad_TabelaMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+            jBtnSad_OKActionPerformed(null);
+        }
+    }//GEN-LAST:event_jTblSad_TabelaMouseClicked
 
     /**
      * @param args the command line arguments

@@ -120,5 +120,15 @@ public class SadVendedor implements java.io.Serializable {
     public String toString() {
         return this.sadNome;
     }
+    @Override
+    public boolean equals(Object object) {
+        if (object instanceof SadVendedor) {
+            SadVendedor sadVendedor = (SadVendedor) object;
+            if (this.getSadIdVendedor() == sadVendedor.getSadIdVendedor()) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

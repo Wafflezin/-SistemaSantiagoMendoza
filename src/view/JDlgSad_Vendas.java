@@ -33,20 +33,21 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
         Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Confirmar, jBtnSad_Cancelar);
         SadClientesDAO clientesDAO = new SadClientesDAO();
         SadVendedorDAO vendedoresDAO = new SadVendedorDAO();
-        List clientes = (List) clientesDAO.listAll();
+        List lista = (List) clientesDAO.listAll();
+        for (int i = 0; i < lista.size(); i++) {
+            jCboSad_Clientes.addItem((SadClientes) lista.get(i));
+            
+        }
+        List listaVend = (List) vendedoresDAO.listAll();
+        for (Object object : listaVend) {
+            jCboSad_Vendedor.addItem((SadVendedor) object);
+        }
         try {
             javax.swing.text.MaskFormatter mascaraData = new javax.swing.text.MaskFormatter("##/##/####");
             mascaraData.setPlaceholderCharacter(' ');
             jFmtSad_DataVendas.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mascaraData));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
-        }
-        for (int i = 0; i < clientes.size(); i++) {
-            jCboSad_Clientes.addItem((SadClientes) clientes.get(i));
-        }
-        List vendedores = (List) vendedoresDAO.listAll();
-        for (int i = 0; i < vendedores.size(); i++) {
-            jCboSad_Vendedor.addItem((SadVendedor) vendedores.get(i));
         }
         try {
             javax.swing.text.MaskFormatter mascaraData = new javax.swing.text.MaskFormatter("##/##/####");
