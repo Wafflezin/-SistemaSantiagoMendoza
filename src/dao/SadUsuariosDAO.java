@@ -64,4 +64,28 @@ public class SadUsuariosDAO extends AbstractDAO {
         SadUsuariosDAO sadUsuariosDAO = new SadUsuariosDAO();
         sadUsuariosDAO.listAll();
     }
+
+    public boolean autenticar(String sad_nome, String sad_senha) {
+        try {
+            session.beginTransaction();
+
+            String hql = "FROM SadUsuarios WHERE sadNome = :nome AND sadSenha = :senha";
+            org.hibernate.Query query = session.createQuery(hql);
+            query.setParameter("nome", sad_nome);
+            query.setParameter("senha", sad_senha);
+
+            SadUsuarios usuario = (SadUsuarios) query.uniqueResult();
+
+            session.getTransaction().commit();
+
+            if (usuario != null) {
+                return true;
+            }
+
+        } catch (Exception ex) {
+            java.util.logging.Logger.getLogger(SadUsuariosDAO.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
 }
