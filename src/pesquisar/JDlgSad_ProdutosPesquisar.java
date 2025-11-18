@@ -2,21 +2,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package view;
+package pesquisar;
 
-import java.util.List;
-import javax.swing.JOptionPane;
-import bean.SadVendas;
-import dao.SadVendasDAO;
+import bean.SadClientes;
+import dao.SadProdutosDAO;
+import bean.SadProdutos;
 import java.io.File;
+import java.util.List;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import tools.Sad_Util;
+import view.JDlgSad_Produtos;
+import controller.Sad_ControllerProdutos;
 
 /**
  *
  * @author u70874542189
  */
-public class JDlgSad_VendasPesquisar extends javax.swing.JDialog {
+public class JDlgSad_ProdutosPesquisar extends javax.swing.JDialog {
 
     private boolean confirmou = false;
 
@@ -24,26 +27,25 @@ public class JDlgSad_VendasPesquisar extends javax.swing.JDialog {
         return confirmou;
     }
     /**
-     * Creates new form JDlgSad_VendasPesquisar
+     * Creates new form JDlgProdutosPesquisar
      */
+    private JDlgSad_Produtos jDlgSad_Produtos;
+    Sad_ControllerProdutos Sad_ControllerProdutos;
 
-    private JDlgSad_Vendas jDlgSad_Vendas;
-    Sad_ControllerVendas Sad_ControllerVendas;
-
-    public JDlgSad_VendasPesquisar(java.awt.Frame parent, boolean modal) {
+    public JDlgSad_ProdutosPesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Pesquisar Vendas");
-        Sad_ControllerVendas = new Sad_ControllerVendas();
-        SadVendasDAO sad_VendasDAO = new SadVendasDAO();
-        List lista = (List) sad_VendasDAO.listAll();
-        Sad_ControllerVendas.setList(lista);
-        jTblSad_Tabela.setModel(Sad_ControllerVendas);
+        setTitle("Pesquisar Produtos");
+        Sad_ControllerProdutos = new Sad_ControllerProdutos();
+        SadProdutosDAO sad_ProdutosDAO = new SadProdutosDAO();
+        List lista = (List) sad_ProdutosDAO.listAll();
+        Sad_ControllerProdutos.setList(lista);
+        jTblSad_Tabela.setModel(Sad_ControllerProdutos);
     }
 
-    public void setTelaPai(JDlgSad_Vendas jDlgSad_Vendas) {;
-        this.jDlgSad_Vendas = jDlgSad_Vendas;
+    public void setTelaPai(JDlgSad_Produtos jDlgSad_Produtos) {;
+        this.jDlgSad_Produtos = jDlgSad_Produtos;
     }
 
     /**
@@ -110,16 +112,19 @@ public class JDlgSad_VendasPesquisar extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jScrollPanelSad_Painel, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jBtnSad_OK)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBtnSad_Cancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jBtnSad_Exportar))
-                    .addComponent(jScrollPanelSad_Painel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                        .addComponent(jBtnSad_Exportar)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,13 +145,14 @@ public class JDlgSad_VendasPesquisar extends javax.swing.JDialog {
         // TODO add your handling code here:
         int selectedRow = jTblSad_Tabela.getSelectedRow();
         if (selectedRow >= 0) {
-            SadVendas sadVendas = Sad_ControllerVendas.getBean(selectedRow);
-            jDlgSad_Vendas.beanView(sadVendas);
+            SadProdutos sadProdutos = Sad_ControllerProdutos.getBean(selectedRow);
+            jDlgSad_Produtos.beanView(sadProdutos);
             confirmou = true;
             this.setVisible(false);
         } else {
-            Sad_Util.sad_mensagem("Selecione uma venda!");
+            Sad_Util.sad_mensagem("Selecione um produto!");
         }
+
 
     }//GEN-LAST:event_jBtnSad_OKActionPerformed
 
@@ -158,9 +164,9 @@ public class JDlgSad_VendasPesquisar extends javax.swing.JDialog {
 
     private void jBtnSad_ExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ExportarActionPerformed
         // TODO add your handling code here:
-        List<SadVendas> vendas = Sad_ControllerVendas.getVendas();
-        if (vendas == null || vendas.isEmpty()) {
-            Sad_Util.sad_mensagem("Nenhuma venda para exportar!");
+        List<SadProdutos> produtos = Sad_ControllerProdutos.getProdutos();
+        if (produtos == null || produtos.isEmpty()) {
+            Sad_Util.sad_mensagem("Nenhum produto para exportar!");
             return;
         }
 
@@ -173,8 +179,9 @@ public class JDlgSad_VendasPesquisar extends javax.swing.JDialog {
                 file = new File(file.getAbsolutePath() + ".csv");
             }
 
-            Sad_ControllerVendas.exportar(vendas, file);
+            Sad_ControllerProdutos.exportar(produtos, file);
         }
+
     }//GEN-LAST:event_jBtnSad_ExportarActionPerformed
 
     private void jTblSad_TabelaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblSad_TabelaMouseClicked
@@ -201,30 +208,14 @@ public class JDlgSad_VendasPesquisar extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDlgSad_VendasPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgSad_ProdutosPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDlgSad_VendasPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgSad_ProdutosPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDlgSad_VendasPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgSad_ProdutosPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDlgSad_VendasPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgSad_ProdutosPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -245,7 +236,7 @@ public class JDlgSad_VendasPesquisar extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDlgSad_VendasPesquisar dialog = new JDlgSad_VendasPesquisar(new javax.swing.JFrame(), true);
+                JDlgSad_ProdutosPesquisar dialog = new JDlgSad_ProdutosPesquisar(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

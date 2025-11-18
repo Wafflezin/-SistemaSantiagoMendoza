@@ -5,6 +5,7 @@
  */
 package view;
 
+import pesquisar.JDlgSad_ClientesPesquisar;
 import bean.SadClientes;
 import dao.SadClientesDAO;
 import tools.Sad_Util;
@@ -30,6 +31,46 @@ public class JDlgSad_Clientes extends javax.swing.JDialog {
             javax.swing.text.MaskFormatter mascaraData = new javax.swing.text.MaskFormatter("##/##/####");
             mascaraData.setPlaceholderCharacter(' ');
             jFmtSad_DataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mascaraData));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            javax.swing.text.MaskFormatter mascaraCpf = new javax.swing.text.MaskFormatter("###.###.###-##");
+            mascaraCpf.setPlaceholderCharacter(' ');
+            jFmtSad_Cpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mascaraCpf));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            javax.swing.text.MaskFormatter mascaraRg = new javax.swing.text.MaskFormatter("##.###.###-#");
+            mascaraRg.setPlaceholderCharacter(' ');
+            jFmtSad_Rg.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mascaraRg));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            javax.swing.text.MaskFormatter mascaraCep = new javax.swing.text.MaskFormatter("#####-###");
+            mascaraCep.setPlaceholderCharacter(' ');
+            jFmtSad_Cep.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mascaraCep));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            javax.swing.text.MaskFormatter mascaraResidencial = new javax.swing.text.MaskFormatter("(##) ####-####");
+            mascaraResidencial.setPlaceholderCharacter(' ');
+            jFmtSad_Residencial.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mascaraResidencial));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            javax.swing.text.MaskFormatter mascaraCelular = new javax.swing.text.MaskFormatter("(##) #####-####");
+            mascaraCelular.setPlaceholderCharacter(' ');
+            jFmtSad_Celular.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mascaraCelular));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }

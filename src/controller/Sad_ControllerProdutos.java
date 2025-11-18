@@ -1,4 +1,4 @@
-package view;
+package controller;
 
 import bean.SadProdutos;
 import java.io.File;

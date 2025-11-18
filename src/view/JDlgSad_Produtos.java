@@ -4,6 +4,7 @@
  */
 package view;
 
+import pesquisar.JDlgSad_ProdutosPesquisar;
 import tools.Sad_Util;
 import bean.SadProdutos;
 import dao.SadProdutosDAO;

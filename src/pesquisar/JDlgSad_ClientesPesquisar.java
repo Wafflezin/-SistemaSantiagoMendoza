@@ -2,21 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package view;
+package pesquisar;
 
 import java.util.List;
 import javax.swing.JOptionPane;
-import bean.SadUsuarios;
-import dao.SadUsuariosDAO;
+import bean.SadClientes;
+import dao.SadClientesDAO;
 import java.io.File;
 import javax.swing.JFileChooser;
 import tools.Sad_Util;
+import view.JDlgSad_Clientes;
+import controller.Sad_ControllerClientes;
 
 /**
  *
  * @author u70874542189
  */
-public class JDlgSad_UsuariosPesquisar extends javax.swing.JDialog {
+public class JDlgSad_ClientesPesquisar extends javax.swing.JDialog {
 
     private boolean confirmou = false;
 
@@ -25,25 +27,25 @@ public class JDlgSad_UsuariosPesquisar extends javax.swing.JDialog {
     }
 
     /**
-     * Creates new form JDlgUsuariosPesquisar
+     * Creates new form JDlgSad_ClientesPesquisar
      */
-    private JDlgSad_Usuarios jDlgSad_Usuarios;
-    Sad_ControllerUsuarios Sad_ControllerUsuarios;
+    private JDlgSad_Clientes jDlgSad_Clientes;
+    Sad_ControllerClientes Sad_ControllerClientes;
 
-    public JDlgSad_UsuariosPesquisar(java.awt.Frame parent, boolean modal) {
+    public JDlgSad_ClientesPesquisar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
-        setTitle("Pesquisar Usuarios");
-        Sad_ControllerUsuarios = new Sad_ControllerUsuarios();
-        SadUsuariosDAO sad_UsuariosDAO = new SadUsuariosDAO();
-        List lista = (List) sad_UsuariosDAO.listAll();
-        Sad_ControllerUsuarios.setList(lista);
-        jTblSad_Tabela.setModel(Sad_ControllerUsuarios);
+        setTitle("Pesquisar Clientes");
+        Sad_ControllerClientes = new Sad_ControllerClientes();
+        SadClientesDAO sad_ClientesDAO = new SadClientesDAO();
+        List lista = (List) sad_ClientesDAO.listAll();
+        Sad_ControllerClientes.setList(lista);
+        jTblSad_Tabela.setModel(Sad_ControllerClientes);
     }
 
-    public void setTelaPai(JDlgSad_Usuarios jDlgSad_Usuarios) {;
-        this.jDlgSad_Usuarios = jDlgSad_Usuarios;
+    public void setTelaPai(JDlgSad_Clientes jDlgSad_Clientes) {;
+        this.jDlgSad_Clientes = jDlgSad_Clientes;
     }
 
     /**
@@ -110,30 +112,29 @@ public class JDlgSad_UsuariosPesquisar extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPanelSad_Painel, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPanelSad_Painel, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jBtnSad_OK)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBtnSad_Cancelar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBtnSad_Exportar)))
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPanelSad_Painel, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBtnSad_OK)
+                    .addComponent(jBtnSad_Exportar)
                     .addComponent(jBtnSad_Cancelar)
-                    .addComponent(jBtnSad_Exportar))
+                    .addComponent(jBtnSad_OK))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPanelSad_Painel, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 62, Short.MAX_VALUE))
         );
 
         pack();
@@ -143,27 +144,28 @@ public class JDlgSad_UsuariosPesquisar extends javax.swing.JDialog {
         // TODO add your handling code here:
         int selectedRow = jTblSad_Tabela.getSelectedRow();
         if (selectedRow >= 0) {
-            SadUsuarios sadUsuarios = Sad_ControllerUsuarios.getBean(selectedRow);
-            jDlgSad_Usuarios.beanView(sadUsuarios);
+            SadClientes sadClientes = Sad_ControllerClientes.getBean(selectedRow);
+            jDlgSad_Clientes.beanView(sadClientes);
             confirmou = true;
             this.setVisible(false);
         } else {
-            Sad_Util.sad_mensagem("Selecione um usuário!");
+            Sad_Util.sad_mensagem("Selecione um cliente!");
         }
-
     }//GEN-LAST:event_jBtnSad_OKActionPerformed
 
     private void jBtnSad_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_CancelarActionPerformed
         // TODO add your handling code here:
         confirmou = false;
         setVisible(false);
+
+
     }//GEN-LAST:event_jBtnSad_CancelarActionPerformed
 
     private void jBtnSad_ExportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ExportarActionPerformed
         // TODO add your handling code here:
-        List<SadUsuarios> usuarios = Sad_ControllerUsuarios.getUsuarios();
-        if (usuarios == null || usuarios.isEmpty()) {
-            Sad_Util.sad_mensagem("Nenhum usuário para exportar!");
+        List<SadClientes> clientes = Sad_ControllerClientes.getClientes();
+        if (clientes == null || clientes.isEmpty()) {
+            Sad_Util.sad_mensagem("Nenhum cliente para exportar!");
             return;
         }
 
@@ -171,7 +173,12 @@ public class JDlgSad_UsuariosPesquisar extends javax.swing.JDialog {
         fc.setDialogTitle("Salvar CSV");
         if (fc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
             File file = fc.getSelectedFile();
-            Sad_ControllerUsuarios.exportar(usuarios, file);
+
+            if (!file.getName().toLowerCase().endsWith(".csv")) {
+                file = new File(file.getAbsolutePath() + ".csv");
+            }
+
+            Sad_ControllerClientes.exportar(clientes, file);
         }
     }//GEN-LAST:event_jBtnSad_ExportarActionPerformed
 
@@ -199,14 +206,22 @@ public class JDlgSad_UsuariosPesquisar extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDlgSad_UsuariosPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgSad_ClientesPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDlgSad_UsuariosPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgSad_ClientesPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDlgSad_UsuariosPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgSad_ClientesPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDlgSad_UsuariosPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgSad_ClientesPesquisar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -219,7 +234,7 @@ public class JDlgSad_UsuariosPesquisar extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDlgSad_UsuariosPesquisar dialog = new JDlgSad_UsuariosPesquisar(new javax.swing.JFrame(), true);
+                JDlgSad_ClientesPesquisar dialog = new JDlgSad_ClientesPesquisar(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

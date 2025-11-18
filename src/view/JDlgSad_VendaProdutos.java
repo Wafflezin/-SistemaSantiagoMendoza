@@ -8,6 +8,7 @@ package view;
 import bean.SadProdutos;
 import bean.SadProdutos;
 import dao.SadProdutosDAO;
+import bean.SadVendaProdutos;
 import java.util.List;
 import tools.Sad_Util;
 
@@ -160,6 +161,11 @@ public class JDlgSad_VendaProdutos extends javax.swing.JDialog {
 
     private void jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKActionPerformed
         // TODO add your handling code here:
+        SadVendaProdutos sadVendaProdutos = new SadVendaProdutos();
+        sadVendaProdutos.setSadProdutos((SadProdutos) jCboSad_Produtos.getSelectedItem());
+        sadVendaProdutos.setSadQuantidade(Sad_Util.strToInt(jTxtSad_Quantidade.getText()));
+        sadVendaProdutos.setSadValorUnitario(Sad_Util.strToDouble(jTxtSad_Valor.getText()));
+        jDlgSad_Vendas.sad_ControllerVendaProdutos.addBean(sadVendaProdutos);
         setVisible(false);
     }//GEN-LAST:event_jBtnOKActionPerformed
 

@@ -1,4 +1,4 @@
-package view;
+package controller;
 
 import bean.SadVendaProdutos;
 import java.io.File;
@@ -26,6 +26,11 @@ public class Sad_ControllerVendaProdutos extends AbstractTableModel {
     }
     public void addBean(SadVendaProdutos sadVendaProdutos){
         this.lstVendaProdutos.add(sadVendaProdutos);
+        this.fireTableDataChanged();
+    }
+    public void removeBean(int rowIndex){
+        this.lstVendaProdutos.remove(rowIndex);
+        this.fireTableDataChanged();
     }
 
     @Override
@@ -43,7 +48,7 @@ public class Sad_ControllerVendaProdutos extends AbstractTableModel {
         SadVendaProdutos v = lstVendaProdutos.get(rowIndex);
         switch (columnIndex) {
             case 0:
-                return v.getSadIdVendaProdutos();
+                return (v.getSadProdutos() != null) ? v.getSadProdutos().getSadIdProdutos() : "";
             case 1:
                 return (v.getSadProdutos() != null) ? v.getSadProdutos().getSadNome() : "";
             case 2:

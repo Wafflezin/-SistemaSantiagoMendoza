@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package view;
+package login;
 
 import dao.SadUsuariosDAO;
 import tools.Sad_Util;
+import view.JFrmSad_Principal;
 
 /**
  *

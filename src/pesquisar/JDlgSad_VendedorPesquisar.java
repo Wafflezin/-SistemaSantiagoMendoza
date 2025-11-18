@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
-package view;
+package pesquisar;
 
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -11,6 +11,8 @@ import dao.SadVendedorDAO;
 import java.io.File;
 import javax.swing.JFileChooser;
 import tools.Sad_Util;
+import view.JDlgSad_Vendedor;
+import controller.Sad_ControllerVendedor;
 
 /**
  *

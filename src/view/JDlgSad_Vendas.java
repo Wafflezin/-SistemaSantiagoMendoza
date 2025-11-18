@@ -5,12 +5,15 @@
  */
 package view;
 
+import controller.Sad_ControllerVendaProdutos;
+import pesquisar.JDlgSad_VendasPesquisar;
 import bean.SadClientes;
 import dao.SadClientesDAO;
 import bean.SadVendas;
 import dao.SadVendasDAO;
 import bean.SadVendedor;
 import dao.SadVendedorDAO;
+import java.util.ArrayList;
 import java.util.List;
 import tools.Sad_Util;
 
@@ -19,6 +22,8 @@ import tools.Sad_Util;
  * @author u70874542189
  */
 public class JDlgSad_Vendas extends javax.swing.JDialog {
+    
+    Sad_ControllerVendaProdutos sad_ControllerVendaProdutos;
 
     private boolean incluir;
 
@@ -56,6 +61,10 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+        
+        sad_ControllerVendaProdutos = new Sad_ControllerVendaProdutos();
+        sad_ControllerVendaProdutos.setList(new ArrayList());
+        jTblSad_Tabela.setModel(sad_ControllerVendaProdutos);
     }
 
     public SadVendas viewBean() {
@@ -403,6 +412,7 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
     private void jBtnSad_IncluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_IncluirProdActionPerformed
         // TODO add your handling code here:
         JDlgSad_VendaProdutos jDlgSad_VendaProdutos = new JDlgSad_VendaProdutos(null, true);
+        jDlgSad_VendaProdutos.setTelaPai(this);
         jDlgSad_VendaProdutos.setVisible(true);
     }//GEN-LAST:event_jBtnSad_IncluirProdActionPerformed
 
@@ -415,9 +425,10 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
 
     private void jBtnSad_ExcluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ExcluirProdActionPerformed
         // TODO add your handling code here:
-        JDlgSad_VendaProdutos jDlgSad_VendaProdutos = new JDlgSad_VendaProdutos(null, true);
-        jDlgSad_VendaProdutos.setVisible(true);
-        if (Sad_Util.sad_perguntar("Deseja excluir o produto?") == true);
+        if (Sad_Util.sad_perguntar("Deseja excluir o produto ?")== true) {
+            int rowindex = jTblSad_Tabela.getSelectedRow();
+            sad_ControllerVendaProdutos.removeBean(rowindex);
+        }
     }//GEN-LAST:event_jBtnSad_ExcluirProdActionPerformed
 
     /**

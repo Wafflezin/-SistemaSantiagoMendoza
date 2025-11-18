@@ -1,4 +1,4 @@
-package view;
+package controller;
 
 import bean.SadVendas;
 import java.io.File;

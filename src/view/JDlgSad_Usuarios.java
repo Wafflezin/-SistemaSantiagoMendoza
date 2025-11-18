@@ -5,6 +5,7 @@
  */
 package view;
 
+import pesquisar.JDlgSad_UsuariosPesquisar;
 import bean.SadUsuarios;
 import dao.SadUsuariosDAO;
 import tools.Sad_Util;
