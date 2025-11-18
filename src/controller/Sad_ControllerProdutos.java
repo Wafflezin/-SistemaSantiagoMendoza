@@ -9,6 +9,14 @@ import static tools.Sad_Util.sad_mensagem;
 
 public class Sad_ControllerProdutos extends AbstractTableModel {
 
+    private static boolean Novo(String valor) {
+        if (valor == null) {
+            return false;
+        }
+        valor = valor.trim().toLowerCase();
+        return valor.equals("1") || valor.equals("true") || valor.equals("sim") || valor.equals("s");
+    }
+
     private List<SadProdutos> lstProdutos;
 
     public void setList(List<SadProdutos> lstProdutos) {
@@ -44,7 +52,8 @@ public class Sad_ControllerProdutos extends AbstractTableModel {
             case 2:
                 return p.getSadPeso();
             case 3:
-                return "1".equals(p.getSadNovo()) ? "Novo" : "Usado";
+                return Novo(p.getSadNovo()) ? "Novo" : "Usado";
+
             default:
                 return "";
         }
@@ -67,6 +76,7 @@ public class Sad_ControllerProdutos extends AbstractTableModel {
     }
 
     public static void exportar(List<SadProdutos> produtos, File file) {
+
         try {
             if (!file.getName().toLowerCase().endsWith(".csv")) {
                 file = new File(file.getAbsolutePath() + ".csv");
@@ -80,7 +90,7 @@ public class Sad_ControllerProdutos extends AbstractTableModel {
                     String peso = p.getSadPeso();
                     double quantidade = p.getSadValor();
                     String testado = "1".equals(p.getSadTestado()) ? "Testado" : "Não Testado";
-                    String novo = "1".equals(p.getSadNovo()) ? "Novo" : "Usado";
+                    String novo = Novo(p.getSadNovo()) ? "Novo" : "Usado";
                     String marca = "\"" + p.getSadMarca().replace("\"", "\"\"") + "\"";
 
                     pw.printf("%d;%s;%s;%s;%s;%s;%s%n",
