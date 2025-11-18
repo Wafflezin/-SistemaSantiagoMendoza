@@ -25,6 +25,10 @@ public class JDlgSad_Usuarios extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Nome, jPwdSad_Senha, jCboSad_Nivel, jChbSad_Ativo, jTxtSad_Apelido, jFmtSad_Cpf, jFmtSad_DataNascimento, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Confirmar, jBtnSad_Cancelar);
         try {
+            javax.swing.text.MaskFormatter mascaraCpf = new javax.swing.text.MaskFormatter("###.###.###-##");
+            mascaraCpf.setPlaceholderCharacter(' ');
+            jFmtSad_Cpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mascaraCpf));
+
             javax.swing.text.MaskFormatter mascaraData = new javax.swing.text.MaskFormatter("##/##/####");
             mascaraData.setPlaceholderCharacter(' ');
             jFmtSad_DataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mascaraData));

@@ -33,6 +33,14 @@ public class JDlgSad_Vendedor extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
+
+        try {
+            javax.swing.text.MaskFormatter mascaraCelular = new javax.swing.text.MaskFormatter("(##) #####-####");
+            mascaraCelular.setPlaceholderCharacter(' ');
+            jFmtSad_Celular.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(mascaraCelular));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public SadVendedor viewBean() {
