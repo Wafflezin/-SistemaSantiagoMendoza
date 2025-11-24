@@ -373,13 +373,17 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
         Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas, jBtnSad_Confirmar, jBtnSad_Cancelar, jBtnSad_IncluirProd, jBtnSad_AlterarProd, jBtnSad_ExcluirProd);
         Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
         Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas);
+        sad_ControllerVendaProdutos.setList(new ArrayList());
+        sad_ControllerVendaProdutos.fireTableDataChanged();
     }//GEN-LAST:event_jBtnSad_ConfirmarActionPerformed
 
     private void jBtnSad_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_CancelarActionPerformed
         // TODO add your handling code here:
         Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas, jBtnSad_Confirmar, jBtnSad_Cancelar, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_IncluirProd, jBtnSad_AlterarProd, jBtnSad_ExcluirProd);
         Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
-        Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas);
+        Sad_Util.sad_limpar(jTxtSad_Codigo, jTblSad_Tabela, jTblSad_Tabela, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas);
+        sad_ControllerVendaProdutos.setList(new ArrayList());
+        sad_ControllerVendaProdutos.fireTableDataChanged();
     }//GEN-LAST:event_jBtnSad_CancelarActionPerformed
 
     private void jBtnSad_PesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_PesquisarActionPerformed
@@ -401,6 +405,8 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
         Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
         Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas);
         jTxtSad_Codigo.grabFocus();
+        sad_ControllerVendaProdutos.setList(new ArrayList());
+        sad_ControllerVendaProdutos.fireTableDataChanged();
     }//GEN-LAST:event_jBtnSad_IncluirActionPerformed
 
     private void jBtnSad_AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_AlterarActionPerformed
@@ -417,16 +423,19 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
             SadVendasDAO sadVendasDAO = new SadVendasDAO();
             SadVendaProdutosDAO vendaProdutosDAO = new SadVendaProdutosDAO();
             SadVendas venda = viewBean();
-            sadVendasDAO.delete(venda);
+           
             for (int ind = 0; ind < jTblSad_Tabela.getRowCount(); ind++) {
                 SadVendaProdutos vendaProdutos = sad_ControllerVendaProdutos.getBean(ind);
                 vendaProdutos.setSadVendas(venda);
                 vendaProdutosDAO.delete(vendaProdutos);
             }
+             sadVendasDAO.delete(venda);
             sadVendasDAO.delete(venda);
             Sad_Util.sad_habilitar(false, jBtnSad_Alterar, jBtnSad_Cancelar, jBtnSad_Excluir);
             Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
-            Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas);
+            Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Codigo, jTblSad_Tabela, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas);
+            sad_ControllerVendaProdutos.setList(new ArrayList());
+            sad_ControllerVendaProdutos.fireTableDataChanged();
         }
     }//GEN-LAST:event_jBtnSad_ExcluirActionPerformed
 
