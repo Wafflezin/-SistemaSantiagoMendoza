@@ -363,6 +363,7 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
             sadVendasDAO.insert(venda);
             for (int ind = 0; ind < jTblSad_Tabela.getRowCount(); ind++) {
                 SadVendaProdutos vendaProdutos = sad_ControllerVendaProdutos.getBean(ind);
+                vendaProdutos.setSadIdVendaProdutos(ind);
                 vendaProdutos.setSadVendas(venda);
                 vendaProdutosDAO.insert(vendaProdutos);
             }
@@ -430,7 +431,6 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
                 vendaProdutosDAO.delete(vendaProdutos);
             }
              sadVendasDAO.delete(venda);
-            sadVendasDAO.delete(venda);
             Sad_Util.sad_habilitar(false, jBtnSad_Alterar, jBtnSad_Cancelar, jBtnSad_Excluir);
             Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
             Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Codigo, jTblSad_Tabela, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas);
