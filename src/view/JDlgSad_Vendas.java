@@ -8,10 +8,12 @@ package view;
 import controller.Sad_ControllerVendaProdutos;
 import pesquisar.JDlgSad_VendasPesquisar;
 import bean.SadClientes;
+import bean.SadVendaProdutos;
 import dao.SadClientesDAO;
 import bean.SadVendas;
 import dao.SadVendasDAO;
 import bean.SadVendedor;
+import dao.SadVendaProdutosDAO;
 import dao.SadVendedorDAO;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +24,7 @@ import tools.Sad_Util;
  * @author u70874542189
  */
 public class JDlgSad_Vendas extends javax.swing.JDialog {
-    
+
     Sad_ControllerVendaProdutos sad_ControllerVendaProdutos;
 
     private boolean incluir;
@@ -35,13 +37,13 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
         initComponents();
         setTitle("Cadastro de Vendas");
         setLocationRelativeTo(null);
-        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Confirmar, jBtnSad_Cancelar);
+        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_Confirmar, jBtnSad_Cancelar, jBtnSad_IncluirProd, jBtnSad_AlterarProd, jBtnSad_ExcluirProd);
         SadClientesDAO clientesDAO = new SadClientesDAO();
         SadVendedorDAO vendedoresDAO = new SadVendedorDAO();
         List lista = (List) clientesDAO.listAll();
         for (int i = 0; i < lista.size(); i++) {
             jCboSad_Clientes.addItem((SadClientes) lista.get(i));
-            
+
         }
         List listaVend = (List) vendedoresDAO.listAll();
         for (Object object : listaVend) {
@@ -61,7 +63,7 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        
+
         sad_ControllerVendaProdutos = new Sad_ControllerVendaProdutos();
         sad_ControllerVendaProdutos.setList(new ArrayList());
         jTblSad_Tabela.setModel(sad_ControllerVendaProdutos);
@@ -84,6 +86,9 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
         jCboSad_Vendedor.setSelectedItem(sadVendas.getSadVendedor());
         jFmtSad_DataVendas.setText(Sad_Util.dateToStr(sadVendas.getSadDataVendas()));
         jTxtSad_Total.setText(Sad_Util.doubleToStr(sadVendas.getSadTotal()));
+        SadVendaProdutosDAO sadVendaProdutosDAO = new SadVendaProdutosDAO();
+        List lista = (List) sadVendaProdutosDAO.listProdutos(sadVendas);
+        sad_ControllerVendaProdutos.setList(lista);
     }
 
     /**
@@ -352,19 +357,27 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
     private void jBtnSad_ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ConfirmarActionPerformed
         // TODO add your handling code here:
         SadVendasDAO sadVendasDAO = new SadVendasDAO();
-        if (incluir) {
-            sadVendasDAO.insert(viewBean());
+        SadVendaProdutosDAO vendaProdutosDAO = new SadVendaProdutosDAO();
+        SadVendas venda = viewBean();
+        if (incluir == true) {
+            sadVendasDAO.insert(venda);
+            for (int ind = 0; ind < jTblSad_Tabela.getRowCount(); ind++) {
+                SadVendaProdutos vendaProdutos = sad_ControllerVendaProdutos.getBean(ind);
+                vendaProdutos.setSadVendas(venda);
+                vendaProdutosDAO.insert(vendaProdutos);
+            }
         } else {
-            sadVendasDAO.update(viewBean());
+            sadVendasDAO.update(venda);
+
         }
-        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas, jBtnSad_Confirmar, jBtnSad_Cancelar);
+        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas, jBtnSad_Confirmar, jBtnSad_Cancelar, jBtnSad_IncluirProd, jBtnSad_AlterarProd, jBtnSad_ExcluirProd);
         Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
         Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas);
     }//GEN-LAST:event_jBtnSad_ConfirmarActionPerformed
 
     private void jBtnSad_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_CancelarActionPerformed
         // TODO add your handling code here:
-        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas, jBtnSad_Confirmar, jBtnSad_Cancelar, jBtnSad_Alterar, jBtnSad_Excluir);
+        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas, jBtnSad_Confirmar, jBtnSad_Cancelar, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_IncluirProd, jBtnSad_AlterarProd, jBtnSad_ExcluirProd);
         Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
         Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas);
     }//GEN-LAST:event_jBtnSad_CancelarActionPerformed
@@ -384,7 +397,7 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
     private void jBtnSad_IncluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_IncluirActionPerformed
         // TODO add your handling code here:
         incluir = true;
-        Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas, jBtnSad_Confirmar, jBtnSad_Cancelar);
+        Sad_Util.sad_habilitar(true, jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas, jBtnSad_Confirmar, jBtnSad_Cancelar, jBtnSad_IncluirProd, jBtnSad_AlterarProd, jBtnSad_ExcluirProd);
         Sad_Util.sad_habilitar(false, jBtnSad_Incluir, jBtnSad_Pesquisar);
         Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas);
         jTxtSad_Codigo.grabFocus();
@@ -393,7 +406,7 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
     private void jBtnSad_AlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_AlterarActionPerformed
         // TODO add your handling code here:
         incluir = false;
-        Sad_Util.sad_habilitar(true, jTxtSad_Total, jFmtSad_DataVendas, jBtnSad_Confirmar, jBtnSad_Cancelar);
+        Sad_Util.sad_habilitar(true, jTxtSad_Total, jFmtSad_DataVendas, jBtnSad_Confirmar, jBtnSad_Cancelar, jBtnSad_IncluirProd, jBtnSad_AlterarProd, jBtnSad_ExcluirProd);
         Sad_Util.sad_habilitar(false, jBtnSad_Excluir, jBtnSad_Incluir, jBtnSad_Alterar);
         jTxtSad_Total.grabFocus();
     }//GEN-LAST:event_jBtnSad_AlterarActionPerformed
@@ -402,7 +415,15 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
         // TODO add your handling code here:
         if (Sad_Util.sad_perguntar("Excluir?") == true) {
             SadVendasDAO sadVendasDAO = new SadVendasDAO();
-            sadVendasDAO.delete(viewBean());
+            SadVendaProdutosDAO vendaProdutosDAO = new SadVendaProdutosDAO();
+            SadVendas venda = viewBean();
+            sadVendasDAO.delete(venda);
+            for (int ind = 0; ind < jTblSad_Tabela.getRowCount(); ind++) {
+                SadVendaProdutos vendaProdutos = sad_ControllerVendaProdutos.getBean(ind);
+                vendaProdutos.setSadVendas(venda);
+                vendaProdutosDAO.delete(vendaProdutos);
+            }
+            sadVendasDAO.delete(venda);
             Sad_Util.sad_habilitar(false, jBtnSad_Alterar, jBtnSad_Cancelar, jBtnSad_Excluir);
             Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
             Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas);
@@ -425,7 +446,7 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
 
     private void jBtnSad_ExcluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ExcluirProdActionPerformed
         // TODO add your handling code here:
-        if (Sad_Util.sad_perguntar("Deseja excluir o produto ?")== true) {
+        if (Sad_Util.sad_perguntar("Deseja excluir o produto ?") == true) {
             int rowindex = jTblSad_Tabela.getSelectedRow();
             sad_ControllerVendaProdutos.removeBean(rowindex);
         }

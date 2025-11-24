@@ -45,7 +45,7 @@ public class SadVendaProdutos implements java.io.Serializable {
         this.sadIdVendaProdutos = sadIdVendaProdutos;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "sad_fkProdutos", nullable = false)
     public SadProdutos getSadProdutos() {
         return this.sadProdutos;
@@ -55,7 +55,7 @@ public class SadVendaProdutos implements java.io.Serializable {
         this.sadProdutos = sadProdutos;
     }
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "sad_fkVendas", nullable = false)
     public SadVendas getSadVendas() {
         return this.sadVendas;
