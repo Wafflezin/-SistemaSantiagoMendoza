@@ -392,7 +392,7 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
 
     private void jBtnSad_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_CancelarActionPerformed
         // TODO add your handling code here:
-        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas,jTblSad_Tabela, jBtnSad_Confirmar, jBtnSad_Cancelar, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_IncluirProd, jBtnSad_AlterarProd, jBtnSad_ExcluirProd);
+        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas, jBtnSad_Confirmar, jBtnSad_Cancelar, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_IncluirProd, jBtnSad_AlterarProd, jBtnSad_ExcluirProd);
         Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
         Sad_Util.sad_limpar(jTxtSad_Codigo, jTblSad_Tabela, jTblSad_Tabela, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas);
         sad_ControllerVendaProdutos.setList(new ArrayList());
