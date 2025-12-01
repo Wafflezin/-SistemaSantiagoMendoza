@@ -17,10 +17,10 @@ import tools.Sad_Util;
  * @author u70874542189
  */
 public class JDlgSad_VendaProdutos extends javax.swing.JDialog {
-    
+
     JDlgSad_Vendas jDlgSad_Vendas;
-    
-   
+    private boolean incluir;
+
     /**
      * Creates new form JDlgSad_VendasSadProdutos
      */
@@ -35,10 +35,22 @@ public class JDlgSad_VendaProdutos extends javax.swing.JDialog {
         for (Object object : lista) {
             jCboSad_Produtos.addItem((SadProdutos) object);
         }
-        
+
     }
-     public void setTelaPai(JDlgSad_Vendas jDlgSad_Vendas){
+
+    public void setTelaPai(JDlgSad_Vendas jDlgSad_Vendas, SadVendaProdutos sadVendaProdutos) {
         this.jDlgSad_Vendas = jDlgSad_Vendas;
+        incluir = true;
+
+        if (sadVendaProdutos != null) {
+
+            incluir = false;
+
+            jCboSad_Produtos.setSelectedItem(sadVendaProdutos.getSadProdutos());
+
+            jTxtSad_Quantidade.setText(Sad_Util.intToStr(sadVendaProdutos.getSadQuantidade()));
+
+        }
     }
 
     /**
@@ -165,6 +177,11 @@ public class JDlgSad_VendaProdutos extends javax.swing.JDialog {
         sadVendaProdutos.setSadProdutos((SadProdutos) jCboSad_Produtos.getSelectedItem());
         sadVendaProdutos.setSadQuantidade(Sad_Util.strToInt(jTxtSad_Quantidade.getText()));
         sadVendaProdutos.setSadValorUnitario(Sad_Util.strToDouble(jTxtSad_Valor.getText()));
+        if (incluir == false) {
+
+            jDlgSad_Vendas.sad_ControllerVendaProdutos.removeBean(jDlgSad_Vendas.getjTblSad_Tabela().getSelectedRow());
+
+        }
         jDlgSad_Vendas.sad_ControllerVendaProdutos.addBean(sadVendaProdutos);
         setVisible(false);
     }//GEN-LAST:event_jBtnOKActionPerformed

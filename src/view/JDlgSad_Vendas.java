@@ -17,6 +17,7 @@ import dao.SadVendaProdutosDAO;
 import dao.SadVendedorDAO;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JTable;
 import tools.Sad_Util;
 
 /**
@@ -24,6 +25,10 @@ import tools.Sad_Util;
  * @author u70874542189
  */
 public class JDlgSad_Vendas extends javax.swing.JDialog {
+
+    public JTable getjTblSad_Tabela() {
+        return jTblSad_Tabela;
+    }
 
     Sad_ControllerVendaProdutos sad_ControllerVendaProdutos;
 
@@ -364,11 +369,18 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
             for (int ind = 0; ind < jTblSad_Tabela.getRowCount(); ind++) {
                 SadVendaProdutos vendaProdutos = sad_ControllerVendaProdutos.getBean(ind);
                 vendaProdutos.setSadIdVendaProdutos(ind);
+                vendaProdutos.setSadIdVendaProdutos(ind);
                 vendaProdutos.setSadVendas(venda);
                 vendaProdutosDAO.insert(vendaProdutos);
             }
         } else {
             sadVendasDAO.update(venda);
+            vendaProdutosDAO.deleteVenda(venda);
+            for (int ind = 0; ind < jTblSad_Tabela.getRowCount(); ind++) {
+                SadVendaProdutos vendaProdutos = sad_ControllerVendaProdutos.getBean(ind);
+                vendaProdutos.setSadVendas(venda);
+                vendaProdutosDAO.insert(vendaProdutos);
+            }
 
         }
         Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas, jBtnSad_Confirmar, jBtnSad_Cancelar, jBtnSad_IncluirProd, jBtnSad_AlterarProd, jBtnSad_ExcluirProd);
@@ -380,7 +392,7 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
 
     private void jBtnSad_CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_CancelarActionPerformed
         // TODO add your handling code here:
-        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas, jBtnSad_Confirmar, jBtnSad_Cancelar, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_IncluirProd, jBtnSad_AlterarProd, jBtnSad_ExcluirProd);
+        Sad_Util.sad_habilitar(false, jTxtSad_Codigo, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas,jTblSad_Tabela, jBtnSad_Confirmar, jBtnSad_Cancelar, jBtnSad_Alterar, jBtnSad_Excluir, jBtnSad_IncluirProd, jBtnSad_AlterarProd, jBtnSad_ExcluirProd);
         Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
         Sad_Util.sad_limpar(jTxtSad_Codigo, jTblSad_Tabela, jTblSad_Tabela, jTxtSad_Codigo, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas);
         sad_ControllerVendaProdutos.setList(new ArrayList());
@@ -424,13 +436,13 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
             SadVendasDAO sadVendasDAO = new SadVendasDAO();
             SadVendaProdutosDAO vendaProdutosDAO = new SadVendaProdutosDAO();
             SadVendas venda = viewBean();
-           
+
             for (int ind = 0; ind < jTblSad_Tabela.getRowCount(); ind++) {
                 SadVendaProdutos vendaProdutos = sad_ControllerVendaProdutos.getBean(ind);
                 vendaProdutos.setSadVendas(venda);
                 vendaProdutosDAO.delete(vendaProdutos);
             }
-             sadVendasDAO.delete(venda);
+            sadVendasDAO.delete(venda);
             Sad_Util.sad_habilitar(false, jBtnSad_Alterar, jBtnSad_Cancelar, jBtnSad_Excluir);
             Sad_Util.sad_habilitar(true, jBtnSad_Incluir, jBtnSad_Pesquisar);
             Sad_Util.sad_limpar(jTxtSad_Codigo, jTxtSad_Codigo, jTblSad_Tabela, jTxtSad_Total, jCboSad_Clientes, jCboSad_Vendedor, jFmtSad_DataVendas);
@@ -442,14 +454,16 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
     private void jBtnSad_IncluirProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_IncluirProdActionPerformed
         // TODO add your handling code here:
         JDlgSad_VendaProdutos jDlgSad_VendaProdutos = new JDlgSad_VendaProdutos(null, true);
-        jDlgSad_VendaProdutos.setTelaPai(this);
+        jDlgSad_VendaProdutos.setTelaPai(this, null);
         jDlgSad_VendaProdutos.setVisible(true);
     }//GEN-LAST:event_jBtnSad_IncluirProdActionPerformed
 
     private void jBtnSad_AlterarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_AlterarProdActionPerformed
         // TODO add your handling code here:
+
         JDlgSad_VendaProdutos jDlgSad_VendaProdutos = new JDlgSad_VendaProdutos(null, true);
-        jDlgSad_VendaProdutos.setTelaPai(this);
+        SadVendaProdutos sadVendaProdutos = sad_ControllerVendaProdutos.getBean(jTblSad_Tabela.getSelectedRow());
+        jDlgSad_VendaProdutos.setTelaPai(this, sadVendaProdutos);
         jDlgSad_VendaProdutos.setVisible(true);
     }//GEN-LAST:event_jBtnSad_AlterarProdActionPerformed
 
