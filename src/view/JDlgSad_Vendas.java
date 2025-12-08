@@ -368,8 +368,7 @@ public class JDlgSad_Vendas extends javax.swing.JDialog {
             sadVendasDAO.insert(venda);
             for (int ind = 0; ind < jTblSad_Tabela.getRowCount(); ind++) {
                 SadVendaProdutos vendaProdutos = sad_ControllerVendaProdutos.getBean(ind);
-                vendaProdutos.setSadIdVendaProdutos(ind);
-                vendaProdutos.setSadIdVendaProdutos(ind);
+                vendaProdutos.setSadIdVendaProdutos(ind+2);           
                 vendaProdutos.setSadVendas(venda);
                 vendaProdutosDAO.insert(vendaProdutos);
             }

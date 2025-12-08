@@ -30,7 +30,7 @@ public class JDlgSad_ConsultaProdutos extends javax.swing.JDialog {
         setLocationRelativeTo(null);
         setTitle("Pesquisar Usuários");
         controllerConsultasProdutos = new Sad_ControllerConsultasProdutos();
-        SadProdutosDAO produtosDAO = new SadProdutosDAO();
+        produtosDAO = new SadProdutosDAO();
         List lista = (List) produtosDAO.listAll();
         controllerConsultasProdutos.setList(lista);
         jTblSad.setModel(controllerConsultasProdutos);
@@ -87,6 +87,11 @@ public class JDlgSad_ConsultaProdutos extends javax.swing.JDialog {
         jLabel2.setText("Valor Maior que ");
 
         jBtnConsulta.setText("Conusultar");
+        jBtnConsulta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnConsultaActionPerformed(evt);
+            }
+        });
 
         jBtnSad_Imprimir.setText("Imprimir");
         jBtnSad_Imprimir.addActionListener(new java.awt.event.ActionListener() {
@@ -150,22 +155,7 @@ public class JDlgSad_ConsultaProdutos extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBtnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOkActionPerformed
-            
-    if((jTxtSad_Nome.getText().isEmpty() == false)
-                && (jTxtSad_Valor.getText().isEmpty() == false) ){
-    List lista = (List) produtosDAO.listNomeValor(jTxtSad_Nome.getText(),
-                                Sad_Util.strToDouble(jTxtSad_Valor.getText()));
-    controllerConsultasProdutos.setList(lista);
-    } else if (jTxtSad_Nome.getText().isEmpty() == false){
-        List lista = (List) produtosDAO.listNome(jTxtSad_Nome.getText());
-    controllerConsultasProdutos.setList(lista);
-    } else if (jTxtSad_Valor.getText().isEmpty() == false) {
-        List lista = (List) produtosDAO.listValor( Sad_Util.strToDouble( jTxtSad_Valor.getText() ));
-    controllerConsultasProdutos.setList(lista);
-    } else {
-        List lista = (List) produtosDAO.listAll();
-        controllerConsultasProdutos.setList(lista);
-    }
+
         this.setVisible(false);
     }//GEN-LAST:event_jBtnOkActionPerformed
 
@@ -179,6 +169,26 @@ public class JDlgSad_ConsultaProdutos extends javax.swing.JDialog {
     private void jBtnSad_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ImprimirActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnSad_ImprimirActionPerformed
+
+    private void jBtnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultaActionPerformed
+        // TODO add your handling code here:
+        if ((jTxtSad_Nome.getText().isEmpty() == false)
+                && (jTxtSad_Valor.getText().isEmpty() == false)) {
+            List lista = (List) produtosDAO.listNomeValor(jTxtSad_Nome.getText(),
+                    Sad_Util.strToDouble(jTxtSad_Valor.getText()));
+            controllerConsultasProdutos.setList(lista);
+        } else if (jTxtSad_Nome.getText().isEmpty() == false) {
+            List lista = (List) produtosDAO.listNome(jTxtSad_Nome.getText());
+            controllerConsultasProdutos.setList(lista);
+        } else if (jTxtSad_Valor.getText().isEmpty() == false) {
+            List lista = (List) produtosDAO.listValor(Sad_Util.strToDouble(jTxtSad_Valor.getText()));
+            controllerConsultasProdutos.setList(lista);
+        } else {
+            List lista = (List) produtosDAO.listAll();
+            controllerConsultasProdutos.setList(lista);
+        }
+
+    }//GEN-LAST:event_jBtnConsultaActionPerformed
 
     /**
      * @param args the command line arguments
