@@ -50,6 +50,33 @@ public class SadVendedorDAO extends AbstractDAO {
         session.getTransaction().commit();
         return lista;
     }
+    public Object listNome(String nome) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(SadVendedor.class);
+        criteria.add(Restrictions.like("sadNome", "%" + nome + "%"));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
+    public Object listArrecadado(double arrecadado) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(SadVendedor.class);
+        criteria.add(Restrictions.ge("sadArrecadado", arrecadado));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+    
+    public Object listNomeArrecadado(String nome, double arrecadado) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(SadVendedor.class);
+        criteria.add(Restrictions.like("sadNome", "%" + nome + "%"));
+        criteria.add(Restrictions.ge("sadArrecadado",  arrecadado));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
 
     @Override
     public Object listAll() {

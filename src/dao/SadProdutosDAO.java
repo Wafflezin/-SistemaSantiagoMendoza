@@ -62,7 +62,7 @@ public class SadProdutosDAO extends AbstractDAO {
     public Object listValor(double valor) {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(SadProdutos.class);
-        criteria.add(Restrictions.ge("sadValor", "%" + valor + "%"));
+        criteria.add(Restrictions.ge("sadValor", valor));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
@@ -72,7 +72,7 @@ public class SadProdutosDAO extends AbstractDAO {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(SadProdutos.class);
         criteria.add(Restrictions.like("sadNome", "%" + nome + "%"));
-        criteria.add(Restrictions.ge("sadValor", "%" + valor + "%"));
+        criteria.add(Restrictions.ge("sadValor",  valor));
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;

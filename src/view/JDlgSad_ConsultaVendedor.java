@@ -4,36 +4,35 @@
  */
 package view;
 
-import bean.SadUsuarios;
-import controller.Sad_ControllerConsultasProdutos;
-import dao.SadProdutosDAO;
+import controller.Sad_ControllerConsultasVendedor;
+import dao.SadVendedorDAO;
 import java.util.List;
 import tools.Sad_Util;
-import view.JDlgSad_ConsultaProdutos;
+import view.JDlgSad_ConsultaVendedor;
 
 /**
  *
  * @author Marcos
  */
-public class JDlgSad_ConsultaProdutos extends javax.swing.JDialog {
+public class JDlgSad_ConsultaVendedor extends javax.swing.JDialog {
 
     /**
-     * Creates new form JDlgConsultaProdutosPesquisar
+     * Creates new form JDlgConsultaVendedorPesquisar
      */
-    SadProdutosDAO produtosDAO;
-    JDlgSad_ConsultaProdutos jDlgConsultaProdutos;
-    Sad_ControllerConsultasProdutos controllerConsultasProdutos;
+    SadVendedorDAO vendedorDAO;
+    JDlgSad_ConsultaVendedor jDlgConsultaVendedor;
+    Sad_ControllerConsultasVendedor controllerConsultasVendedor;
 
-    public JDlgSad_ConsultaProdutos(java.awt.Frame parent, boolean modal) {
+    public JDlgSad_ConsultaVendedor(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Pesquisar Usuários");
-        controllerConsultasProdutos = new Sad_ControllerConsultasProdutos();
-        produtosDAO = new SadProdutosDAO();
-        List lista = (List) produtosDAO.listAll();
-        controllerConsultasProdutos.setList(lista);
-        jTblSad.setModel(controllerConsultasProdutos);
+        controllerConsultasVendedor = new Sad_ControllerConsultasVendedor();
+        vendedorDAO = new SadVendedorDAO();
+        List lista = (List) vendedorDAO.listAll();
+        controllerConsultasVendedor.setList(lista);
+        jTblSad.setModel(controllerConsultasVendedor);
     }
 
     /**
@@ -84,7 +83,7 @@ public class JDlgSad_ConsultaProdutos extends javax.swing.JDialog {
 
         jLabel1.setText("Nome");
 
-        jLabel2.setText("Valor Maior que ");
+        jLabel2.setText("Arrecadou mais que");
 
         jBtnConsulta.setText("Consultar");
         jBtnConsulta.addActionListener(new java.awt.event.ActionListener() {
@@ -174,19 +173,19 @@ public class JDlgSad_ConsultaProdutos extends javax.swing.JDialog {
         // TODO add your handling code here:
         if ((jTxtSad_Nome.getText().isEmpty() == false)
                 && (jTxtSad_Valor.getText().isEmpty() == false)) {
-            List lista = (List) produtosDAO.listNomeValor(jTxtSad_Nome.getText(),
+            List lista = (List) vendedorDAO.listNomeArrecadado(jTxtSad_Nome.getText(),
                     Sad_Util.strToDouble(jTxtSad_Valor.getText()));
-            controllerConsultasProdutos.setList(lista);
+            controllerConsultasVendedor.setList(lista);
 
         } else if (jTxtSad_Nome.getText().isEmpty() == false) {
-            List lista = (List) produtosDAO.listNome(jTxtSad_Nome.getText());
-            controllerConsultasProdutos.setList(lista);
+            List lista = (List) vendedorDAO.listNome(jTxtSad_Nome.getText());
+            controllerConsultasVendedor.setList(lista);
         } else if (jTxtSad_Valor.getText().isEmpty() == false) {
-            List lista = (List) produtosDAO.listValor(Sad_Util.strToDouble(jTxtSad_Valor.getText()));
-            controllerConsultasProdutos.setList(lista);
+            List lista = (List) vendedorDAO.listArrecadado(Sad_Util.strToDouble(jTxtSad_Valor.getText()));
+            controllerConsultasVendedor.setList(lista);
         } else {
-            List lista = (List) produtosDAO.listAll();
-            controllerConsultasProdutos.setList(lista);
+            List lista = (List) vendedorDAO.listAll();
+            controllerConsultasVendedor.setList(lista);
         }
 
     }//GEN-LAST:event_jBtnConsultaActionPerformed
@@ -208,14 +207,22 @@ public class JDlgSad_ConsultaProdutos extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(JDlgSad_ConsultaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgSad_ConsultaVendedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(JDlgSad_ConsultaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgSad_ConsultaVendedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(JDlgSad_ConsultaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgSad_ConsultaVendedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(JDlgSad_ConsultaProdutos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(JDlgSad_ConsultaVendedor.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -228,7 +235,7 @@ public class JDlgSad_ConsultaProdutos extends javax.swing.JDialog {
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JDlgSad_ConsultaProdutos dialog = new JDlgSad_ConsultaProdutos(new javax.swing.JFrame(), true);
+                JDlgSad_ConsultaVendedor dialog = new JDlgSad_ConsultaVendedor(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
