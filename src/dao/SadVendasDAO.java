@@ -6,9 +6,12 @@
 package dao;
 
 import bean.SadVendas;
+import java.util.Date;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
+import tools.Sad_Util;
 
 /**
  *
@@ -46,6 +49,46 @@ public class SadVendasDAO extends AbstractDAO {
         session.beginTransaction();
         Criteria criteria = session.createCriteria(SadVendas.class);
         criteria.add(Restrictions.eq("SadIdVendas", codigo));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    public List<SadVendas> listData(String data) {
+        Session sessao = HibernateUtil.getSessionFactory().openSession();
+        Criteria criteria = sessao.createCriteria(SadVendas.class);
+
+        if (data != null && !data.isEmpty()) {
+            Date dataConvertida = Sad_Util.strToDate(data);
+            criteria.add(Restrictions.ge("sadDataVendas", dataConvertida));
+        }
+
+        List<SadVendas> lista = criteria.list();
+        sessao.close();
+        return lista;
+
+    }
+
+    public Object listTotal(double total) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(SadVendas.class);
+        criteria.add(Restrictions.ge("sadTotal", total));
+        List lista = criteria.list();
+        session.getTransaction().commit();
+        return lista;
+    }
+
+    public Object listDataTotal(String dataVendas, double total) {
+        session.beginTransaction();
+        Criteria criteria = session.createCriteria(SadVendas.class);
+
+        if (dataVendas != null && !dataVendas.isEmpty()) {
+            Date dataConvertida = Sad_Util.strToDate(dataVendas);
+            criteria.add(Restrictions.ge("sadDataVendas", dataConvertida)); // ✔ APÓS A DATA
+        }
+
+        criteria.add(Restrictions.ge("sadTotal", total));
+
         List lista = criteria.list();
         session.getTransaction().commit();
         return lista;
