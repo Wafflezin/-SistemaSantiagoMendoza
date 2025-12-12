@@ -79,6 +79,7 @@ public class JDlgSad_ConsultaClientes extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(jTblSad);
 
+        jBtnOk.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/confirmar.png"))); // NOI18N
         jBtnOk.setText("OK");
         jBtnOk.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
