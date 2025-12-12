@@ -143,7 +143,7 @@ public class Sad_ControllerConsultasClientes extends AbstractTableModel {
 
             Sad_Util.sad_mensagem("Exportado pra PDF");
         } catch (Exception e) {
-            e.printStackTrace();
+            Sad_Util.sad_mensagem("Erro ao exportar pra PDF");
         }
 
     }

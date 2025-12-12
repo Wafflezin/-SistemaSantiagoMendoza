@@ -7,6 +7,7 @@ package view;
 import bean.SadUsuarios;
 import controller.Sad_ControllerConsultasProdutos;
 import dao.SadProdutosDAO;
+import java.io.File;
 import java.util.List;
 import tools.Sad_Util;
 import view.JDlgSad_ConsultaProdutos;
@@ -168,6 +169,22 @@ public class JDlgSad_ConsultaProdutos extends javax.swing.JDialog {
 
     private void jBtnSad_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ImprimirActionPerformed
         // TODO add your handling code here:
+        try {
+            javax.swing.JFileChooser chooser = new javax.swing.JFileChooser();
+            chooser.setDialogTitle("Salvar PDF");
+
+            int opcao = chooser.showSaveDialog(this);
+
+            if (opcao == javax.swing.JFileChooser.APPROVE_OPTION) {
+                File file = chooser.getSelectedFile();
+
+                controllerConsultasProdutos.exportarPDF(file);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jBtnSad_ImprimirActionPerformed
 
     private void jBtnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultaActionPerformed
