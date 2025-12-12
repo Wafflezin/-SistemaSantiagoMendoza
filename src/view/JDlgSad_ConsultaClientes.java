@@ -4,10 +4,14 @@
  */
 package view;
 
+import bean.SadClientes;
 import bean.SadUsuarios;
+import controller.Sad_ControllerClientes;
 import controller.Sad_ControllerConsultasClientes;
 import dao.SadClientesDAO;
+import java.io.File;
 import java.util.List;
+import javax.swing.JFileChooser;
 import tools.Sad_Util;
 import view.JDlgSad_ConsultaClientes;
 
@@ -168,6 +172,22 @@ public class JDlgSad_ConsultaClientes extends javax.swing.JDialog {
 
     private void jBtnSad_ImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSad_ImprimirActionPerformed
         // TODO add your handling code here:
+        try {
+            javax.swing.JFileChooser chooser = new javax.swing.JFileChooser();
+            chooser.setDialogTitle("Salvar PDF");
+
+            int opcao = chooser.showSaveDialog(this);
+
+            if (opcao == javax.swing.JFileChooser.APPROVE_OPTION) {
+                File file = chooser.getSelectedFile();
+
+                controllerConsultasClientes.exportarPDF(file);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }//GEN-LAST:event_jBtnSad_ImprimirActionPerformed
 
     private void jBtnConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnConsultaActionPerformed
